@@ -1,0 +1,315 @@
+unit Umain;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics, uLibSetting,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
+
+  uTCPServer, ShellApi, Vcl.Imaging.jpeg;
+
+type
+  TMainForm = class(TForm)
+    TopPanel: TPanel;
+    StartButton: TButton;
+    GetPacketTimer: TTimer;
+    PortEdit: TEdit;
+    PortLabel: TLabel;
+    ClientConnectedListBox: TListBox;
+    imgBackground: TImage;
+    LogMemo: TMemo;
+    Label1: TLabel;
+    GroupBox2: TGroupBox;
+    KillAllButton: TButton;
+    RestartAllButton: TButton;
+    RunAllButton: TButton;
+    ShutdownAllbutton: TButton;
+    ShutdownButton: TButton;
+    RestartButton: TButton;
+    RunButton: TButton;
+    KillButton: TButton;
+    Image1: TImage;
+
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+
+    procedure StartButtonClick(Sender: TObject);
+
+    procedure SingleButtonClick(Sender: TObject);
+
+    procedure GetPacketTimerTimer(Sender: TObject);
+
+    procedure ShutdownAllbuttonClick(Sender: TObject);
+    procedure RestartAllButtonClick(Sender: TObject);
+    procedure RunAllButtonClick(Sender: TObject);
+    procedure KillAllButtonClick(Sender: TObject);
+
+    procedure Image1Click(Sender: TObject);
+
+  private
+    vSettingFile: string;
+
+    server: TTCPServer;
+
+    procedure Client_Connect(const S: string);
+    procedure Client_Disconnect(const S: string);
+    procedure Server_Log(const S: string);
+
+    procedure NetRecv_CommandData(apRec: PAnsiChar; aSize: word);
+
+  public
+    { Public declarations }
+  end;
+
+var
+  MainForm: TMainForm;
+
+implementation
+
+{$R *.dfm}
+
+uses
+  UNetData;
+
+procedure TMainForm.RestartAllButtonClick(Sender: TObject);
+var
+  i: Integer;
+  NetData: RecCommandData;
+  SelectedIndex: Integer;
+  CommandData: RecCommandData;
+  ipaddress: string;
+  indexBox: byte;
+  command: byte;
+begin
+
+  SelectedIndex := ClientConnectedListBox.ItemIndex;
+
+  indexBox := ClientConnectedListBox.Items.Count;
+
+  for i := 0 to indexBox - 1 do
+  begin
+    SelectedIndex := i;
+
+    if SelectedIndex > -1 then
+    begin
+      ipaddress := server.Clients[SelectedIndex].ConnectedIP;
+      command := 5;
+      CommandData.command := command;
+      server.SendDataToIPAddress(CommandID, @CommandData, ipaddress);
+    end;
+  end;
+end;
+
+procedure TMainForm.RunAllButtonClick(Sender: TObject);
+var
+  i: Integer;
+  NetData: RecCommandData;
+  SelectedIndex: Integer;
+  CommandData: RecCommandData;
+  ipaddress: string;
+  indexBox: byte;
+  command: byte;
+begin
+
+  SelectedIndex := ClientConnectedListBox.ItemIndex;
+
+  indexBox := ClientConnectedListBox.Items.Count;
+
+  for i := 0 to indexBox - 1 do
+  begin
+    SelectedIndex := i;
+
+    if SelectedIndex > -1 then
+    begin
+      ipaddress := server.Clients[SelectedIndex].ConnectedIP;
+      command := 7;
+      CommandData.command := command;
+      server.SendDataToIPAddress(CommandID, @CommandData, ipaddress);
+    end;
+  end;
+end;
+
+procedure TMainForm.Client_Connect(const S: string);
+var
+  ss: TStringList;
+begin
+  ss := TStringList.Create;
+  try
+    LogMemo.Lines.Add(S);
+    ClientConnectedListBox.Clear;
+    server.GetConnectedList(ss);
+    ClientConnectedListBox.Items.Assign(ss);
+  finally
+    ss.Free;
+  end;
+end;
+
+procedure TMainForm.Client_Disconnect(const S: string);
+var
+  ss: TStringList;
+begin
+  ss := TStringList.Create;
+  try
+    LogMemo.Lines.Add(S);
+    ClientConnectedListBox.Clear;
+    server.GetConnectedList(ss);
+    ClientConnectedListBox.Items.Assign(ss);
+  finally
+    ss.Free;
+  end;
+end;
+
+procedure TMainForm.FormCreate(Sender: TObject);
+begin
+  server := TTCPServer.Create;
+  server.OnClient_Connect := Client_Connect;
+  server.OnClient_DisConnect := Client_Disconnect;
+  server.OnGetStatusLog := Server_Log;
+  server.RegisterProcedure(CommandID, NetRecv_CommandData,SizeOf(RecCommandData));
+
+  GetPacketTimer.Interval := 50;
+end;
+
+procedure TMainForm.FormDestroy(Sender: TObject);
+begin
+  server.UnregisterAllProcedure;
+  server.Stop;
+  server.Free;
+end;
+
+procedure TMainForm.FormShow(Sender: TObject);
+begin
+  vSettingFile := getFileSetting;
+  LoadFF_NetSetting(vSettingFile, vNetSetting);
+
+  if vNetSetting.AutoStart then
+  begin
+    server.Listen(vNetSetting.Port);
+    GetPacketTimer.Enabled := True;
+  end;
+end;
+
+procedure TMainForm.GetPacketTimerTimer(Sender: TObject);
+begin
+  server.getPacket;
+end;
+
+procedure TMainForm.Image1Click(Sender: TObject);
+begin
+  TopPanel.Visible := not TopPanel.Visible;
+end;
+
+procedure TMainForm.KillAllButtonClick(Sender: TObject);
+var
+  i: Integer;
+  NetData: RecCommandData;
+  SelectedIndex: Integer;
+  CommandData: RecCommandData;
+  ipaddress: string;
+  indexBox: byte;
+  command: byte;
+begin
+
+  SelectedIndex := ClientConnectedListBox.ItemIndex;
+
+  indexBox := ClientConnectedListBox.Items.Count;
+
+  for i := 0 to indexBox - 1 do
+  begin
+    SelectedIndex := i;
+
+    if SelectedIndex > -1 then
+    begin
+      ipaddress := server.Clients[SelectedIndex].ConnectedIP;
+      command := 8;
+      CommandData.command := command;
+      server.SendDataToIPAddress(CommandID, @CommandData, ipaddress);
+    end;
+  end;
+end;
+
+procedure TMainForm.NetRecv_CommandData(apRec: PAnsiChar; aSize: word);
+begin
+  //
+end;
+
+procedure TMainForm.Server_Log(const S: string);
+begin
+  LogMemo.Lines.Add(S);
+end;
+
+procedure TMainForm.ShutdownAllbuttonClick(Sender: TObject);
+var
+  i: Integer;
+  NetData: RecCommandData;
+  SelectedIndex: Integer;
+  CommandData: RecCommandData;
+  ipaddress: string;
+  indexBox: byte;
+  command: byte;
+begin
+
+  SelectedIndex := ClientConnectedListBox.ItemIndex;
+
+  indexBox := ClientConnectedListBox.Items.Count;
+
+  for i := 0 to indexBox - 1 do
+  begin
+    SelectedIndex := i;
+
+    if SelectedIndex > -1 then
+    begin
+      ipaddress := server.Clients[SelectedIndex].ConnectedIP;
+      command := 5;
+      CommandData.command := command;
+      server.SendDataToIPAddress(CommandID, @CommandData, ipaddress);
+    end;
+  end;
+end;
+
+procedure TMainForm.SingleButtonClick(Sender: TObject);
+var
+  SelectedIndex: Integer;
+  ipaddress: string;
+  CommandData: RecCommandData;
+
+begin
+  SelectedIndex := ClientConnectedListBox.ItemIndex;
+
+  if SelectedIndex > -1 then
+  begin
+    ipaddress := server.Clients[SelectedIndex].ConnectedIP;
+    CommandData.command := TButton(Sender).Tag;
+    server.SendDataToIPAddress(CommandID, @CommandData, ipaddress);
+  end;
+end;
+
+procedure TMainForm.StartButtonClick(Sender: TObject);
+begin
+  if StartButton.Caption = 'Start' then
+  begin
+    server.Listen(PortEdit.Text);
+    GetPacketTimer.Enabled := True;
+
+    StartButton.Caption := 'Stop';
+  end
+  else
+  begin
+    GetPacketTimer.Enabled := False;
+    server.Stop;
+
+    StartButton.Caption := 'Start';
+  end;
+end;
+
+//procedure TMainForm.StopButtonClick(Sender: TObject);
+//begin
+//
+//
+//  StartButton.Enabled := True;
+//  StopButton.Enabled := False;
+//end;
+
+end.

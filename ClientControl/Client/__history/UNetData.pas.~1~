@@ -1,0 +1,19 @@
+unit UNetData;
+
+interface
+
+uses
+  uTCPDataType;
+
+const
+  CommandID = 77;
+
+type
+  TCommandData = record
+    pid: TPacketID;
+    command: byte;
+  end;
+
+implementation
+
+end.

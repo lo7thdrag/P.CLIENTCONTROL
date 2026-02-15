@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899-12-30 00:00:00.000.855,=C:\Users\2D_4\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024-03-22 15:46:09.000.751,=C:\Users\2D_4\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024-03-22 15:47:21.000.733,D:\Program\Keygenerator\uMain.pas=C:\Users\2D_4\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024-03-22 15:47:21.000.733,D:\Program\Keygenerator\uMain.dfm=C:\Users\2D_4\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2024-03-22 15:47:33.000.953,D:\Program\Keygenerator\KeyGen.dproj=C:\Users\2D_4\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2024-03-25 10:56:01.000.306,=D:\Program\Keygenerator\StringUtils\uCodecBase64.pas</Transaction>
+    <Transaction>2024-03-25 10:56:01.000.432,=D:\Program\Keygenerator\StringUtils\uStringFunc.pas</Transaction>
+    <Transaction>2024-09-04 15:30:03.000.972,D:\Keygenerator\KeyGenAPVC.dproj=D:\Keygenerator\KeyGen.dproj</Transaction>
+    <Transaction>2024-09-04 15:49:57.000.985,=D:\Keygenerator\Unit1.pas</Transaction>
+    <Transaction>2024-09-04 15:50:39.000.377,D:\Keygenerator\ufrmPassword.dfm=D:\Keygenerator\Unit1.dfm</Transaction>
+    <Transaction>2024-09-04 15:50:39.000.377,D:\Keygenerator\ufrmPassword.pas=D:\Keygenerator\Unit1.pas</Transaction>
+    <Transaction>2024-12-02 12:50:55.000.734,D:\KeyGeneratorNOPP\KeyGenNOPP.dproj=D:\KeyGeneratorNOPP\KeyGenAPVC.dproj</Transaction>
+  </Transactions>
+</BorlandProject>

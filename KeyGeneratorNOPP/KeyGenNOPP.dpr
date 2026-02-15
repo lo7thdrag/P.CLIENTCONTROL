@@ -1,0 +1,18 @@
+program KeyGenNOPP;
+
+uses
+  Vcl.Forms,
+  uMain in 'uMain.pas' {frmKeyGen},
+  uCodecBase64 in 'StringUtils\uCodecBase64.pas',
+  uStringFunc in 'StringUtils\uStringFunc.pas',
+  ufrmPassword in 'ufrmPassword.pas' {frmPassword};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TfrmKeyGen, frmKeyGen);
+  Application.CreateForm(TfrmPassword, frmPassword);
+  Application.Run;
+end.

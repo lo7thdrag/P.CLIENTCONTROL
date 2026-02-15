@@ -1,0 +1,24 @@
+unit UNetData;
+
+interface
+
+uses
+  uTCPDataType;
+
+const
+  CommandID: Word = 77;
+
+  ShutdownCommand: Byte = 1;
+  RestartCommand: Byte = 2;
+  CloseAllCommand:Byte = 3;
+  RunAllCommad :Byte =4;
+
+type
+  TCommandData = record
+    pid: TPacketID;
+    command: Byte;
+  end;
+
+implementation
+
+end.

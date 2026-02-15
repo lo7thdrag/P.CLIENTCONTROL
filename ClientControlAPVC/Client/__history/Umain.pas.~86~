@@ -1,0 +1,340 @@
+unit Umain;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics, uLibSetting,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, uExecuter,
+  uTCPClient, ShellApi, Vcl.Imaging.jpeg, Winapi.TlHelp32, Vcl.Imaging.pngimage,
+  Vcl.Menus;
+
+const
+  WM_ShellIcon = WM_USER + 1;
+
+type
+  TMainForm = class(TForm)
+    GetPacketTimer: TTimer;
+    Timer1: TTimer;
+    PopupMenu1: TPopupMenu;
+    Show1: TMenuItem;
+    Hide1: TMenuItem;
+    pnlHeader: TPanel;
+    Image2: TImage;
+    Label3: TLabel;
+    Panel1: TPanel;
+    btnClose: TButton;
+    Panel2: TPanel;
+    lblClearLog: TLabel;
+    Panel3: TPanel;
+    LogMemo: TMemo;
+
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+
+    procedure btnConnectClick(Sender: TObject);
+    procedure btnCloseClick(Sender: TObject);
+
+    procedure GetPacketTimerTimer(Sender: TObject);
+    procedure Timer1Timer(Sender: TObject);
+    procedure lblClearLogClick(Sender: TObject);
+    procedure Show1Click(Sender: TObject);
+    procedure Hide1Click(Sender: TObject);
+
+    procedure Image1Click(Sender: TObject);
+
+  private
+    vSettingFile: string;
+
+    Client: TTCPClient;
+    FAppGame : TAppExecute;
+
+    procedure OnConnected(Sender: TObject);
+    procedure OnDisconnected(Sender: TObject);
+    procedure Client_Log(const S: string);
+    procedure NetRecv_CommandData(apRec: PAnsiChar; aSize: word);
+    procedure ShutdownWindows();
+    procedure RestartWindows();
+    procedure RunApp();
+    procedure KillApp();
+
+    procedure O_nsShellIcon( var Msg : TMessage ); message WM_ShellIcon;
+    procedure O_nsMinimize( var Msg : TWMSysCommand ); message WM_SYSCOMMAND;
+
+  public
+    procedure BeginApplication;
+
+  end;
+
+var
+  MainForm: TMainForm;
+
+implementation
+
+{$R *.dfm}
+
+uses
+  UNetData;
+
+{$REGION ' Form Handle '}
+
+procedure TMainForm.FormActivate(Sender: TObject);
+begin
+  ShowWindow(Application.Handle, SW_HIDE);
+end;
+
+procedure TMainForm.FormCreate(Sender: TObject);
+begin
+  FAppGame    := TAppExecute.Create;
+  FAppGame.OnStartExecute := nil;
+  FAppGame.OnEndExecute   := nil;
+
+  Client := TTCPClient.Create;
+
+  Client.OnConnected := OnConnected;
+  Client.OnDisconnected := OnDisconnected;
+
+  Client.OnGetStatusLog := Client_Log;
+
+  Client.RegisterProcedure(CommandID, NetRecv_CommandData, SizeOf(RecCommandData));
+
+  GetPacketTimer.Interval := 50;
+end;
+
+procedure TMainForm.FormDestroy(Sender: TObject);
+begin
+  FAppGame.Free;
+
+  Client.UnregisterAllProcedure;
+  Client.Disconnect;
+  Client.Free;
+end;
+
+procedure TMainForm.FormShow(Sender: TObject);
+begin
+//  vSettingFile := getFileSetting;
+//  LoadFF_NetSetting(vSettingFile, vNetSetting);
+//
+//  if vNetSetting.AutoStart then
+//  begin
+//    Client.Connect(vNetSetting.ServerIP, vNetSetting.Port);
+//  end;
+//
+//  FAppGame.FExecFname := vNetSetting.Application;
+end;
+
+{$ENDREGION}
+
+{$REGION ' Button Handle '}
+
+procedure TMainForm.btnConnectClick(Sender: TObject);
+begin
+//  if btnConnect.Caption = 'Connect' then
+//  begin
+//    Client.Connect(AddressEdit.Text, PortEdit.Text);
+//    btnConnect.Caption := 'Disconnect';
+//  end
+//  else
+//  begin
+//    Client.Disconnect;
+//    btnConnect.Caption := 'Connect';
+//  end;
+end;
+
+procedure TMainForm.BeginApplication;
+begin
+  vSettingFile := getFileSetting;
+  LoadFF_NetSetting(vSettingFile, vNetSetting);
+
+  if vNetSetting.AutoStart then
+  begin
+    Client.Connect(vNetSetting.ServerIP, vNetSetting.Port);
+  end;
+
+  FAppGame.FExecFname := vNetSetting.Application;
+end;
+
+procedure TMainForm.btnCloseClick(Sender: TObject);
+begin
+  Client.Disconnect;
+  Close;
+end;
+
+procedure TMainForm.lblClearLogClick(Sender: TObject);
+begin
+  LogMemo.Clear;
+end;
+
+procedure TMainForm.Show1Click(Sender: TObject);
+begin
+  Show;
+  SetForegroundWindow( Handle );
+end;
+
+procedure TMainForm.Hide1Click(Sender: TObject);
+begin
+  Hide;
+end;
+
+procedure TMainForm.Image1Click(Sender: TObject);
+begin
+//  TopPanel.Visible := not TopPanel.Visible;
+end;
+
+{$ENDREGION}
+
+{$REGION ' Additional Handle '}
+
+procedure TMainForm.Client_Log(const S: string);
+begin
+  LogMemo.Lines.Add(S);
+end;
+
+procedure TMainForm.NetRecv_CommandData(apRec: PAnsiChar; aSize: word);
+var
+  r: ^RecCommandData;
+begin
+  r := @apRec^;
+  case r.command of
+    doShutdown:
+    begin
+      ShutdownWindows;
+    end;
+    doRestart:
+    begin
+      RestartWindows;
+    end;
+    doRunApp:
+    begin
+      RunApp;
+    end;
+    doKillApp:
+    begin
+      KillApp
+    end;
+    doKillLauncher:
+    begin
+      Close;
+    end;
+  end;
+end;
+
+procedure TMainForm.OnConnected(Sender: TObject);
+begin
+  GetPacketTimer.Enabled := True;
+end;
+
+procedure TMainForm.OnDisconnected(Sender: TObject);
+begin
+  GetPacketTimer.Enabled := False;
+end;
+
+procedure TMainForm.O_nsMinimize(var Msg: TWMSysCommand);
+begin
+  if( Msg.CmdType = SC_MINIMIZE ) then
+    Hide
+  else
+    inherited;
+end;
+
+procedure TMainForm.O_nsShellIcon(var Msg: TMessage);
+var
+  O_ns : TPoint;
+begin
+  case Msg.LParam of
+    WM_LBUTTONDBLCLK :
+    begin
+      Show;
+      SetForegroundWindow( Handle );
+    end;
+    WM_RBUTTONUP :
+    begin
+      SetForegroundWindow( Handle );
+      GetCursorPos( O_ns );
+      PopupMenu1.Popup( O_ns.x, O_ns.y );
+      PostMessage( Handle, WM_USER, 0, 0 );
+    end;
+  end;
+end;
+
+procedure TMainForm.KillApp;
+var
+  connector, killer :THandle;
+  stamped : LongBool;
+  exe : TProcessEntry32;
+  IDExe : Integer;
+  flag : Boolean;
+
+begin
+
+  connector := CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+  exe.dwSize := sizeOf(exe);
+  stamped := Process32First(connector, exe);
+
+  flag := False;
+  while stamped do
+  begin
+    stamped := Process32Next(connector, exe);
+
+    if exe.szExeFile = vNetSetting.Application then
+    begin
+      IDExe := exe.th32ProcessID;
+      flag := True;
+      Break
+    end;
+
+  end;
+
+  if flag then
+  begin
+    killer := OpenProcess(PROCESS_TERMINATE, False, IDExe );
+
+    if TerminateProcess(killer, 0) then
+    begin
+      LogMemo.Lines.Add('Kill ' + vNetSetting.Application);
+    end
+  end;
+end;
+
+procedure TMainForm.RunApp;
+begin
+  FAppGame.Executes;
+  LogMemo.Lines.Add('Run ' + vNetSetting.Application);
+end;
+
+procedure TMainForm.RestartWindows;
+begin
+  LogMemo.Lines.Add('Restart');
+  ShellExecute(handle, 'open', PChar('cmd.exe'), PChar('/C shutdown /r /t 2'), nil, SW_HIDE);
+end;
+
+procedure TMainForm.ShutdownWindows;
+begin
+  LogMemo.Lines.Add('shutdown');
+  ShellExecute(handle, 'open', PChar('cmd.exe'), PChar('/C shutdown /s /t 2'), nil, SW_HIDE);
+end;
+
+procedure TMainForm.Timer1Timer(Sender: TObject);
+begin
+  if Assigned(Client) then
+  begin
+    if Client.Connected = False then
+    begin
+      if vNetSetting.AutoStart then
+      begin
+        Client.Connect(vNetSetting.ServerIP, vNetSetting.Port);
+      end;
+    end;
+  end;
+end;
+
+procedure TMainForm.GetPacketTimerTimer(Sender: TObject);
+begin
+  Client.GetPacket;
+end;
+
+{$ENDREGION}
+
+end.

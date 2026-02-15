@@ -1,0 +1,181 @@
+unit Umain;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics, uLibSetting,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
+  uTCPClient, ShellApi, Vcl.Imaging.jpeg;
+
+type
+  TMainForm = class(TForm)
+    TopPanel: TPanel;
+    PortLabel: TLabel;
+    PortEdit: TEdit;
+    addressLabel: TLabel;
+    AddressEdit: TEdit;
+    LogMemo: TMemo;
+    GetPacketTimer: TTimer;
+    imgBackground: TImage;
+    ButtonClose: TButton;
+    btnConnect: TButton;
+    Image1: TImage;
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure DisConnectButtonClick(Sender: TObject);
+    procedure GetPacketTimerTimer(Sender: TObject);
+    procedure ButtonCloseClick(Sender: TObject);
+    procedure ButtonOpenClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure Image1Click(Sender: TObject);
+    procedure btnConnectClick(Sender: TObject);
+  private
+    { Private declarations }
+    vSettingFile: string;
+
+    Client: TTCPClient;
+
+    openFile: string;
+
+    procedure OnConnected(Sender: TObject);
+    procedure OnDisconnected(Sender: TObject);
+    procedure Client_Log(const S: string);
+    procedure NetRecv_CommandData(apRec: PAnsiChar; aSize: word);
+
+  public
+
+  end;
+
+var
+  MainForm: TMainForm;
+
+implementation
+
+{$R *.dfm}
+
+uses
+  UNetData;
+
+procedure TMainForm.btnConnectClick(Sender: TObject);
+begin
+  if btnConnect.Caption = 'Connect' then
+  begin
+    Client.Connect(AddressEdit.Text, PortEdit.Text);
+    btnConnect.Caption := 'Disconnect';
+  end
+  else
+  begin
+    Client.Disconnect;
+    btnConnect.Caption := 'Connect';
+  end;
+end;
+
+procedure TMainForm.ButtonCloseClick(Sender: TObject);
+begin
+  Close;
+  Client.Disconnect;
+end;
+
+procedure TMainForm.ButtonOpenClick(Sender: TObject);
+var
+  openFile: String;
+begin
+
+//  openFile := inputAplicationLabel.Text;
+  ShellExecute(handle, 'open', PChar(openFile), nil, nil, SW_SHOW);
+
+end;
+
+procedure TMainForm.Client_Log(const S: string);
+begin
+  LogMemo.Lines.Add(S);
+end;
+
+procedure TMainForm.DisConnectButtonClick(Sender: TObject);
+begin
+  Client.Disconnect;
+end;
+
+procedure TMainForm.FormCreate(Sender: TObject);
+begin
+
+  Client := TTCPClient.Create;
+
+  Client.OnConnected := OnConnected;
+  Client.OnDisconnected := OnDisconnected;
+
+  Client.OnGetStatusLog := Client_Log;
+
+  Client.RegisterProcedure(CommandID, NetRecv_CommandData, SizeOf(RecCommandData));
+
+  GetPacketTimer.Interval := 50;
+end;
+
+procedure TMainForm.FormDestroy(Sender: TObject);
+begin
+  Client.UnregisterAllProcedure;
+  Client.Disconnect;
+  Client.Free;
+end;
+
+procedure TMainForm.FormShow(Sender: TObject);
+begin
+  vSettingFile := getFileSetting;
+  LoadFF_NetSetting(vSettingFile, vNetSetting);
+
+  if vNetSetting.AutoStart then
+  begin
+    Client.Connect(vNetSetting.ServerIP, vNetSetting.Port);
+  end;
+end;
+
+procedure TMainForm.GetPacketTimerTimer(Sender: TObject);
+begin
+  Client.GetPacket;
+end;
+
+procedure TMainForm.Image1Click(Sender: TObject);
+begin
+  TopPanel.Visible := not TopPanel.Visible;
+end;
+
+procedure TMainForm.NetRecv_CommandData(apRec: PAnsiChar; aSize: word);
+var
+  r: ^RecCommandData;
+begin
+  r := @apRec^;
+  case r.command of
+    doShutdown:
+    begin
+      LogMemo.Lines.Add('shutdown');
+      ShellExecute(0, nil, 'cmd.exe', '/C shutdown /s', nil, SW_HIDE);
+    end;
+    doRestart:
+    begin
+      LogMemo.Lines.Add('Restart');
+    end;
+    doRunApp:
+    begin
+      LogMemo.Lines.Add('Kill');
+      ShellExecute(0, nil, 'cmd.exe', '/C shutdown /s', nil, SW_HIDE);
+    end;
+    doKillApp:
+    begin
+      LogMemo.Lines.Add('Run');
+      ShellExecute(0, nil, 'cmd.exe', '/C shutdown /s', nil, SW_HIDE);
+    end;
+  end;
+end;
+
+procedure TMainForm.OnConnected(Sender: TObject);
+begin
+  GetPacketTimer.Enabled := True;
+end;
+
+procedure TMainForm.OnDisconnected(Sender: TObject);
+begin
+  GetPacketTimer.Enabled := False;
+end;
+
+end.

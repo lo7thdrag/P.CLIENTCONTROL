@@ -1,0 +1,209 @@
+unit uMain;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Winapi.ActiveX, WbemScripting_TLB, System.StrUtils,
+  Vcl.StdCtrls, uCodecBase64, Vcl.ExtCtrls, System.Win.Registry,
+  Vcl.Imaging.jpeg, ufrmPassword;
+
+type
+  TfrmKeyGen = class(TForm)
+    ImgBackgroundForm: TImage;
+    edtApp: TEdit;
+    Label2: TLabel;
+    edtNetwork: TEdit;
+    ImgBtnRegister: TImage;
+    Label3: TLabel;
+    lblClose: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label4: TLabel;
+    procedure ImgBtnPatchClick(Sender: TObject);
+    procedure ImgBtnRegisterClick(Sender: TObject);
+
+    procedure Crack(Sender: TObject);
+
+    procedure FormCreate(Sender: TObject);
+    procedure lblCloseClick(Sender: TObject);
+
+  private
+    Reg : TRegistry;
+
+    function  GetSNHardisk: string;
+
+  public
+    { Public declarations }
+  end;
+
+var
+  frmKeyGen: TfrmKeyGen;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmKeyGen.Crack(Sender: TObject);
+var
+  str1Temp : string;
+  alamatTemp, password : string;
+  Appstop, Networkstop, start : TDateTime;
+  Tahun, Bulan, Hari : Word;
+
+begin
+  frmPassword := TfrmPassword.Create(Self);
+  try
+    with frmPassword do
+    begin
+      ShowModal;
+
+      password := pass;
+
+    end;
+  finally
+    frmPassword.Free;
+  end;
+
+  if password <> 'Nuruly@k1n' then
+    Exit;
+
+  str1Temp := GetSNHardisk;
+
+  DecodeDate(Now, Tahun, Bulan, Hari);
+  start := EncodeDate(Tahun, Bulan, Hari);
+
+  Appstop := start + StrToInt(edtApp.Text);
+  Networkstop := start + StrToInt(edtNetwork.Text);
+
+  alamatTemp:='\Software\CmPack\CmLogin';
+
+  try
+
+    {Membuat/ membuka folder di regedit}
+    Reg.OpenKey(alamatTemp,true);
+
+    {Menulis di regedit}
+    Reg.WriteString('LockID',str1Temp);
+    Reg.WriteString('Date',FloatToStr(Appstop));
+    Reg.WriteString('DateNetwork',FloatToStr(Networkstop));
+
+  finally
+
+    Reg.CloseKey;
+
+  end;
+
+  MessageDlg('Activation Successful', mtInformation,[mbOk], 0);
+end;
+
+procedure TfrmKeyGen.FormCreate(Sender: TObject);
+begin
+  Reg := Tregistry.Create;
+
+  Reg.RootKey := HKEY_CURRENT_USER;
+end;
+
+function TfrmKeyGen.GetSNHardisk: string;
+var
+  WMIServices : ISWbemServices;
+  Root        : ISWbemObjectSet;
+  Item        : Variant;
+  snTemp      : string;
+begin
+  WMIServices := CoSWbemLocator.Create.ConnectServer('.', 'root\cimv2','', '', '', '', 0, nil);
+  Root  := WMIServices.ExecQuery('Select SerialNumber From Win32_DiskDrive','WQL', 0, nil);
+  Item := Root.ItemIndex(0);
+  snTemp:=VarToStr(Item.SerialNumber);
+
+  snTemp := ReplaceStr(snTemp, '_', '');
+  snTemp := ReplaceStr(snTemp, '.', '');
+  Result := RightStr(snTemp,8);
+end;
+
+procedure TfrmKeyGen.ImgBtnPatchClick(Sender: TObject);
+var
+  ranIntTemp : Integer;
+  str1Temp : string;
+  alamatTemp : string;
+
+begin
+  str1Temp := GetSNHardisk;
+
+  alamatTemp:='\Software\CmPack\CmLogin';
+
+  try
+    {Membuat/ membuka folder di regedit}
+    Reg.OpenKey(alamatTemp,true);
+
+    {Menulis di regedit}
+    Reg.WriteString('BufferID',str1Temp);
+  finally
+    Reg.CloseKey;
+  end;
+
+  ranIntTemp := Random(10);
+  insert (IntToStr(ranIntTemp), str1Temp, 0);
+  ranIntTemp := Random(10);
+  insert (IntToStr(ranIntTemp), str1Temp, 5);
+  ranIntTemp := Random(10);
+  insert (IntToStr(ranIntTemp), str1Temp, 11);
+
+//  Edit1.Text := Base64Encode(str1Temp);
+
+end;
+
+procedure TfrmKeyGen.ImgBtnRegisterClick(Sender: TObject);
+var
+  regNumTemp : string;
+  str1Temp : string;
+  alamatTemp : string;
+  stop, start : TDateTime;
+  Tahun, Bulan, Hari : Word;
+begin
+  str1Temp := GetSNHardisk;
+
+//  regNumTemp := base64decode(Edit2.Text);
+
+  Delete (regNumTemp, 11, 1);
+  Delete (regNumTemp, 6, 1);
+  Delete (regNumTemp, 2, 1);
+
+  DecodeDate(Now, Tahun, Bulan, Hari);
+  start := EncodeDate(Tahun, Bulan, Hari);
+
+  stop := start + 365;
+
+  if str1Temp = regNumTemp then
+  begin
+    alamatTemp:='\Software\CmPack\CmLogin';
+
+    try
+
+      {Membuat/ membuka folder di regedit}
+      Reg.OpenKey(alamatTemp,true);
+
+      {Menulis di regedit}
+      Reg.WriteString('LockID',regNumTemp);
+      Reg.WriteString('Date',FloatToStr(stop));
+
+    finally
+
+      Reg.CloseKey;
+
+    end;
+
+    MessageDlg('Activation Successful', mtInformation,[mbOk], 0);
+  end
+  else
+  begin
+    ShowMessage('Invalid Serial Number');
+  end;
+end;
+
+procedure TfrmKeyGen.lblCloseClick(Sender: TObject);
+begin
+  Close;
+end;
+
+end.

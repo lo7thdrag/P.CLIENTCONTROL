@@ -1,0 +1,24 @@
+unit UNetData;
+
+interface
+
+uses
+  uTCPDataType;
+
+const
+  doShutdown = 0;
+  doRestart  = 1;
+  doRunApp   = 2;
+  doKillApp  = 3;
+
+  CommandID: Word = 77;
+
+type
+  RecCommandData = record
+    pid: TPacketID;
+    command: Byte;
+  end;
+
+implementation
+
+end.

@@ -1,0 +1,155 @@
+unit Umain;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
+  uTCPClient, ShellApi;
+
+type
+  TMainForm = class(TForm)
+    TopPanel: TPanel;
+    PortLabel: TLabel;
+    PortEdit: TEdit;
+    addressLabel: TLabel;
+    AddressEdit: TEdit;
+    LogMemo: TMemo;
+    GetPacketTimer: TTimer;
+    ButtonClose: TButton;
+    inputAplicationLabel: TEdit;
+    EditAplicationLabel: TLabel;
+    ButtonOpen: TButton;
+    imgBackground: TImage;
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure DisConnectButtonClick(Sender: TObject);
+    procedure GetPacketTimerTimer(Sender: TObject);
+    procedure ButtonCloseClick(Sender: TObject);
+    procedure ButtonOpenClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+  private
+    { Private declarations }
+    vSettingFile: string;
+
+    Client: TTCPClient;
+
+    openFile: string;
+
+    procedure OnConnected(Sender: TObject);
+    procedure OnDisconnected(Sender: TObject);
+    procedure Client_Log(const S: string);
+    procedure NetRecv_CommandData(apRec: PAnsiChar; aSize: word);
+
+  public
+    function LoadFF_NetSetting(const fName: string; var nSet: TNetSetting): boolean;
+  end;
+
+var
+  MainForm: TMainForm;
+
+implementation
+
+{$R *.dfm}
+
+uses
+  UNetData;
+
+procedure TMainForm.ButtonCloseClick(Sender: TObject);
+begin
+  Close;
+  Client.Disconnect;
+end;
+
+procedure TMainForm.ButtonOpenClick(Sender: TObject);
+var
+  openFile: String;
+begin
+
+  openFile := inputAplicationLabel.Text;
+  ShellExecute(handle, 'open', PChar(openFile), nil, nil, SW_SHOW);
+
+end;
+
+procedure TMainForm.Client_Log(const S: string);
+begin
+  LogMemo.Lines.Add(S);
+end;
+
+procedure TMainForm.DisConnectButtonClick(Sender: TObject);
+begin
+  Client.Disconnect;
+end;
+
+procedure TMainForm.FormCreate(Sender: TObject);
+begin
+
+  Client := TTCPClient.Create;
+
+  Client.OnConnected := OnConnected;
+  Client.OnDisconnected := OnDisconnected;
+
+  Client.OnGetStatusLog := Client_Log;
+
+  Client.RegisterProcedure(CommandID, NetRecv_CommandData, SizeOf(TCommandData));
+
+  GetPacketTimer.Interval := 50;
+end;
+
+procedure TMainForm.FormDestroy(Sender: TObject);
+begin
+  Client.UnregisterAllProcedure;
+  Client.Disconnect;
+  Client.Free;
+end;
+
+procedure TMainForm.FormShow(Sender: TObject);
+begin
+  //
+  Client.Connect(AddressEdit.Text, PortEdit.Text);
+end;
+
+procedure TMainForm.GetPacketTimerTimer(Sender: TObject);
+begin
+  Client.GetPacket;
+end;
+
+procedure TMainForm.NetRecv_CommandData(apRec: PAnsiChar; aSize: word);
+var
+  r: ^TCommandData;
+begin
+  r := @apRec^;
+  case r.command of
+    1:
+      LogMemo.Lines.Add('shutdown');
+    // ShellExecute(0, nil, 'cmd.exe', '/C shutdown /s', nil, SW_HIDE);
+    2:
+      LogMemo.Lines.Add('Restart');
+    3:
+      LogMemo.Lines.Add('Kill');
+    4:
+      LogMemo.Lines.Add('Run');
+    5:
+      LogMemo.Lines.Add('shutdownAll');
+    6:
+      LogMemo.Lines.Add('RestartAll');
+    7:
+      LogMemo.Lines.Add('RunAll');
+    8:
+      LogMemo.Lines.Add('KillAll');
+    // ShellExecute(0, nil, 'cmd.exe', '/C shutdown /r', nil, SW_HIDE);
+  end;
+end;
+
+procedure TMainForm.OnConnected(Sender: TObject);
+begin
+  GetPacketTimer.Enabled := True;
+end;
+
+procedure TMainForm.OnDisconnected(Sender: TObject);
+begin
+  GetPacketTimer.Enabled := False;
+end;
+
+end.

@@ -1,0 +1,38 @@
+unit UNetData;
+
+interface
+
+uses
+  uTCPDataType;
+
+const
+  CommandID = 77;
+  ShutDownID = 11;
+  RestartID = 22;
+  KillAppID = 33;
+
+type
+
+  KillApp = Record
+    pid: TPacketID;
+    KillAppTemp: Integer;
+  End;
+
+  TRestart = record
+    pid: TPacketID;
+    Restrat: Integer;
+  end;
+
+  TShutDown = Record
+    pid: TPacketID;
+    Shutdown: Integer;
+  End;
+
+  TCommandData = record
+    pid: TPacketID;
+    command: byte;
+  end;
+
+implementation
+
+end.
