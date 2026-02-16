@@ -358,6 +358,13 @@ begin
 
   AppState := value;
 
+  if vNetSetting.ClientMode = 'NSFS' then
+    AppData.command := 0
+  else if vNetSetting.ClientMode = 'NAFS' then
+    AppData.command := 1
+  else if vNetSetting.ClientMode = 'NSSFS' then
+    AppData.command := 2;
+
   AppData.state := AppState;
   AppData.appName := vNetSetting.ClientMode;
 
