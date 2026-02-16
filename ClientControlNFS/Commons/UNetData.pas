@@ -27,6 +27,7 @@ type
     pid: TPacketID;
     command: Byte;
     state : Boolean;
+    appName : string;
   end;
 
 implementation

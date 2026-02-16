@@ -13,23 +13,7 @@ uses
 type
   TMainForm = class(TForm)
     GetPacketTimer: TTimer;
-    pnlSystem: TPanel;
-    grpSystemAllClient: TGroupBox;
-    btnRestartAllSystem: TButton;
-    btnRunAllGC: TButton;
-    btnKillAllGC: TButton;
-    grpSystemSingleClient: TGroupBox;
-    btnKillGC: TButton;
-    btnRunGC: TButton;
-    btnRestartSystem: TButton;
-    btnShutdownSystem: TButton;
-    btnShutdownAllSystem: TButton;
     ilClientStateColor: TImageList;
-    btnRunSimCLient: TButton;
-    btnKillSimClient: TButton;
-    btnRunAllSimClient: TButton;
-    btnKillAllSimClient: TButton;
-    Label1: TLabel;
     tmrCekAplication: TTimer;
     AdvSmoothPanel1: TAdvSmoothPanel;
     AdvSmoothPanel4: TAdvSmoothPanel;
@@ -104,6 +88,8 @@ type
     btnShutdown: TImage;
     btnRestartAll: TImage;
     btnShutdownAll: TImage;
+    AdvSmoothPanel14: TAdvSmoothPanel;
+    AdvSmoothPanel18: TAdvSmoothPanel;
 
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -131,6 +117,8 @@ type
     procedure UpdateSystemClientState;
     procedure UpdateConnectState(const S: string);
     procedure UpdateDisconnectState(const S: string);
+
+    procedure LoadConsoleList;
 
     procedure Server_Log(const S: string);
 
@@ -161,10 +149,6 @@ begin
   FAppGame.OnStartExecute := nil;
   FAppGame.OnEndExecute   := nil;
 
-  FAppGame2    := TAppExecute.Create;
-  FAppGame2.OnStartExecute := nil;
-  FAppGame2.OnEndExecute   := nil;
-
   server := TTCPServer.Create;
   server.OnClient_Connect := Client_Connect;
   server.OnClient_DisConnect := Client_Disconnect;
@@ -194,8 +178,7 @@ begin
     GetPacketTimer.Enabled := True;
   end;
 
-  FAppGame.FExecFname := vNetSetting.Application;
-  FAppGame2.FExecFname := vNetSetting.Application2;
+  LoadConsoleList;
 end;
 
 {$ENDREGION}
@@ -216,9 +199,9 @@ begin
     1 :
     begin
       {$REGION ' Serevr NAFS '}
-      if not GetApp('SystemServerNafs.exe') then
+      if not GetApp(vNetSetting.Nafsserverapp) then
       begin
-        FAppGame.FExecFname := vNetSetting.Nafsserver+'SystemServerNafs.exe';
+        FAppGame.FExecFname := vNetSetting.Nafsserver + vNetSetting.Nafsserverapp;
         FAppGame.Executes;
       end
       else
@@ -228,9 +211,9 @@ begin
     3 :
     begin
       {$REGION ' Bridge NAFS '}
-      if not GetApp('BridgeNafs.exe') then
+      if not GetApp(vNetSetting.Nafsbridgeapp) then
       begin
-        FAppGame.FExecFname := vNetSetting.Nafsbridge+'BridgeNafs.exe';
+        FAppGame.FExecFname := vNetSetting.Nafsbridge + vNetSetting.Nafsbridgeapp;
         FAppGame.Executes;
       end
       else
@@ -259,9 +242,9 @@ begin
     7 :
     begin
       {$REGION ' Serevr NSFS '}
-      if not GetApp('SystemServerNsfs.exe') then
+      if not GetApp(vNetSetting.Nsfsserverapp) then
       begin
-        FAppGame.FExecFname := vNetSetting.Nsfsserver+'SystemServerNsfs.exe';
+        FAppGame.FExecFname := vNetSetting.Nsfsserver + vNetSetting.Nsfsserverapp;
         FAppGame.Executes;
       end
       else
@@ -271,9 +254,9 @@ begin
     9 :
     begin
       {$REGION ' Bridge NSFS '}
-      if not GetApp('BridgeNsfs.exe') then
+      if not GetApp(vNetSetting.Nsfsbridgeapp) then
       begin
-        FAppGame.FExecFname := vNetSetting.Nsfsbridge+'BridgeNsfs.exe';
+        FAppGame.FExecFname := vNetSetting.Nsfsbridge + vNetSetting.Nsfsbridgeapp;
         FAppGame.Executes;
       end
       else
@@ -302,9 +285,9 @@ begin
     13 :
     begin
       {$REGION ' Serevr NSSFS '}
-      if not GetApp('SystemServerNssfs.exe') then
+      if not GetApp(vNetSetting.Nssfsserverapp) then
       begin
-        FAppGame.FExecFname := vNetSetting.Nssfsserver+'SystemServerNssfs.exe';
+        FAppGame.FExecFname := vNetSetting.Nssfsserver + vNetSetting.Nssfsserverapp;
         FAppGame.Executes;
       end
       else
@@ -314,9 +297,9 @@ begin
     15 :
     begin
       {$REGION ' Bridge NSSFS '}
-      if not GetApp('BridgeNssfs.exe') then
+      if not GetApp(vNetSetting.Nssfsbridgeapp) then
       begin
-        FAppGame.FExecFname := vNetSetting.Nssfsbridge+'BridgeNssfs.exe';
+        FAppGame.FExecFname := vNetSetting.Nssfsbridge + vNetSetting.Nssfsbridgeapp;
         FAppGame.Executes;
       end
       else
@@ -342,6 +325,18 @@ begin
       server.SendDataToIPAddress(CommandID, @CommandData, vNetSetting.InstNssfs);
       {$ENDREGION}
     end;
+    19:
+    begin
+      {$REGION ' Session Voip '}
+      if not GetApp(vNetSetting.Sessionvoipapp) then
+      begin
+        FAppGame.FExecFname := vNetSetting.Sessionvoip + vNetSetting.Sessionvoipapp;
+        FAppGame.Executes;
+      end
+      else
+        ShowMessage('Can not Run, double load Session Voip');
+      {$ENDREGION}
+    end;
   end;
 end;
 
@@ -351,27 +346,28 @@ var
 
 begin
   case TImage(Sender).Tag of
-    2 : KillApp('ServerSystemNafs.exe');
-    4 : KillApp('BridgeNafs.exe');
+    2 : KillApp(vNetSetting.Nafsserverapp);
+    4 : KillApp(vNetSetting.Nafsbridgeapp);
     6 :
     begin
       CommandData.command := 4;
       server.SendDataToIPAddress(CommandID, @CommandData, vNetSetting.InstNafs);
     end;
-    8 : KillApp('ServerSystemNsfs.exe');
-    10 : KillApp('BridgeNsfs.exe');
+    8 : KillApp(vNetSetting.Nsfsserverapp);
+    10 : KillApp(vNetSetting.Nsfsbridgeapp);
     12 :
     begin
       CommandData.command := 4;
       server.SendDataToIPAddress(CommandID, @CommandData, vNetSetting.InstNsfs);
     end;
-    14 : KillApp('ServerSystemNssfs.exe');
-    16 : KillApp('BridgeNssfs.exe');
+    14 : KillApp(vNetSetting.Nssfsserverapp);
+    16 : KillApp(vNetSetting.Nssfsbridgeapp);
     18 :
     begin
       CommandData.command := 4;
       server.SendDataToIPAddress(CommandID, @CommandData, vNetSetting.InstNssfs);
     end;
+    20 : KillApp(vNetSetting.Sessionvoipapp);
   end;
 end;
 
@@ -414,8 +410,71 @@ begin
 end;
 
 procedure TMainForm.UpdateSystemClientState;
+var
+  i : Integer;
+  li : TListItem;
+
 begin
-//
+  for i := 0 to lvSystem.Items.Count-1 do
+  begin
+    li := lvSystem.Items[i];
+
+    if server.getClientState(li.SubItems[0]) then
+    begin
+      li.StateIndex := 1;
+    end
+    else
+    begin
+      li.StateIndex := 0;
+    end;
+  end;
+end;
+
+procedure TMainForm.LoadConsoleList;
+var
+  i : Integer;
+  li : TListItem;
+
+begin
+  for i := 0 to lvSystem.Items.Count-1 do
+  begin
+    li := lvSystem.Items[i];
+
+    li.StateIndex := 0;
+
+    if li.Caption = 'INST NSFS' then li.SubItems[0] := vNetSetting.instruktur_nsfs
+    else if li.Caption = 'INST NAFS' then li.SubItems[0] := vNetSetting.instruktur_nafs
+    else if li.Caption = 'INST NSSFS' then li.SubItems[0] := vNetSetting.instruktur_nssfs
+
+    else if li.Caption = 'MK3 NSFS' then li.SubItems[0] := vNetSetting.mk3_2h_nsfs
+    else if li.Caption = 'MK4 NSFS' then li.SubItems[0] := vNetSetting.mk4_nsfs
+    else if li.Caption = 'C 802' then li.SubItems[0] := vNetSetting.c802
+    else if li.Caption = 'TDS' then li.SubItems[0] := vNetSetting.tds
+    else if li.Caption = 'C 705' then li.SubItems[0] := vNetSetting.c705
+    else if li.Caption = 'YAKHONT' then li.SubItems[0] := vNetSetting.yakhont
+    else if li.Caption = 'FC 57 DIG' then li.SubItems[0] := vNetSetting.fc57mm_digital
+    else if li.Caption = 'MR 35' then li.SubItems[0] := vNetSetting.mr_35
+    else if li.Caption = 'FC 57 MAN' then li.SubItems[0] := vNetSetting.fc57mm_manual
+    else if li.Caption = 'MM 103' then li.SubItems[0] := vNetSetting.mm_103
+
+    else if li.Caption = 'MK3 NAFS' then li.SubItems[0] := vNetSetting.mk3_2h_nafs
+    else if li.Caption = 'MK4 NAFS' then li.SubItems[0] := vNetSetting.mk4_nafs
+    else if li.Caption = 'CIWS 730' then li.SubItems[0] := vNetSetting.ciws_730
+    else if li.Caption = 'EO 730' then li.SubItems[0] := vNetSetting.eo_tracker_730
+    else if li.Caption = 'AK 230' then li.SubItems[0] := vNetSetting.ak_230
+    else if li.Caption = 'MR 203' then li.SubItems[0] := vNetSetting.mr_203
+
+    else if li.Caption = 'MK3 NSSFS' then li.SubItems[0] := vNetSetting.mk3_2h_nssfs
+    else if li.Caption = 'MK4 NSSFS' then li.SubItems[0] := vNetSetting.mk4_nssfs
+    else if li.Caption = 'SPS' then li.SubItems[0] := vNetSetting.sps
+    else if li.Caption = 'SUT & BLACK SHARK' then li.SubItems[0] := vNetSetting.sut_black_shark
+    else if li.Caption = 'RBU DIG' then li.SubItems[0] := vNetSetting.rbu_digital
+    else if li.Caption = 'RBU MAN' then li.SubItems[0] := vNetSetting.rbu_manual
+
+    else if li.Caption = '3D NSFS' then li.SubItems[0] := vNetSetting.display3d_nsfs
+    else if li.Caption = '3D NAFS' then li.SubItems[0] := vNetSetting.display3d_nafs
+    else if li.Caption = '3D NSSFS' then li.SubItems[0] := vNetSetting.display3d_nssfs
+  end;
 end;
 
 {$ENDREGION}
@@ -430,7 +489,7 @@ begin
   try
     server.GetConnectedList(ss);
     UpdateConnectState(s);
-//    UpdateSystemClientState;
+    UpdateSystemClientState;
   finally
     ss.Free;
   end;
@@ -444,7 +503,7 @@ begin
   try
     server.GetConnectedList(ss);
     UpdateDisconnectState(s);
-//    UpdateSystemClientState;
+    UpdateSystemClientState;
   finally
     ss.Free;
   end;
@@ -523,7 +582,7 @@ procedure TMainForm.tmrCekAplicationTimer(Sender: TObject);
 begin
 
   {$REGION ' Cek System Server NAFS '}
-  if GetApp('SystemServerNafs.exe') then
+  if GetApp(vNetSetting.Nafsserverapp) then
   begin
     if lblStatusServerNafs.Caption <> 'running' then
     begin
@@ -542,7 +601,7 @@ begin
   {$ENDREGION}
 
   {$REGION ' Cek Bridge NAFS '}
-  if GetApp('BridgeNafs.exe') then
+  if GetApp(vNetSetting.Nafsbridgeapp) then
   begin
     if lblStatusBridgeNafs.Caption <> 'running' then
     begin
@@ -561,7 +620,7 @@ begin
   {$ENDREGION}
 
   {$REGION ' Cek System Server NSFS '}
-  if GetApp('SystemServerNsfs.exe') then
+  if GetApp(vNetSetting.Nsfsserverapp) then
   begin
     if lblStatusServerNsfs.Caption <> 'running' then
     begin
@@ -580,7 +639,7 @@ begin
   {$ENDREGION}
 
   {$REGION ' Cek Bridge NSFS '}
-  if GetApp('BridgeNsfs.exe') then
+  if GetApp(vNetSetting.Nsfsbridgeapp) then
   begin
     if lblStatusBridgeNsfs.Caption <> 'running' then
     begin
@@ -599,7 +658,7 @@ begin
   {$ENDREGION}
 
   {$REGION ' Cek System Server NSSFS '}
-  if GetApp('SystemServerNssfs.exe') then
+  if GetApp(vNetSetting.Nssfsserverapp) then
   begin
     if lblStatusServerNssfs.Caption <> 'running' then
     begin
@@ -618,7 +677,7 @@ begin
   {$ENDREGION}
 
   {$REGION ' Cek Bridge NSSFS '}
-  if GetApp('BridgeNssfs.exe') then
+  if GetApp(vNetSetting.Nssfsbridgeapp) then
   begin
     if lblStatusBridgeNssfs.Caption <> 'running' then
     begin
@@ -632,6 +691,25 @@ begin
     begin
       lblStatusBridgeNssfs.Caption := 'online';
       imgBridgeNssfs.Picture.LoadFromFile('Image\online.png');
+    end;
+  end;
+  {$ENDREGION}
+
+  {$REGION ' Cek Session Voip '}
+  if GetApp(vNetSetting.Sessionvoipapp) then
+  begin
+    if lblStatusSessionVoip.Caption <> 'running' then
+    begin
+      lblStatusSessionVoip.Caption := 'running';
+      imgSessionVoip.Picture.LoadFromFile('Image\running.png');
+    end;
+  end
+  else
+  begin
+    if lblStatusSessionVoip.Caption <> 'online' then
+    begin
+      lblStatusSessionVoip.Caption := 'online';
+      imgSessionVoip.Picture.LoadFromFile('Image\online.png');
     end;
   end;
   {$ENDREGION}
@@ -658,19 +736,6 @@ begin
     begin
       if rec.state then
       begin
-        lblStatusInstructorNafs.Caption := 'running';
-        imgIntructorNafs.Picture.LoadFromFile('Image\running.png');
-      end
-      else
-      begin
-        lblStatusInstructorNafs.Caption := 'online';
-        imgIntructorNafs.Picture.LoadFromFile('Image\online.png');
-      end;
-    end;
-    1 :
-    begin
-      if rec.state then
-      begin
         lblStatusInstructorNsfs.Caption := 'running';
         imgIntructorNsfs.Picture.LoadFromFile('Image\running.png');
       end
@@ -678,6 +743,19 @@ begin
       begin
         lblStatusInstructorNsfs.Caption := 'online';
         imgIntructorNsfs.Picture.LoadFromFile('Image\online.png');
+      end;
+    end;
+    1 :
+    begin
+      if rec.state then
+      begin
+        lblStatusInstructorNafs.Caption := 'running';
+        imgIntructorNafs.Picture.LoadFromFile('Image\running.png');
+      end
+      else
+      begin
+        lblStatusInstructorNafs.Caption := 'online';
+        imgIntructorNafs.Picture.LoadFromFile('Image\online.png');
       end;
     end;
     2 :

@@ -7,7 +7,7 @@ uses
   System.Classes, Vcl.Graphics, uLibSetting,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, uExecuter,
   uTCPClient, ShellApi, Vcl.Imaging.jpeg, Winapi.TlHelp32, Vcl.Imaging.pngimage,
-  Vcl.Menus;
+  Vcl.Menus, AdvSmoothPanel;
 
 const
   WM_ShellIcon = WM_USER + 1;
@@ -16,29 +16,22 @@ type
   TMainForm = class(TForm)
 
     GetPacketTimer: TTimer;
-    pnlHeader: TPanel;
-    imgHeaderBackground: TImage;
-    btnConnect: TButton;
-    pnlBody: TPanel;
-    Image2: TImage;
     LogMemo: TMemo;
     btnClose: TButton;
     Timer1: TTimer;
     lblClearLog: TLabel;
-    PortEdit: TEdit;
-    AddressEdit: TEdit;
 
     PopupMenu1: TPopupMenu;
     Show1: TMenuItem;
     Hide1: TMenuItem;
     tmrCekApplication: TTimer;
+    pnlBody: TAdvSmoothPanel;
 
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormActivate(Sender: TObject);
 
-    procedure btnConnectClick(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
 
     procedure GetPacketTimerTimer(Sender: TObject);
@@ -53,7 +46,6 @@ type
 
     Client: TTCPClient;
     FAppGame : TAppExecute;
-    FAppGame2 : TAppExecute;
     AppState : Boolean;
 
     function GetApp: Boolean;
@@ -62,12 +54,11 @@ type
     procedure OnDisconnected(Sender: TObject);
     procedure Client_Log(const S: string);
     procedure NetRecv_CommandData(apRec: PAnsiChar; aSize: word);
+
     procedure ShutdownWindows();
     procedure RestartWindows();
-    procedure RunGC();
-    procedure RunSimClient();
-    procedure KillGC();
-    procedure KillSimClient();
+    procedure RunClientApp();
+    procedure KillClientApp();
 
     procedure O_nsShellIcon( var Msg : TMessage ); message WM_ShellIcon;
     procedure O_nsMinimize( var Msg : TWMSysCommand ); message WM_SYSCOMMAND;
@@ -100,10 +91,6 @@ begin
   FAppGame.OnStartExecute := nil;
   FAppGame.OnEndExecute   := nil;
 
-  FAppGame2    := TAppExecute.Create;
-  FAppGame2.OnStartExecute := nil;
-  FAppGame2.OnEndExecute   := nil;
-
   Client := TTCPClient.Create;
 
   Client.OnConnected := OnConnected;
@@ -120,44 +107,18 @@ end;
 
 procedure TMainForm.FormDestroy(Sender: TObject);
 begin
-//  FAppGame.Free;
-//  FAppGame2.Free;
-//
-//  Client.UnregisterAllProcedure;
   Client.Disconnect;
   Client.Free;
 end;
 
 procedure TMainForm.FormShow(Sender: TObject);
 begin
-//  vSettingFile := getFileSetting;
-//  LoadFF_NetSetting(vSettingFile, vNetSetting);
-//
-//  if vNetSetting.AutoStart then
-//  begin
-//    Client.Connect(vNetSetting.ServerIP, vNetSetting.Port);
-//  end;
-//
-//  FAppGame.FExecFname := vNetSetting.Application;
+
 end;
 
 {$ENDREGION}
 
 {$REGION ' Button Handle '}
-
-procedure TMainForm.btnConnectClick(Sender: TObject);
-begin
-  if btnConnect.Caption = 'Connect' then
-  begin
-    Client.Connect(AddressEdit.Text, PortEdit.Text);
-    btnConnect.Caption := 'Disconnect';
-  end
-  else
-  begin
-    Client.Disconnect;
-    btnConnect.Caption := 'Connect';
-  end;
-end;
 
 procedure TMainForm.BeginApplication;
 begin
@@ -169,8 +130,7 @@ begin
     Client.Connect(vNetSetting.ServerIP, vNetSetting.Port);
   end;
 
-  FAppGame.FExecFname := vNetSetting.Application;
-  FAppGame2.FExecFname := vNetSetting.Application2;
+  FAppGame.FExecFname := vNetSetting.Clientapp;
 end;
 
 procedure TMainForm.btnCloseClick(Sender: TObject);
@@ -209,19 +169,11 @@ begin
     end;
     doRunGC:
     begin
-      RunGC;
-    end;
-    doRunSimClient:
-    begin
-      RunSimClient;
+      RunClientApp;
     end;
     doKillGC:
     begin
-      KillGC
-    end;
-    doKillSimClient:
-    begin
-      KillSimClient
+      KillClientApp
     end;
     doKillLauncher:
     begin
@@ -268,7 +220,7 @@ begin
   end;
 end;
 
-procedure TMainForm.KillGC;
+procedure TMainForm.KillClientApp;
 var
   connector, killer :THandle;
   stamped : LongBool;
@@ -287,7 +239,7 @@ begin
   begin
     stamped := Process32Next(connector, exe);
 
-    if exe.szExeFile = vNetSetting.Application then
+    if exe.szExeFile = vNetSetting.Clientapp then
     begin
       IDExe := exe.th32ProcessID;
       flag := True;
@@ -302,66 +254,21 @@ begin
 
     if TerminateProcess(killer, 0) then
     begin
-      LogMemo.Lines.Add('Kill ' + vNetSetting.Application);
+      LogMemo.Lines.Add('Kill ' + vNetSetting.Clientapp);
     end
   end;
 end;
 
-procedure TMainForm.KillSimClient;
-var
-  connector, killer :THandle;
-  stamped : LongBool;
-  exe : TProcessEntry32;
-  IDExe : Integer;
-  flag : Boolean;
-
-begin
-
-  connector := CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
-  exe.dwSize := sizeOf(exe);
-  stamped := Process32First(connector, exe);
-
-  flag := False;
-  while stamped do
-  begin
-    stamped := Process32Next(connector, exe);
-
-    if exe.szExeFile = vNetSetting.Application2 then
-    begin
-      IDExe := exe.th32ProcessID;
-      flag := True;
-      Break
-    end;
-
-  end;
-
-  if flag then
-  begin
-    killer := OpenProcess(PROCESS_TERMINATE, False, IDExe );
-
-    if TerminateProcess(killer, 0) then
-    begin
-      LogMemo.Lines.Add('Kill ' + vNetSetting.Application2);
-    end
-  end;
-end;
-
-procedure TMainForm.RunGC;
+procedure TMainForm.RunClientApp;
 begin
   if not GetApp then
   begin
     FAppGame.Executes;
-    LogMemo.Lines.Add('Run ' + vNetSetting.Application);
+    LogMemo.Lines.Add('Run ' + vNetSetting.Clientapp);
   end
   else
-    LogMemo.Lines.Add('Can not Run, double load ' + vNetSetting.Application);
+    LogMemo.Lines.Add('Can not Run, double load ' + vNetSetting.Clientapp);
 
-end;
-
-procedure TMainForm.RunSimClient;
-begin
-  FAppGame2.Executes;
-  LogMemo.Lines.Add('Run ' + vNetSetting.Application2);
 end;
 
 procedure TMainForm.RestartWindows;
@@ -402,7 +309,7 @@ begin
   begin
     stamped := Process32Next(connector, exe);
 
-    if exe.szExeFile = vNetSetting.Application then
+    if exe.szExeFile = vNetSetting.Clientapp then
     begin
       IDExe := exe.th32ProcessID;
       Result := True;
@@ -442,6 +349,8 @@ var
   AppData: RecAppData;
 
 begin
+  {procedure untuk melakukan pengecekan app instruktur}
+
   value := GetApp;
 
   if AppState = value then
@@ -449,15 +358,9 @@ begin
 
   AppState := value;
 
-  // Kirim Paket
-  if vNetSetting.clientmode = 'NAFS' then
-    AppData.command := 0
-  else if vNetSetting.clientmode = 'NSFS' then
-    AppData.command := 1
-  else
-    AppData.command := 2;
-
   AppData.state := AppState;
+  AppData.appName := vNetSetting.ClientMode;
+
   Client.SendData(CommandApp, @AppData);
 
 end;
