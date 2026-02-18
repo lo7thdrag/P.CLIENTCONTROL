@@ -2,7 +2,10 @@ program WorldClient;
 
 uses
   Vcl.Forms,
-  Controls, Dialogs, ShellApi, Windows,
+  Controls,
+  Dialogs,
+  ShellApi,
+  Windows,
   Umain in 'Umain.pas' {MainForm},
   uDataBuffer in '..\LibNets\NetComponent\uDataBuffer.pas',
   uNetBaseSocket in '..\LibNets\NetComponent\uNetBaseSocket.pas',
@@ -12,7 +15,8 @@ uses
   UNetData in '..\Commons\UNetData.pas',
   uLibSetting in '..\LibNets\uLibSetting.pas',
   uIniFilesProcs in '..\LibNets\uIniFilesProcs.pas',
-  uExecuter in '..\Commons\uExecuter.pas';
+  uExecuter in '..\Commons\uExecuter.pas',
+  WbemScripting_TLB in '..\Commons\WbemScripting_TLB.pas';
 
 {$R *.res}
 

@@ -200,7 +200,7 @@ begin
 
   WMIServices := CoSWbemLocator.Create.ConnectServer('.', 'root\cimv2','', '', '', '', 0, nil);
   Root  := WMIServices.ExecQuery('Select SerialNumber From Win32_DiskDrive','WQL', 0, nil);
-//  Item := Root.ItemIndex(0);
+  Item := Root.ItemIndex(0);
   snTemp:=VarToStr(Item.SerialNumber);
 
   snTemp := ReplaceStr(snTemp, '_', '');
