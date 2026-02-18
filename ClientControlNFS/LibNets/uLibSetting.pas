@@ -134,9 +134,9 @@ begin
 
     Nafsserver      := INIFReadString(inif, c_url, 'nafsserver', c_URL_APP);
     Nafsbridge      := INIFReadString(inif, c_url, 'nafsbridge', c_URL_APP);
-    Nsfsserver      := INIFReadString(inif, c_url, 'nafsserver', c_URL_APP);
+    Nsfsserver      := INIFReadString(inif, c_url, 'nsfsserver', c_URL_APP);
     Nsfsbridge      := INIFReadString(inif, c_url, 'nsfsbridge', c_URL_APP);
-    Nssfsserver     := INIFReadString(inif, c_url, 'nafsserver', c_URL_APP);
+    Nssfsserver     := INIFReadString(inif, c_url, 'nssfsserver', c_URL_APP);
     Nssfsbridge     := INIFReadString(inif, c_url, 'nssfsbridge',c_URL_APP);
     Sessionvoip     := INIFReadString(inif, c_url, 'sessionvoip',c_URL_APP);
 

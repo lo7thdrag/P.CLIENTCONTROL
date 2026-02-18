@@ -1,4 +1,4 @@
-program server;
+program WorldController;
 
 uses
   Vcl.Forms,

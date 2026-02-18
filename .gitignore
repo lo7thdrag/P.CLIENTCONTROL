@@ -6,3 +6,5 @@
 *.dcu
 /ClientControlNFS/LibNets/__history
 /ClientControlNFS/Server/__history
+/ClientControlNFS/Dcu
+*.dcu

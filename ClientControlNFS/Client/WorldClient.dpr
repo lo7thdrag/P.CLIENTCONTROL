@@ -1,4 +1,4 @@
-program Client;
+program WorldClient;
 
 uses
   Vcl.Forms,

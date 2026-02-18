@@ -95,6 +95,9 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
 
+    procedure btnSingleSystemClick(Sender: TObject);
+    procedure btnAllSystemClick(Sender: TObject);
+
     procedure GetPacketTimerTimer(Sender: TObject);
 
     procedure btnRunClick(Sender: TObject);
@@ -336,6 +339,53 @@ begin
       else
         ShowMessage('Can not Run, double load Session Voip');
       {$ENDREGION}
+    end;
+  end;
+end;
+
+procedure TMainForm.btnAllSystemClick(Sender: TObject);
+var
+  i: Integer;
+  SelectedIndex: Integer;
+  CommandData: RecCommandData;
+  ipaddress: string;
+  li : TListItem;
+
+begin
+  for i := 0 to lvSystem.Items.Count - 1 do
+  begin
+    li := lvSystem.Items[i];
+    ipaddress := li.SubItems[0];
+
+    {0: Shutdown; 1: Restart;}
+    CommandData.command := TButton(Sender).Tag;;
+    server.SendDataToIPAddress(CommandID, @CommandData, ipaddress);
+  end;
+
+  case TButton(Sender).Tag of
+    0 : ShowMessage('Shutdown All');
+    1 : ShowMessage('Restart All');
+  end;
+end;
+
+procedure TMainForm.btnSingleSystemClick(Sender: TObject);
+var
+  li : TListItem;
+  ipaddress: string;
+  CommandData: RecCommandData;
+
+begin
+  if lvSystem.Selected <> nil then
+  begin
+    li := lvSystem.Items[lvSystem.Selected.Index];
+    ipaddress := li.SubItems[0];
+
+    CommandData.command := TButton(Sender).Tag;
+    server.SendDataToIPAddress(CommandID, @CommandData, ipaddress);
+
+    case TButton(Sender).Tag of
+      0 : ShowMessage('Shutdown ' + ipaddress);
+      1 : ShowMessage('Restart ' + ipaddress);
     end;
   end;
 end;
@@ -668,7 +718,7 @@ begin
   end
   else
   begin
-    if lblStatusServerNsfs.Caption <> 'online' then
+    if lblStatusServerNssfs.Caption <> 'online' then
     begin
       lblStatusServerNssfs.Caption := 'online';
       imgServerNssfs.Picture.LoadFromFile('Image\online.png');
