@@ -6,7 +6,7 @@ object MainForm: TMainForm
   BorderStyle = bsSingle
   Caption = 'Console Control'
   ClientHeight = 613
-  ClientWidth = 539
+  ClientWidth = 537
   Color = clWindowText
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -23,13 +23,14 @@ object MainForm: TMainForm
   object pnlLog: TPanel
     Left = 535
     Top = 48
-    Width = 4
+    Width = 2
     Height = 565
     Align = alClient
     BevelOuter = bvNone
     Color = clWindowText
     ParentBackground = False
     TabOrder = 3
+    ExplicitWidth = 4
     object lblClearLog: TLabel
       Left = 194
       Top = 61
@@ -88,7 +89,7 @@ object MainForm: TMainForm
   object pnlHeader: TPanel
     Left = 0
     Top = 0
-    Width = 539
+    Width = 537
     Height = 48
     Align = alTop
     BevelOuter = bvNone
@@ -97,11 +98,12 @@ object MainForm: TMainForm
     ParentBackground = False
     ShowCaption = False
     TabOrder = 0
+    ExplicitWidth = 539
     DesignSize = (
-      539
+      537
       48)
     object Label3: TLabel
-      Left = 392
+      Left = 390
       Top = 16
       Width = 134
       Height = 16
@@ -118,7 +120,7 @@ object MainForm: TMainForm
       ExplicitLeft = 393
     end
     object Label2: TLabel
-      Left = 8
+      Left = 6
       Top = 13
       Width = 188
       Height = 23
@@ -132,6 +134,7 @@ object MainForm: TMainForm
       Font.Style = [fsBold]
       ParentFont = False
       OnMouseDown = Label3MouseDown
+      ExplicitLeft = 8
     end
     object cbbServerState: TComboBox
       Left = 203

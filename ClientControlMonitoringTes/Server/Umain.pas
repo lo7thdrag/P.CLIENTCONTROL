@@ -1,0 +1,606 @@
+unit Umain;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics, uLibSetting, uExecuter, Winapi.TlHelp32,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
+
+  uTCPServer, ShellApi, Vcl.Imaging.jpeg, Vcl.ComCtrls, System.ImageList,
+  Vcl.ImgList, uAppUtils;
+
+type
+  TMainForm = class(TForm)
+    GetPacketTimer: TTimer;
+    pnlHeader: TPanel;
+    pnlSystem: TPanel;
+    grpSystemServer: TGroupBox;
+    grpSystemAllClient: TGroupBox;
+    btnRestartAllSystem: TButton;
+    btnRunAllGC: TButton;
+    btnKillAllGC: TButton;
+    grpSystemSingleClient: TGroupBox;
+    btnKillGC: TButton;
+    btnRunGC: TButton;
+    btnRestartSystem: TButton;
+    btnShutdownSystem: TButton;
+    btnShutdownAllSystem: TButton;
+    btnRefreshSystemState: TButton;
+    btnSystemShowLog: TButton;
+    Label3: TLabel;
+    cbbServerState: TComboBox;
+    pnlVoip: TPanel;
+    grpVoipServer: TGroupBox;
+    btnVoipRefreshState: TButton;
+    btnVoipShowLog: TButton;
+    grpVoipAllClient: TGroupBox;
+    btnRestartAllVoip: TButton;
+    btnRunAllApk1: TButton;
+    btnKillAllApk1: TButton;
+    btnShutdownAllVoip: TButton;
+    grpVoipSingleClient: TGroupBox;
+    btnKillApk1: TButton;
+    btnRunApk1: TButton;
+    btnVoipRestart: TButton;
+    btnVoipShutdown: TButton;
+    lvSystem: TListView;
+    lvVoip: TListView;
+    pnlLog: TPanel;
+    lblClearLog: TLabel;
+    LogMemo: TMemo;
+    PortEdit: TEdit;
+    PortLabel: TLabel;
+    StartButton: TButton;
+    Label1: TLabel;
+    ilClientStateColor: TImageList;
+    Label2: TLabel;
+    btnMonitoring: TButton;
+    btnShow: TButton;
+
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+
+    procedure StartButtonClick(Sender: TObject);
+
+    procedure btnSingleSystemClick(Sender: TObject);
+    procedure btnAllSystemClick(Sender: TObject);
+
+    procedure btnSingleVoipClick(Sender: TObject);
+    procedure btnAllVoipClick(Sender: TObject);
+
+    procedure GetPacketTimerTimer(Sender: TObject);
+    procedure lblClearLogClick(Sender: TObject);
+
+    procedure btnShowLogClick(Sender: TObject);
+    procedure btnRefreshSystemStateClick(Sender: TObject);
+    procedure btnRefreshVoipStateClick(Sender: TObject);
+    procedure cbbServerStateChange(Sender: TObject);
+    procedure Label3MouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure btnShowClick(Sender: TObject);
+
+  private
+    vSettingFile: string;
+    FAppGame : TAppExecute;
+    server: TTCPServer;
+
+    FRemoteClientCMD: TAppExecute;
+
+    procedure Client_Connect(const S: string);
+    procedure UpdateSystemClientState;
+    procedure UpdateVoipClientState;
+    procedure Client_Disconnect(const S: string);
+    procedure Server_Log(const S: string);
+
+    procedure NetRecv_CommandData(apRec: PAnsiChar; aSize: word);
+
+  public
+
+    function CekSimServer:Boolean;
+    procedure RunApp;
+    procedure KillApp(app: string);
+
+  end;
+
+var
+  MainForm: TMainForm;
+
+implementation
+
+{$R *.dfm}
+
+uses
+  UNetData;
+
+{$REGION ' Form Section '}
+
+procedure TMainForm.FormCreate(Sender: TObject);
+begin
+  FAppGame    := TAppExecute.Create;
+  FAppGame.OnStartExecute := nil;
+  FAppGame.OnEndExecute   := nil;
+
+  server := TTCPServer.Create;
+  server.OnClient_Connect := Client_Connect;
+  server.OnClient_DisConnect := Client_Disconnect;
+  server.OnGetStatusLog := Server_Log;
+  server.RegisterProcedure(CommandID, NetRecv_CommandData,SizeOf(RecCommandData));
+
+  GetPacketTimer.Interval := 50;
+end;
+
+procedure TMainForm.FormDestroy(Sender: TObject);
+begin
+  FAppGame.Free;
+
+  server.UnregisterAllProcedure;
+  server.Stop;
+  server.Free;
+end;
+
+procedure TMainForm.FormShow(Sender: TObject);
+begin
+  vSettingFile := getFileSetting;
+  LoadFF_NetSetting(vSettingFile, vNetSetting);
+
+  if vNetSetting.AutoStart then
+  begin
+    server.Listen(vNetSetting.Port);
+    GetPacketTimer.Enabled := True;
+  end;
+end;
+
+{$ENDREGION}
+
+{$REGION ' System Section '}
+
+procedure TMainForm.btnRefreshSystemStateClick(Sender: TObject);
+begin
+  UpdateSystemClientState;
+end;
+
+procedure TMainForm.btnAllSystemClick(Sender: TObject);
+var
+  i: Integer;
+  SelectedIndex: Integer;
+  CommandData: RecCommandData;
+  ipaddress: string;
+  li : TListItem;
+
+begin
+  for i := 0 to lvSystem.Items.Count - 1 do
+  begin
+    li := lvSystem.Items[i];
+    ipaddress := li.SubItems[0];
+
+    CommandData.command := TButton(Sender).Tag;;
+    server.SendDataToIPAddress(CommandID, @CommandData, ipaddress);
+
+    case TButton(Sender).Tag of
+      0 : LogMemo.Lines.Add('Shutdown ' + ipaddress);
+      1 : LogMemo.Lines.Add('Restart ' + ipaddress);
+      2 : LogMemo.Lines.Add('Run GC ' + ipaddress);
+      3 : LogMemo.Lines.Add('Run Simclient ' + ipaddress);
+      4 : LogMemo.Lines.Add('Kill GC ' + ipaddress);
+      5 : LogMemo.Lines.Add('Kill Simclient ' + ipaddress);
+    end;
+  end;
+end;
+
+procedure TMainForm.btnSingleSystemClick(Sender: TObject);
+var
+  li : TListItem;
+  ipaddress: string;
+  CommandData: RecCommandData;
+
+begin
+  if lvSystem.Selected <> nil then
+  begin
+    li := lvSystem.Items[lvSystem.Selected.Index];
+    ipaddress := li.SubItems[0];
+
+    CommandData.command := TButton(Sender).Tag;
+    server.SendDataToIPAddress(CommandID, @CommandData, ipaddress);
+
+    case TButton(Sender).Tag of
+      0 : LogMemo.Lines.Add('Shutdown ' + ipaddress);
+      1 : LogMemo.Lines.Add('Restart ' + ipaddress);
+      2 : LogMemo.Lines.Add('Run GC ' + ipaddress);
+      3 : LogMemo.Lines.Add('Run Simclient ' + ipaddress);
+      4 : LogMemo.Lines.Add('Kill GC ' + ipaddress);
+      5 : LogMemo.Lines.Add('Kill Simclient ' + ipaddress);
+    end;
+  end;
+end;
+
+procedure TMainForm.UpdateSystemClientState;
+var
+  i : Integer;
+  li : TListItem;
+
+begin
+  for i := 0 to lvSystem.Items.Count-1 do
+  begin
+    li := lvSystem.Items[i];
+
+    if server.getClientState(li.SubItems[0]) then
+    begin
+      li.StateIndex := 1;
+      li.SubItems[1] := 'Connected'
+    end
+    else
+    begin
+      li.StateIndex := 0;
+      li.SubItems[1] := 'Disconnected'
+    end;
+  end;
+end;
+
+{$ENDREGION}
+
+{$REGION ' Voip Section '}
+
+procedure TMainForm.btnRefreshVoipStateClick(Sender: TObject);
+begin
+  UpdateVoipClientState;
+end;
+
+procedure TMainForm.btnAllVoipClick(Sender: TObject);
+var
+  i: Integer;
+  SelectedIndex: Integer;
+  CommandData: RecCommandData;
+  ipaddress: string;
+  li : TListItem;
+
+begin
+  for i := 0 to lvVoip.Items.Count - 1 do
+  begin
+    li := lvVoip.Items[i];
+    ipaddress := li.SubItems[0];
+
+    CommandData.command := TButton(Sender).Tag;;
+    server.SendDataToIPAddress(CommandID, @CommandData, ipaddress);
+
+    case TButton(Sender).Tag of
+      0 : LogMemo.Lines.Add('Shutdown ' + ipaddress);
+      1 : LogMemo.Lines.Add('Restart ' + ipaddress);
+      2 : LogMemo.Lines.Add('Run Apk 1 ' + ipaddress);
+      3 : LogMemo.Lines.Add('Run Apk 2 ' + ipaddress);
+      4 : LogMemo.Lines.Add('Kill Apk 1 ' + ipaddress);
+      5 : LogMemo.Lines.Add('Kill Apk 2 ' + ipaddress);
+    end;
+  end;
+end;
+
+procedure TMainForm.btnSingleVoipClick(Sender: TObject);
+var
+  li : TListItem;
+  ipaddress: string;
+  CommandData: RecCommandData;
+
+begin
+  if lvVoip.Selected <> nil then
+  begin
+    li := lvVoip.Items[lvVoip.Selected.Index];
+    ipaddress := li.SubItems[0];
+
+    CommandData.command := TButton(Sender).Tag;
+    server.SendDataToIPAddress(CommandID, @CommandData, ipaddress);
+
+    case TButton(Sender).Tag of
+      0 : LogMemo.Lines.Add('Shutdown ' + ipaddress);
+      1 : LogMemo.Lines.Add('Restart ' + ipaddress);
+      2 : LogMemo.Lines.Add('Run Apk 1 ' + ipaddress);
+      3 : LogMemo.Lines.Add('Run Apk 2 ' + ipaddress);
+      4 : LogMemo.Lines.Add('Kill Apk 1 ' + ipaddress);
+      5 : LogMemo.Lines.Add('Kill Apk 2 ' + ipaddress);
+    end;
+  end;
+end;
+
+procedure TMainForm.UpdateVoipClientState;
+var
+  i : Integer;
+  li : TListItem;
+
+begin
+  for i := 0 to lvVoip.Items.Count-1 do
+  begin
+    li := lvVoip.Items[i];
+
+    if server.getClientState(li.SubItems[0]) then
+    begin
+      li.StateIndex := 1;
+      li.SubItems[1] := 'Connected'
+    end
+    else
+    begin
+      li.StateIndex := 0;
+      li.SubItems[1] := 'Disconnected'
+    end;
+  end;
+end;
+
+{$ENDREGION}
+
+{$REGION ' Join Section '}
+
+function TMainForm.CekSimServer: Boolean;
+var
+  connector, killer :THandle;
+  stamped : LongBool;
+  exe : TProcessEntry32;
+  IDExe : Integer;
+  flag : Boolean;
+
+begin
+
+  connector := CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+  exe.dwSize := sizeOf(exe);
+  stamped := Process32First(connector, exe);
+
+  flag := False;
+  while stamped do
+  begin
+    stamped := Process32Next(connector, exe);
+
+    if exe.szExeFile = 'SimServer.exe' then
+    begin
+      IDExe := exe.th32ProcessID;
+      flag := True;
+      Break
+    end;
+
+  end;
+
+  if flag then
+  begin
+    ShowMessage('Game Sedang berjalan ');
+  end;
+
+  Result := flag;
+end;
+
+procedure TMainForm.Client_Connect(const S: string);
+var
+  ss: TStringList;
+begin
+  ss := TStringList.Create;
+  try
+    server.GetConnectedList(ss);
+    UpdateSystemClientState;
+    UpdateVoipClientState;
+  finally
+    ss.Free;
+  end;
+end;
+
+procedure TMainForm.Client_Disconnect(const S: string);
+var
+  ss: TStringList;
+begin
+  ss := TStringList.Create;
+  try
+    server.GetConnectedList(ss);
+    UpdateSystemClientState;
+    UpdateVoipClientState;
+  finally
+    ss.Free;
+  end;
+end;
+
+procedure TMainForm.GetPacketTimerTimer(Sender: TObject);
+begin
+  server.getPacket;
+end;
+
+procedure TMainForm.KillApp(app: string);
+var
+  connector, killer :THandle;
+  stamped : LongBool;
+  exe : TProcessEntry32;
+  IDExe : Integer;
+  flag : Boolean;
+
+begin
+
+  connector := CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+  exe.dwSize := sizeOf(exe);
+  stamped := Process32First(connector, exe);
+
+  flag := False;
+  while stamped do
+  begin
+    stamped := Process32Next(connector, exe);
+
+    if exe.szExeFile = app then
+    begin
+      IDExe := exe.th32ProcessID;
+      flag := True;
+      Break
+    end;
+
+  end;
+
+  if flag then
+  begin
+    killer := OpenProcess(PROCESS_TERMINATE, False, IDExe );
+
+    if TerminateProcess(killer, 0) then
+    begin
+      LogMemo.Lines.Add('Kill ' + app);
+    end
+  end;
+end;
+
+procedure TMainForm.Label3MouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+var
+  i : Integer;
+  CommandData: RecCommandData;
+  ipaddress: string;
+  li : TListItem;
+
+begin
+  case Button of
+    mbRight :
+    begin
+      if (ssShift in Shift) then
+      begin
+        for i := 0 to lvSystem.Items.Count - 1 do
+        begin
+          li := lvSystem.Items[i];
+          ipaddress := li.SubItems[0];
+
+          CommandData.command := doKillLauncher;
+          server.SendDataToIPAddress(CommandID, @CommandData, ipaddress);
+
+          LogMemo.Lines.Add('Close launcher ' + ipaddress);
+        end;
+      end;
+    end;
+
+    mbLeft:
+    begin
+      if (ssShift in Shift) then
+      begin
+        for i := 0 to lvVoip.Items.Count - 1 do
+        begin
+          li := lvVoip.Items[i];
+          ipaddress := li.SubItems[0];
+
+          CommandData.command := doKillLauncher;
+          server.SendDataToIPAddress(CommandID, @CommandData, ipaddress);
+
+          LogMemo.Lines.Add('Close launcher ' + ipaddress);
+        end;
+      end;
+    end;
+  end;
+end;
+
+procedure TMainForm.StartButtonClick(Sender: TObject);
+begin
+  if StartButton.Caption = 'Start' then
+  begin
+    server.Listen(PortEdit.Text);
+    GetPacketTimer.Enabled := True;
+
+    StartButton.Caption := 'Stop';
+  end
+  else
+  begin
+    GetPacketTimer.Enabled := False;
+    server.Stop;
+
+    StartButton.Caption := 'Start';
+  end;
+end;
+
+procedure TMainForm.btnShowClick(Sender: TObject);
+var
+  sCommand: string;
+  ipaddress: string;
+  li : TListItem;
+
+begin
+  if FRemoteClientCMD = nil then
+  begin
+    FRemoteClientCMD := TAppExecute.Create;
+    FRemoteClientCMD.OnStartExecute := nil;
+    FRemoteClientCMD.OnEndExecute := nil;
+
+    if isExeRunning(vNetSetting.RemoteClientName, false) then
+      CloseCurrentHandleApplication(vNetSetting.RemoteClientName);
+  end;
+
+  if FRemoteClientCMD <> nil then
+  begin
+    if FRemoteClientCMD.Active then
+      FRemoteClientCMD.Terminates;
+  end;
+
+  if lvSystem.Selected <> nil then
+  begin
+    li := lvSystem.Items[lvSystem.Selected.Index];
+    ipaddress := li.SubItems[0];
+
+    sCommand := ipaddress + ' ' + IntToStr(vNetSetting.RemotePort) + ' ' + IntToStr(clLime)
+      + ' ' + 'False';
+    FRemoteClientCMD.FExecFname := vNetSetting.RemoteClientName;
+    FRemoteClientCMD.ExecutesWithParams(sCommand);
+  end;
+end;
+
+procedure TMainForm.btnShowLogClick(Sender: TObject);
+begin
+  if Self.Width > 546 then
+  begin
+    Self.Width := 546;
+    btnSystemShowLog.Caption := 'Show Log';
+    btnVoipShowLog.Caption := 'Show Log'
+  end
+  else
+  begin
+    Self.Width := 799;
+    btnSystemShowLog.Caption := 'Hide Log';
+    btnVoipShowLog.Caption := 'Hide Log'
+  end;
+
+end;
+
+procedure TMainForm.lblClearLogClick(Sender: TObject);
+begin
+  LogMemo.Clear;
+end;
+
+procedure TMainForm.NetRecv_CommandData(apRec: PAnsiChar; aSize: word);
+begin
+  //
+end;
+
+procedure TMainForm.RunApp;
+begin
+  FAppGame.Executes;
+end;
+
+procedure TMainForm.Server_Log(const S: string);
+begin
+  LogMemo.Lines.Add(S);
+end;
+
+procedure TMainForm.cbbServerStateChange(Sender: TObject);
+begin
+  if cbbServerState.ItemIndex = -1 then
+    cbbServerState.ItemIndex := 0;
+
+  if cbbServerState.ItemIndex = 0 then
+  begin
+    btnRunGC.Enabled := False;
+    btnRunAllGC.Enabled := False;
+  end
+  else if cbbServerState.ItemIndex = 1 then
+  begin
+    if CekSimServer then
+    begin
+      cbbServerState.ItemIndex := 0;
+      Exit
+    end;
+
+    btnAllSystemClick(btnKillAllGC);
+    KillApp(vNetSetting.Application);
+
+    FAppGame.FExecFname := vNetSetting.Application;
+
+    RunApp;
+
+    btnRunGC.Enabled := True;
+    btnRunAllGC.Enabled := True;
+  end;
+end;
+
+{$ENDREGION}
+
+end.

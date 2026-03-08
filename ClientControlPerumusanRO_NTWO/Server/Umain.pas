@@ -93,7 +93,7 @@ type
 
   public
 
-    function CekSimServer:Boolean;
+    function CekSimServer(app: string):Boolean;
     procedure RunApp;
     procedure KillApp(app: string);
 
@@ -323,7 +323,7 @@ end;
 
 {$REGION ' Join Section '}
 
-function TMainForm.CekSimServer: Boolean;
+function TMainForm.CekSimServer(app: string): Boolean;
 var
   connector, killer :THandle;
   stamped : LongBool;
@@ -342,7 +342,7 @@ begin
   begin
     stamped := Process32Next(connector, exe);
 
-    if exe.szExeFile = 'SimServer.exe' then
+    if exe.szExeFile = app then
     begin
       IDExe := exe.th32ProcessID;
       flag := True;
@@ -350,12 +350,6 @@ begin
     end;
 
   end;
-
-  if flag then
-  begin
-    ShowMessage('Game Sedang berjalan ');
-  end;
-
   Result := flag;
 end;
 
@@ -536,28 +530,37 @@ begin
   if cbbServerState.ItemIndex = -1 then
     cbbServerState.ItemIndex := 0;
 
-  if cbbServerState.ItemIndex = 0 then
-  begin
-    btnRunGC.Enabled := False;
-    btnRunAllGC.Enabled := False;
-  end
-  else if cbbServerState.ItemIndex = 1 then
-  begin
-    if CekSimServer then
+  case cbbServerState.ItemIndex of
+    0 : {Shutdown Server}
     begin
-      cbbServerState.ItemIndex := 0;
-      Exit
+      if CekSimServer(vNetSetting.Application) then
+      begin
+        btnAllSystemClick(btnKillAllGC);
+        KillApp(vNetSetting.Application);
+      end;
+
+      btnRunGC.Enabled := False;
+      btnRunAllGC.Enabled := False;
     end;
+    1 : {Running Server}
+    begin
+      if CekSimServer(vNetSetting.Application) then
+      begin
+        cbbServerState.ItemIndex := 0;
+        ShowMessage('Game sedang berjalan.');
+        Exit
+      end;
 
-    btnAllSystemClick(btnKillAllGC);
-    KillApp(vNetSetting.Application);
+      btnAllSystemClick(btnKillAllGC);
+      KillApp(vNetSetting.Application);
 
-    FAppGame.FExecFname := vNetSetting.Application;
+      FAppGame.FExecFname := vNetSetting.Application;
 
-    RunApp;
+      RunApp;
 
-    btnRunGC.Enabled := True;
-    btnRunAllGC.Enabled := True;
+      btnRunGC.Enabled := True;
+      btnRunAllGC.Enabled := True;
+    end;
   end;
 end;
 

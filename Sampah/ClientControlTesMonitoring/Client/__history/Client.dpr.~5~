@@ -1,0 +1,22 @@
+program Client;
+
+uses
+  Vcl.Forms,
+  Umain in 'Umain.pas' {MainForm},
+  uDataBuffer in '..\LibNets\NetComponent\uDataBuffer.pas',
+  uNetBaseSocket in '..\LibNets\NetComponent\uNetBaseSocket.pas',
+  uPacketRegister in '..\LibNets\NetComponent\uPacketRegister.pas',
+  uTCPClient in '..\LibNets\NetComponent\uTCPClient.pas',
+  uTCPDatatype in '..\LibNets\NetComponent\uTCPDatatype.pas',
+  UNetData in '..\Commons\UNetData.pas',
+  uLibSetting in '..\LibNets\uLibSetting.pas',
+  uIniFilesProcs in '..\LibNets\uIniFilesProcs.pas';
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TMainForm, MainForm);
+  Application.Run;
+end.
