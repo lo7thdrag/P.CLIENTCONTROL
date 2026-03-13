@@ -8,7 +8,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
 
   uTCPServer, ShellApi, Vcl.Imaging.jpeg, Vcl.ComCtrls, System.ImageList,
-  Vcl.ImgList, Vcl.Imaging.pngimage, AdvSmoothPanel;
+  Vcl.ImgList, Vcl.Imaging.pngimage, AdvSmoothPanel, Vcl.Menus;
 
 type
   TMainForm = class(TForm)
@@ -82,7 +82,6 @@ type
     imgSessionVoip: TImage;
     lblStatusSessionVoip: TLabel;
     lvSystem: TListView;
-    Label17: TLabel;
     Label20: TLabel;
     btnRestart: TImage;
     btnShutdown: TImage;
@@ -90,6 +89,11 @@ type
     btnShutdownAll: TImage;
     AdvSmoothPanel14: TAdvSmoothPanel;
     AdvSmoothPanel18: TAdvSmoothPanel;
+    pmClient: TPopupMenu;
+    mniRestart: TMenuItem;
+    mniShutdown: TMenuItem;
+    mniRestartAll: TMenuItem;
+    mniShutdownAll: TMenuItem;
 
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -104,6 +108,8 @@ type
     procedure btnKillClick(Sender: TObject);
     procedure btnRefreshSystemStateClick(Sender: TObject);
     procedure tmrCekAplicationTimer(Sender: TObject);
+    procedure lvSystemMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
 
   private
     vSettingFile: string;
@@ -515,8 +521,9 @@ begin
     else if li.Caption = 'MR 203' then li.SubItems[0] := vNetSetting.mr_203
 
     else if li.Caption = 'MK3 NSSFS' then li.SubItems[0] := vNetSetting.mk3_2h_nssfs
+    else if li.Caption = 'SPS MK3' then li.SubItems[0] := vNetSetting.sps_mk3
     else if li.Caption = 'MK4 NSSFS' then li.SubItems[0] := vNetSetting.mk4_nssfs
-    else if li.Caption = 'SPS' then li.SubItems[0] := vNetSetting.sps
+    else if li.Caption = 'SPS MK4' then li.SubItems[0] := vNetSetting.sps_mk4
     else if li.Caption = 'SUT & BLACK SHARK' then li.SubItems[0] := vNetSetting.sut_black_shark
     else if li.Caption = 'RBU DIG' then li.SubItems[0] := vNetSetting.rbu_digital
     else if li.Caption = 'RBU MAN' then li.SubItems[0] := vNetSetting.rbu_manual
@@ -524,6 +531,24 @@ begin
     else if li.Caption = '3D NSFS' then li.SubItems[0] := vNetSetting.display3d_nsfs
     else if li.Caption = '3D NAFS' then li.SubItems[0] := vNetSetting.display3d_nafs
     else if li.Caption = '3D NSSFS' then li.SubItems[0] := vNetSetting.display3d_nssfs
+  end;
+end;
+
+procedure TMainForm.lvSystemMouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+  var
+    p : TPoint;
+begin
+  if ( Button = mbright ) then
+  begin
+    GetCursorPos(p);
+
+    if Assigned(lvSystem.Selected) then
+    begin
+      pmClient.Popup(p.X, p.Y);
+    end;
+
+
   end;
 end;
 

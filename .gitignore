@@ -10,3 +10,4 @@
 *.dcu
 *.dcu
 /ClientControlMonitoringTes/LibNets/__recovery
+/ClientControlMonitoringTes/Server/__history

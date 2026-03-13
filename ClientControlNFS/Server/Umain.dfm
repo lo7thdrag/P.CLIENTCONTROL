@@ -1,11 +1,11 @@
 object MainForm: TMainForm
-  Left = 10
-  Top = 10
+  Left = 0
+  Top = 0
   BorderIcons = []
   BorderStyle = bsNone
   Caption = 'Console Control'
-  ClientHeight = 1055
-  ClientWidth = 1032
+  ClientHeight = 920
+  ClientWidth = 991
   Color = clFuchsia
   TransparentColor = True
   TransparentColorValue = clFuchsia
@@ -22,10 +22,10 @@ object MainForm: TMainForm
   PixelsPerInch = 96
   TextHeight = 13
   object AdvSmoothPanel1: TAdvSmoothPanel
-    Left = 302
-    Top = 363
-    Width = 715
-    Height = 333
+    Left = 295
+    Top = 313
+    Width = 686
+    Height = 293
     Cursor = crDefault
     Caption.Location = plTopCenter
     Caption.HatchStyle = HatchStyleDiagonalBrick
@@ -62,9 +62,9 @@ object MainForm: TMainForm
     TabOrder = 0
     TMSStyle = 0
     object Image1: TImage
-      Left = 19
+      Left = 17
       Top = 18
-      Width = 679
+      Width = 652
       Height = 40
       Picture.Data = {
         07544269746D617036080700424D360807000000000036000000280000008007
@@ -14473,10 +14473,10 @@ object MainForm: TMainForm
       Stretch = True
     end
     object AdvSmoothPanel6: TAdvSmoothPanel
-      Left = 18
+      Left = 17
       Top = 64
-      Width = 223
-      Height = 251
+      Width = 215
+      Height = 210
       Cursor = crDefault
       Caption.Location = plTopCenter
       Caption.HatchStyle = HatchStyleDiagonalBrick
@@ -14515,7 +14515,7 @@ object MainForm: TMainForm
       object Label4: TLabel
         Left = 0
         Top = 0
-        Width = 223
+        Width = 215
         Height = 65
         Align = alTop
         Alignment = taCenter
@@ -14534,10 +14534,10 @@ object MainForm: TMainForm
         ExplicitWidth = 261
       end
       object imgServerNsfs: TImage
-        Left = 42
-        Top = 44
-        Width = 140
-        Height = 140
+        Left = 39
+        Top = 39
+        Width = 137
+        Height = 109
         Picture.Data = {
           0954506E67496D61676589504E470D0A1A0A0000000D49484452000002000000
           02000806000000F478D4FA000000097048597300000EC400000EC401952B0E1B
@@ -14934,8 +14934,8 @@ object MainForm: TMainForm
         Stretch = True
       end
       object lblStatusServerNsfs: TLabel
-        Left = 50
-        Top = 83
+        Left = 46
+        Top = 67
         Width = 123
         Height = 35
         Alignment = taCenter
@@ -14951,11 +14951,13 @@ object MainForm: TMainForm
       end
       object btnRunServerNsfs: TImage
         Tag = 7
-        Left = 19
-        Top = 191
+        Left = 15
+        Top = 153
         Width = 90
         Height = 35
         Cursor = crHandPoint
+        Hint = 'Run'
+        ParentShowHint = False
         Picture.Data = {
           0954506E67496D61676589504E470D0A1A0A0000000D494844520000005A0000
           002308020000009BE78A5C000000097048597300000EC400000EC401952B0E1B
@@ -15035,16 +15037,19 @@ object MainForm: TMainForm
           FED2E5CB5A9A1AD99929C08A9C71EFAE8DBC3C3C97AF5C3B76FC14385D8C94A4
           01038C8C4C8C26C686E6A6C6A0050DDB36AFE6E6E26263631BA1AB7F40090494
           02FEFCFDFBE3FB0F00383AA047EDC5D26D0000000049454E44AE426082}
+        ShowHint = True
         Stretch = True
         OnClick = btnRunClick
       end
       object btnStopServerNsfs: TImage
         Tag = 8
-        Left = 114
-        Top = 191
+        Left = 110
+        Top = 153
         Width = 90
         Height = 35
         Cursor = crHandPoint
+        Hint = 'Kill'
+        ParentShowHint = False
         Picture.Data = {
           0954506E67496D61676589504E470D0A1A0A0000000D494844520000005A0000
           002308020000009BE78A5C000000097048597300000EC400000EC401952B0E1B
@@ -15125,15 +15130,16 @@ object MainForm: TMainForm
           53233B33E5EBD76F8C7B776DE4E5E1B97CE5DAB1E3A7C0E962A4240D18606464
           62343136343735062D68D8B679353717171B1BDB085DFD034A20A014F0E7EFDF
           1FDF7F00006CE78B47DD1D868B0000000049454E44AE426082}
+        ShowHint = True
         Stretch = True
         OnClick = btnKillClick
       end
     end
     object AdvSmoothPanel7: TAdvSmoothPanel
-      Left = 246
+      Left = 236
       Top = 64
-      Width = 223
-      Height = 251
+      Width = 215
+      Height = 210
       Cursor = crDefault
       Caption.Location = plTopCenter
       Caption.HatchStyle = HatchStyleDiagonalBrick
@@ -15170,10 +15176,10 @@ object MainForm: TMainForm
       TabOrder = 1
       TMSStyle = 0
       object imgBridgeNsfs: TImage
-        Left = 42
-        Top = 44
-        Width = 140
-        Height = 140
+        Left = 39
+        Top = 39
+        Width = 137
+        Height = 109
         Picture.Data = {
           0954506E67496D61676589504E470D0A1A0A0000000D49484452000002000000
           02000806000000F478D4FA000000097048597300000EC400000EC401952B0E1B
@@ -15572,7 +15578,7 @@ object MainForm: TMainForm
       object Label8: TLabel
         Left = 0
         Top = 0
-        Width = 223
+        Width = 215
         Height = 65
         Align = alTop
         Alignment = taCenter
@@ -15591,8 +15597,8 @@ object MainForm: TMainForm
         ExplicitWidth = 261
       end
       object lblStatusBridgeNsfs: TLabel
-        Left = 50
-        Top = 83
+        Left = 46
+        Top = 67
         Width = 123
         Height = 35
         Alignment = taCenter
@@ -15608,11 +15614,13 @@ object MainForm: TMainForm
       end
       object btnRunBridgeNsfs: TImage
         Tag = 9
-        Left = 19
-        Top = 191
+        Left = 15
+        Top = 153
         Width = 90
         Height = 35
         Cursor = crHandPoint
+        Hint = 'Run'
+        ParentShowHint = False
         Picture.Data = {
           0954506E67496D61676589504E470D0A1A0A0000000D494844520000005A0000
           002308020000009BE78A5C000000097048597300000EC400000EC401952B0E1B
@@ -15692,16 +15700,19 @@ object MainForm: TMainForm
           FED2E5CB5A9A1AD99929C08A9C71EFAE8DBC3C3C97AF5C3B76FC14385D8C94A4
           01038C8C4C8C26C686E6A6C6A0050DDB36AFE6E6E26263631BA1AB7F40090494
           02FEFCFDFBE3FB0F00383AA047EDC5D26D0000000049454E44AE426082}
+        ShowHint = True
         Stretch = True
         OnClick = btnRunClick
       end
       object btnStopBridgeNsfs: TImage
         Tag = 10
-        Left = 114
-        Top = 191
+        Left = 110
+        Top = 153
         Width = 90
         Height = 35
         Cursor = crHandPoint
+        Hint = 'Kill'
+        ParentShowHint = False
         Picture.Data = {
           0954506E67496D61676589504E470D0A1A0A0000000D494844520000005A0000
           002308020000009BE78A5C000000097048597300000EC400000EC401952B0E1B
@@ -15782,15 +15793,16 @@ object MainForm: TMainForm
           53233B33E5EBD76F8C7B776DE4E5E1B97CE5DAB1E3A7C0E962A4240D18606464
           62343136343735062D68D8B679353717171B1BDB085DFD034A20A014F0E7EFDF
           1FDF7F00006CE78B47DD1D868B0000000049454E44AE426082}
+        ShowHint = True
         Stretch = True
         OnClick = btnKillClick
       end
     end
     object AdvSmoothPanel8: TAdvSmoothPanel
-      Left = 474
+      Left = 455
       Top = 64
-      Width = 223
-      Height = 251
+      Width = 215
+      Height = 210
       Cursor = crDefault
       Caption.Location = plTopCenter
       Caption.HatchStyle = HatchStyleDiagonalBrick
@@ -15827,10 +15839,10 @@ object MainForm: TMainForm
       TabOrder = 2
       TMSStyle = 0
       object imgIntructorNsfs: TImage
-        Left = 42
-        Top = 44
-        Width = 140
-        Height = 140
+        Left = 39
+        Top = 39
+        Width = 137
+        Height = 109
         Picture.Data = {
           0954506E67496D61676589504E470D0A1A0A0000000D49484452000002000000
           02000806000000F478D4FA000000097048597300000EC400000EC401952B0E1B
@@ -16216,8 +16228,8 @@ object MainForm: TMainForm
         Stretch = True
       end
       object lblStatusInstructorNsfs: TLabel
-        Left = 50
-        Top = 83
+        Left = 46
+        Top = 67
         Width = 123
         Height = 35
         Alignment = taCenter
@@ -16234,7 +16246,7 @@ object MainForm: TMainForm
       object Label10: TLabel
         Left = 0
         Top = 0
-        Width = 223
+        Width = 215
         Height = 65
         Align = alTop
         Alignment = taCenter
@@ -16254,11 +16266,13 @@ object MainForm: TMainForm
       end
       object btnRunInstructorNsfs: TImage
         Tag = 11
-        Left = 19
-        Top = 191
+        Left = 15
+        Top = 153
         Width = 90
         Height = 35
         Cursor = crHandPoint
+        Hint = 'Run'
+        ParentShowHint = False
         Picture.Data = {
           0954506E67496D61676589504E470D0A1A0A0000000D494844520000005A0000
           002308020000009BE78A5C000000097048597300000EC400000EC401952B0E1B
@@ -16338,16 +16352,19 @@ object MainForm: TMainForm
           FED2E5CB5A9A1AD99929C08A9C71EFAE8DBC3C3C97AF5C3B76FC14385D8C94A4
           01038C8C4C8C26C686E6A6C6A0050DDB36AFE6E6E26263631BA1AB7F40090494
           02FEFCFDFBE3FB0F00383AA047EDC5D26D0000000049454E44AE426082}
+        ShowHint = True
         Stretch = True
         OnClick = btnRunClick
       end
       object btnStopIntructorNsfs: TImage
         Tag = 12
-        Left = 114
-        Top = 191
+        Left = 110
+        Top = 153
         Width = 90
         Height = 35
         Cursor = crHandPoint
+        Hint = 'Kill'
+        ParentShowHint = False
         Picture.Data = {
           0954506E67496D61676589504E470D0A1A0A0000000D494844520000005A0000
           002308020000009BE78A5C000000097048597300000EC400000EC401952B0E1B
@@ -16428,16 +16445,17 @@ object MainForm: TMainForm
           53233B33E5EBD76F8C7B776DE4E5E1B97CE5DAB1E3A7C0E962A4240D18606464
           62343136343735062D68D8B679353717171B1BDB085DFD034A20A014F0E7EFDF
           1FDF7F00006CE78B47DD1D868B0000000049454E44AE426082}
+        ShowHint = True
         Stretch = True
         OnClick = btnKillClick
       end
     end
   end
   object AdvSmoothPanel4: TAdvSmoothPanel
-    Left = 302
-    Top = 20
-    Width = 715
-    Height = 333
+    Left = 295
+    Top = 10
+    Width = 686
+    Height = 293
     Cursor = crDefault
     Caption.Location = plTopCenter
     Caption.HatchStyle = HatchStyleDiagonalBrick
@@ -16474,9 +16492,9 @@ object MainForm: TMainForm
     TabOrder = 1
     TMSStyle = 0
     object imgHeaderNafs: TImage
-      Left = 18
+      Left = 17
       Top = 18
-      Width = 679
+      Width = 652
       Height = 40
       Picture.Data = {
         07544269746D617036080700424D360807000000000036000000280000008007
@@ -30885,10 +30903,10 @@ object MainForm: TMainForm
       Stretch = True
     end
     object advsmthpnl1: TAdvSmoothPanel
-      Left = 18
+      Left = 17
       Top = 64
-      Width = 223
-      Height = 251
+      Width = 215
+      Height = 210
       Cursor = crDefault
       Caption.Location = plTopCenter
       Caption.HatchStyle = HatchStyleDiagonalBrick
@@ -30927,7 +30945,7 @@ object MainForm: TMainForm
       object Label2: TLabel
         Left = 0
         Top = 0
-        Width = 223
+        Width = 215
         Height = 65
         Align = alTop
         Alignment = taCenter
@@ -30947,11 +30965,13 @@ object MainForm: TMainForm
       end
       object btnRunServerNafs: TImage
         Tag = 1
-        Left = 19
-        Top = 191
+        Left = 15
+        Top = 153
         Width = 90
         Height = 35
         Cursor = crHandPoint
+        Hint = 'Run'
+        ParentShowHint = False
         Picture.Data = {
           0954506E67496D61676589504E470D0A1A0A0000000D494844520000005A0000
           002308020000009BE78A5C000000097048597300000EC400000EC401952B0E1B
@@ -31031,16 +31051,19 @@ object MainForm: TMainForm
           FED2E5CB5A9A1AD99929C08A9C71EFAE8DBC3C3C97AF5C3B76FC14385D8C94A4
           01038C8C4C8C26C686E6A6C6A0050DDB36AFE6E6E26263631BA1AB7F40090494
           02FEFCFDFBE3FB0F00383AA047EDC5D26D0000000049454E44AE426082}
+        ShowHint = True
         Stretch = True
         OnClick = btnRunClick
       end
       object btnStopServerNafs: TImage
         Tag = 2
-        Left = 114
-        Top = 191
+        Left = 110
+        Top = 153
         Width = 90
         Height = 35
         Cursor = crHandPoint
+        Hint = 'Kill'
+        ParentShowHint = False
         Picture.Data = {
           0954506E67496D61676589504E470D0A1A0A0000000D494844520000005A0000
           002308020000009BE78A5C000000097048597300000EC400000EC401952B0E1B
@@ -31121,14 +31144,15 @@ object MainForm: TMainForm
           53233B33E5EBD76F8C7B776DE4E5E1B97CE5DAB1E3A7C0E962A4240D18606464
           62343136343735062D68D8B679353717171B1BDB085DFD034A20A014F0E7EFDF
           1FDF7F00006CE78B47DD1D868B0000000049454E44AE426082}
+        ShowHint = True
         Stretch = True
         OnClick = btnKillClick
       end
       object imgServerNafs: TImage
-        Left = 42
-        Top = 44
-        Width = 140
-        Height = 140
+        Left = 39
+        Top = 39
+        Width = 137
+        Height = 109
         Picture.Data = {
           0954506E67496D61676589504E470D0A1A0A0000000D49484452000002000000
           02000806000000F478D4FA000000097048597300000EC400000EC401952B0E1B
@@ -31525,8 +31549,8 @@ object MainForm: TMainForm
         Stretch = True
       end
       object lblStatusServerNafs: TLabel
-        Left = 50
-        Top = 83
+        Left = 46
+        Top = 67
         Width = 123
         Height = 35
         Alignment = taCenter
@@ -31542,10 +31566,10 @@ object MainForm: TMainForm
       end
     end
     object AdvSmoothPanel2: TAdvSmoothPanel
-      Left = 246
+      Left = 236
       Top = 64
-      Width = 223
-      Height = 251
+      Width = 215
+      Height = 210
       Cursor = crDefault
       Caption.Location = plTopCenter
       Caption.HatchStyle = HatchStyleDiagonalBrick
@@ -31582,10 +31606,10 @@ object MainForm: TMainForm
       TabOrder = 1
       TMSStyle = 0
       object imgBridgeNafs: TImage
-        Left = 42
-        Top = 44
-        Width = 140
-        Height = 140
+        Left = 39
+        Top = 39
+        Width = 137
+        Height = 109
         Picture.Data = {
           0954506E67496D61676589504E470D0A1A0A0000000D49484452000002000000
           02000806000000F478D4FA000000097048597300000EC400000EC401952B0E1B
@@ -31982,8 +32006,8 @@ object MainForm: TMainForm
         Stretch = True
       end
       object lblStatusBridgeNafs: TLabel
-        Left = 50
-        Top = 83
+        Left = 46
+        Top = 67
         Width = 123
         Height = 35
         Alignment = taCenter
@@ -32000,7 +32024,7 @@ object MainForm: TMainForm
       object Label5: TLabel
         Left = 0
         Top = 0
-        Width = 223
+        Width = 215
         Height = 65
         Align = alTop
         Alignment = taCenter
@@ -32020,11 +32044,13 @@ object MainForm: TMainForm
       end
       object btnRunBridgeNafs: TImage
         Tag = 3
-        Left = 19
-        Top = 191
+        Left = 15
+        Top = 153
         Width = 90
         Height = 35
         Cursor = crHandPoint
+        Hint = 'Run'
+        ParentShowHint = False
         Picture.Data = {
           0954506E67496D61676589504E470D0A1A0A0000000D494844520000005A0000
           002308020000009BE78A5C000000097048597300000EC400000EC401952B0E1B
@@ -32104,16 +32130,19 @@ object MainForm: TMainForm
           FED2E5CB5A9A1AD99929C08A9C71EFAE8DBC3C3C97AF5C3B76FC14385D8C94A4
           01038C8C4C8C26C686E6A6C6A0050DDB36AFE6E6E26263631BA1AB7F40090494
           02FEFCFDFBE3FB0F00383AA047EDC5D26D0000000049454E44AE426082}
+        ShowHint = True
         Stretch = True
         OnClick = btnRunClick
       end
       object btnStopBridgeNafs: TImage
         Tag = 4
-        Left = 114
-        Top = 191
+        Left = 110
+        Top = 153
         Width = 90
         Height = 35
         Cursor = crHandPoint
+        Hint = 'Kill'
+        ParentShowHint = False
         Picture.Data = {
           0954506E67496D61676589504E470D0A1A0A0000000D494844520000005A0000
           002308020000009BE78A5C000000097048597300000EC400000EC401952B0E1B
@@ -32194,15 +32223,16 @@ object MainForm: TMainForm
           53233B33E5EBD76F8C7B776DE4E5E1B97CE5DAB1E3A7C0E962A4240D18606464
           62343136343735062D68D8B679353717171B1BDB085DFD034A20A014F0E7EFDF
           1FDF7F00006CE78B47DD1D868B0000000049454E44AE426082}
+        ShowHint = True
         Stretch = True
         OnClick = btnKillClick
       end
     end
     object AdvSmoothPanel3: TAdvSmoothPanel
-      Left = 474
+      Left = 455
       Top = 64
-      Width = 223
-      Height = 251
+      Width = 215
+      Height = 210
       Cursor = crDefault
       Caption.Location = plTopCenter
       Caption.HatchStyle = HatchStyleDiagonalBrick
@@ -32241,7 +32271,7 @@ object MainForm: TMainForm
       object Label7: TLabel
         Left = 0
         Top = 0
-        Width = 223
+        Width = 215
         Height = 65
         Align = alTop
         Alignment = taCenter
@@ -32260,10 +32290,10 @@ object MainForm: TMainForm
         ExplicitWidth = 261
       end
       object imgIntructorNafs: TImage
-        Left = 42
-        Top = 44
-        Width = 140
-        Height = 140
+        Left = 39
+        Top = 39
+        Width = 137
+        Height = 109
         Picture.Data = {
           0954506E67496D61676589504E470D0A1A0A0000000D49484452000002000000
           02000806000000F478D4FA000000097048597300000EC400000EC401952B0E1B
@@ -32650,11 +32680,13 @@ object MainForm: TMainForm
       end
       object btnRunInstructorNafs: TImage
         Tag = 5
-        Left = 19
-        Top = 191
+        Left = 15
+        Top = 153
         Width = 90
         Height = 35
         Cursor = crHandPoint
+        Hint = 'Run'
+        ParentShowHint = False
         Picture.Data = {
           0954506E67496D61676589504E470D0A1A0A0000000D494844520000005A0000
           002308020000009BE78A5C000000097048597300000EC400000EC401952B0E1B
@@ -32734,16 +32766,19 @@ object MainForm: TMainForm
           FED2E5CB5A9A1AD99929C08A9C71EFAE8DBC3C3C97AF5C3B76FC14385D8C94A4
           01038C8C4C8C26C686E6A6C6A0050DDB36AFE6E6E26263631BA1AB7F40090494
           02FEFCFDFBE3FB0F00383AA047EDC5D26D0000000049454E44AE426082}
+        ShowHint = True
         Stretch = True
         OnClick = btnRunClick
       end
       object btnStopIntructorNafs: TImage
         Tag = 6
-        Left = 114
-        Top = 191
+        Left = 110
+        Top = 153
         Width = 90
         Height = 35
         Cursor = crHandPoint
+        Hint = 'Kill'
+        ParentShowHint = False
         Picture.Data = {
           0954506E67496D61676589504E470D0A1A0A0000000D494844520000005A0000
           002308020000009BE78A5C000000097048597300000EC400000EC401952B0E1B
@@ -32824,12 +32859,13 @@ object MainForm: TMainForm
           53233B33E5EBD76F8C7B776DE4E5E1B97CE5DAB1E3A7C0E962A4240D18606464
           62343136343735062D68D8B679353717171B1BDB085DFD034A20A014F0E7EFDF
           1FDF7F00006CE78B47DD1D868B0000000049454E44AE426082}
+        ShowHint = True
         Stretch = True
         OnClick = btnKillClick
       end
       object lblStatusInstructorNafs: TLabel
-        Left = 50
-        Top = 83
+        Left = 46
+        Top = 67
         Width = 123
         Height = 35
         Alignment = taCenter
@@ -32846,10 +32882,10 @@ object MainForm: TMainForm
     end
   end
   object AdvSmoothPanel5: TAdvSmoothPanel
-    Left = 302
-    Top = 706
-    Width = 715
-    Height = 333
+    Left = 295
+    Top = 616
+    Width = 686
+    Height = 293
     Cursor = crDefault
     Caption.Location = plTopCenter
     Caption.HatchStyle = HatchStyleDiagonalBrick
@@ -32886,9 +32922,9 @@ object MainForm: TMainForm
     TabOrder = 2
     TMSStyle = 0
     object Image11: TImage
-      Left = 19
+      Left = 17
       Top = 18
-      Width = 679
+      Width = 652
       Height = 40
       Picture.Data = {
         07544269746D617036080700424D360807000000000036000000280000008007
@@ -47297,10 +47333,10 @@ object MainForm: TMainForm
       Stretch = True
     end
     object AdvSmoothPanel9: TAdvSmoothPanel
-      Left = 19
+      Left = 17
       Top = 64
-      Width = 223
-      Height = 251
+      Width = 215
+      Height = 210
       Cursor = crDefault
       Caption.Location = plTopCenter
       Caption.HatchStyle = HatchStyleDiagonalBrick
@@ -47338,9 +47374,9 @@ object MainForm: TMainForm
       TMSStyle = 0
       object imgServerNssfs: TImage
         Left = 42
-        Top = 44
-        Width = 140
-        Height = 140
+        Top = 39
+        Width = 137
+        Height = 109
         Picture.Data = {
           0954506E67496D61676589504E470D0A1A0A0000000D49484452000002000000
           02000806000000F478D4FA000000097048597300000EC400000EC401952B0E1B
@@ -47739,7 +47775,7 @@ object MainForm: TMainForm
       object Label12: TLabel
         Left = 0
         Top = 0
-        Width = 223
+        Width = 215
         Height = 65
         Align = alTop
         Alignment = taCenter
@@ -47759,7 +47795,7 @@ object MainForm: TMainForm
       end
       object lblStatusServerNssfs: TLabel
         Left = 50
-        Top = 83
+        Top = 67
         Width = 123
         Height = 35
         Alignment = taCenter
@@ -47775,11 +47811,13 @@ object MainForm: TMainForm
       end
       object btnRunServerNssfs: TImage
         Tag = 13
-        Left = 19
-        Top = 191
+        Left = 15
+        Top = 153
         Width = 90
         Height = 35
         Cursor = crHandPoint
+        Hint = 'Run'
+        ParentShowHint = False
         Picture.Data = {
           0954506E67496D61676589504E470D0A1A0A0000000D494844520000005A0000
           002308020000009BE78A5C000000097048597300000EC400000EC401952B0E1B
@@ -47859,16 +47897,19 @@ object MainForm: TMainForm
           FED2E5CB5A9A1AD99929C08A9C71EFAE8DBC3C3C97AF5C3B76FC14385D8C94A4
           01038C8C4C8C26C686E6A6C6A0050DDB36AFE6E6E26263631BA1AB7F40090494
           02FEFCFDFBE3FB0F00383AA047EDC5D26D0000000049454E44AE426082}
+        ShowHint = True
         Stretch = True
         OnClick = btnRunClick
       end
       object btnStopServerNssfs: TImage
         Tag = 14
-        Left = 114
-        Top = 191
+        Left = 110
+        Top = 153
         Width = 90
         Height = 35
         Cursor = crHandPoint
+        Hint = 'Kill'
+        ParentShowHint = False
         Picture.Data = {
           0954506E67496D61676589504E470D0A1A0A0000000D494844520000005A0000
           002308020000009BE78A5C000000097048597300000EC400000EC401952B0E1B
@@ -47949,15 +47990,16 @@ object MainForm: TMainForm
           53233B33E5EBD76F8C7B776DE4E5E1B97CE5DAB1E3A7C0E962A4240D18606464
           62343136343735062D68D8B679353717171B1BDB085DFD034A20A014F0E7EFDF
           1FDF7F00006CE78B47DD1D868B0000000049454E44AE426082}
+        ShowHint = True
         Stretch = True
         OnClick = btnKillClick
       end
     end
     object AdvSmoothPanel10: TAdvSmoothPanel
-      Left = 246
+      Left = 236
       Top = 64
-      Width = 223
-      Height = 251
+      Width = 215
+      Height = 210
       Cursor = crDefault
       Caption.Location = plTopCenter
       Caption.HatchStyle = HatchStyleDiagonalBrick
@@ -47995,9 +48037,9 @@ object MainForm: TMainForm
       TMSStyle = 0
       object imgBridgeNssfs: TImage
         Left = 42
-        Top = 44
-        Width = 140
-        Height = 140
+        Top = 39
+        Width = 137
+        Height = 109
         Picture.Data = {
           0954506E67496D61676589504E470D0A1A0A0000000D49484452000002000000
           02000806000000F478D4FA000000097048597300000EC400000EC401952B0E1B
@@ -48396,7 +48438,7 @@ object MainForm: TMainForm
       object Label14: TLabel
         Left = 0
         Top = 0
-        Width = 223
+        Width = 215
         Height = 65
         Align = alTop
         Alignment = taCenter
@@ -48416,7 +48458,7 @@ object MainForm: TMainForm
       end
       object lblStatusBridgeNssfs: TLabel
         Left = 50
-        Top = 83
+        Top = 67
         Width = 123
         Height = 35
         Alignment = taCenter
@@ -48432,11 +48474,13 @@ object MainForm: TMainForm
       end
       object btnRunBridgeNssfs: TImage
         Tag = 15
-        Left = 19
-        Top = 191
+        Left = 15
+        Top = 153
         Width = 90
         Height = 35
         Cursor = crHandPoint
+        Hint = 'Run'
+        ParentShowHint = False
         Picture.Data = {
           0954506E67496D61676589504E470D0A1A0A0000000D494844520000005A0000
           002308020000009BE78A5C000000097048597300000EC400000EC401952B0E1B
@@ -48516,16 +48560,19 @@ object MainForm: TMainForm
           FED2E5CB5A9A1AD99929C08A9C71EFAE8DBC3C3C97AF5C3B76FC14385D8C94A4
           01038C8C4C8C26C686E6A6C6A0050DDB36AFE6E6E26263631BA1AB7F40090494
           02FEFCFDFBE3FB0F00383AA047EDC5D26D0000000049454E44AE426082}
+        ShowHint = True
         Stretch = True
         OnClick = btnRunClick
       end
       object btnStopBridgeNssfs: TImage
         Tag = 16
-        Left = 114
-        Top = 191
+        Left = 110
+        Top = 153
         Width = 90
         Height = 35
         Cursor = crHandPoint
+        Hint = 'Kill'
+        ParentShowHint = False
         Picture.Data = {
           0954506E67496D61676589504E470D0A1A0A0000000D494844520000005A0000
           002308020000009BE78A5C000000097048597300000EC400000EC401952B0E1B
@@ -48606,15 +48653,16 @@ object MainForm: TMainForm
           53233B33E5EBD76F8C7B776DE4E5E1B97CE5DAB1E3A7C0E962A4240D18606464
           62343136343735062D68D8B679353717171B1BDB085DFD034A20A014F0E7EFDF
           1FDF7F00006CE78B47DD1D868B0000000049454E44AE426082}
+        ShowHint = True
         Stretch = True
         OnClick = btnKillClick
       end
     end
     object AdvSmoothPanel11: TAdvSmoothPanel
-      Left = 474
+      Left = 455
       Top = 64
-      Width = 223
-      Height = 251
+      Width = 215
+      Height = 210
       Cursor = crDefault
       Caption.Location = plTopCenter
       Caption.HatchStyle = HatchStyleDiagonalBrick
@@ -48652,9 +48700,9 @@ object MainForm: TMainForm
       TMSStyle = 0
       object imgIntructorNssfs: TImage
         Left = 42
-        Top = 44
-        Width = 140
-        Height = 140
+        Top = 39
+        Width = 137
+        Height = 109
         Picture.Data = {
           0954506E67496D61676589504E470D0A1A0A0000000D49484452000002000000
           02000806000000F478D4FA000000097048597300000EC400000EC401952B0E1B
@@ -49042,7 +49090,7 @@ object MainForm: TMainForm
       object Label16: TLabel
         Left = 0
         Top = 0
-        Width = 223
+        Width = 215
         Height = 65
         Align = alTop
         Alignment = taCenter
@@ -49062,7 +49110,7 @@ object MainForm: TMainForm
       end
       object lblStatusInstructorNssfs: TLabel
         Left = 50
-        Top = 83
+        Top = 67
         Width = 123
         Height = 35
         Alignment = taCenter
@@ -49078,11 +49126,13 @@ object MainForm: TMainForm
       end
       object btnRunInstructorNssfs: TImage
         Tag = 17
-        Left = 19
-        Top = 191
+        Left = 15
+        Top = 153
         Width = 90
         Height = 35
         Cursor = crHandPoint
+        Hint = 'Run'
+        ParentShowHint = False
         Picture.Data = {
           0954506E67496D61676589504E470D0A1A0A0000000D494844520000005A0000
           002308020000009BE78A5C000000097048597300000EC400000EC401952B0E1B
@@ -49162,16 +49212,19 @@ object MainForm: TMainForm
           FED2E5CB5A9A1AD99929C08A9C71EFAE8DBC3C3C97AF5C3B76FC14385D8C94A4
           01038C8C4C8C26C686E6A6C6A0050DDB36AFE6E6E26263631BA1AB7F40090494
           02FEFCFDFBE3FB0F00383AA047EDC5D26D0000000049454E44AE426082}
+        ShowHint = True
         Stretch = True
         OnClick = btnRunClick
       end
       object btnStopIntructorNssfs: TImage
         Tag = 18
-        Left = 114
-        Top = 191
+        Left = 110
+        Top = 153
         Width = 90
         Height = 35
         Cursor = crHandPoint
+        Hint = 'Kill'
+        ParentShowHint = False
         Picture.Data = {
           0954506E67496D61676589504E470D0A1A0A0000000D494844520000005A0000
           002308020000009BE78A5C000000097048597300000EC400000EC401952B0E1B
@@ -49252,16 +49305,17 @@ object MainForm: TMainForm
           53233B33E5EBD76F8C7B776DE4E5E1B97CE5DAB1E3A7C0E962A4240D18606464
           62343136343735062D68D8B679353717171B1BDB085DFD034A20A014F0E7EFDF
           1FDF7F00006CE78B47DD1D868B0000000049454E44AE426082}
+        ShowHint = True
         Stretch = True
         OnClick = btnKillClick
       end
     end
   end
   object AdvSmoothPanel12: TAdvSmoothPanel
-    Left = 17
-    Top = 363
+    Left = 10
+    Top = 313
     Width = 275
-    Height = 676
+    Height = 596
     Cursor = crDefault
     Caption.Location = plTopCenter
     Caption.HatchStyle = HatchStyleDiagonalBrick
@@ -49297,27 +49351,10 @@ object MainForm: TMainForm
     Align = alCustom
     TabOrder = 3
     TMSStyle = 0
-    object Label17: TLabel
-      Left = 17
-      Top = 15
-      Width = 134
-      Height = 27
-      Alignment = taCenter
-      Caption = 'console list :'
-      Color = 13666138
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWhite
-      Font.Height = -27
-      Font.Name = 'Deusex'
-      Font.Style = []
-      ParentColor = False
-      ParentFont = False
-      Layout = tlCenter
-    end
     object btnRestart: TImage
       Tag = 1
-      Left = 141
-      Top = 592
+      Left = 128
+      Top = 589
       Width = 117
       Height = 35
       Cursor = crHandPoint
@@ -49719,11 +49756,12 @@ object MainForm: TMainForm
         BFB3BCBFB3BCBFB3BCBFB3BCBFB3BCBFB3BCBFB3BCBFB3BCBFB3BCBFB3BCBFB3
         BCBFB3BCBFB3BBBFB3BBBFB3BBBEB3BBBEB1BABDAEB5B9B5BBBF}
       Stretch = True
+      Visible = False
       OnClick = btnSingleSystemClick
     end
     object btnShutdown: TImage
-      Left = 17
-      Top = 592
+      Left = 18
+      Top = 589
       Width = 117
       Height = 35
       Cursor = crHandPoint
@@ -50125,12 +50163,13 @@ object MainForm: TMainForm
         BFB3BCBFB3BCBFB3BCBFB3BCBFB3BCBFB3BCBFB3BCBFB3BCBFB3BCBFB3BCBFB3
         BCBFB3BCBFB3BBBFB3BBBFB3BBBEB3BBBEB1BABDAEB5B9B5BBBF}
       Stretch = True
+      Visible = False
       OnClick = btnSingleSystemClick
     end
     object btnRestartAll: TImage
       Tag = 1
       Left = 141
-      Top = 631
+      Top = 618
       Width = 117
       Height = 35
       Cursor = crHandPoint
@@ -50532,11 +50571,12 @@ object MainForm: TMainForm
         BFB3BCBFB3BCBFB3BCBFB3BCBFB3BCBFB3BCBFB3BCBFB3BCBFB3BCBFB3BCBFB3
         BCBFB3BCBFB3BBBFB3BBBFB3BBBEB3BBBEB1BABDAEB5B9B5BBBF}
       Stretch = True
+      Visible = False
       OnClick = btnAllSystemClick
     end
     object btnShutdownAll: TImage
-      Left = 17
-      Top = 631
+      Left = 18
+      Top = 618
       Width = 117
       Height = 35
       Cursor = crHandPoint
@@ -50938,13 +50978,14 @@ object MainForm: TMainForm
         BFB3BCBFB3BCBFB3BCBFB3BCBFB3BCBFB3BCBFB3BCBFB3BCBFB3BCBFB3BCBFB3
         BCBFB3BCBFB3BBBFB3BBBFB3BBBEB3BBBEB1BABDAEB5B9B5BBBF}
       Stretch = True
+      Visible = False
       OnClick = btnAllSystemClick
     end
     object lvSystem: TListView
       Left = 17
-      Top = 48
+      Top = 20
       Width = 241
-      Height = 537
+      Height = 556
       Columns = <
         item
           Caption = 'Console'
@@ -50962,71 +51003,74 @@ object MainForm: TMainForm
         end>
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -12
+      Font.Height = -11
       Font.Name = 'Tahoma'
       Font.Style = []
       GridLines = True
       Items.ItemData = {
-        05020600001C00000000000000FFFFFFFFFFFFFFFF02000000FFFFFFFF000000
-        000949004E005300540020004E005300460053000040111E3600481D1E360000
-        0000FFFFFFFFFFFFFFFF02000000FFFFFFFF000000000949004E005300540020
-        004E0041004600530000B0111E3600B81D1E3600000000FFFFFFFFFFFFFFFF02
-        000000FFFFFFFF000000000A49004E005300540020004E005300530046005300
-        0020121E3600F01D1E3600000000FFFFFFFFFFFFFFFF02000000FFFFFFFF0000
-        0000084D004B00330020004E005300460053000090121E3600281E1E36000000
-        00FFFFFFFFFFFFFFFF02000000FFFFFFFF00000000084D004B00340020004E00
-        5300460053000000131E3600601E1E3600000000FFFFFFFFFFFFFFFF02000000
-        FFFFFFFF0000000005430020003800300032000070131E3600981E1E36000000
-        00FFFFFFFFFFFFFFFF02000000FFFFFFFF000000000354004400530000E0131E
-        3600D01E1E3600000000FFFFFFFFFFFFFFFF02000000FFFFFFFF000000000543
-        0020003700300035000050141E3600081F1E3600000000FFFFFFFFFFFFFFFF02
-        000000FFFFFFFF0000000007590041004B0048004F004E00540000C0141E3600
-        401F1E3600000000FFFFFFFFFFFFFFFF02000000FFFFFFFF0000000009460043
-        0020003500370020004400490047000030151E3600781F1E3600000000FFFFFF
-        FFFFFFFFFF02000000FFFFFFFF00000000054D00520020003300350000A0151E
-        3600B01F1E3600000000FFFFFFFFFFFFFFFF02000000FFFFFFFF000000000946
-        00430020003500370020004D0041004E000010161E3600E81F1E3600000000FF
-        FFFFFFFFFFFFFF02000000FFFFFFFF00000000064D004D002000310030003300
-        0080161E360020201E3600000000FFFFFFFFFFFFFFFF02000000FFFFFFFF0000
-        0000084D004B00330020004E0041004600530000F0161E360058201E36000000
-        00FFFFFFFFFFFFFFFF02000000FFFFFFFF00000000084D004B00340020004E00
-        4100460053000060171E360090201E3600000000FFFFFFFFFFFFFFFF02000000
-        FFFFFFFF00000000084300490057005300200037003300300000D0171E3600C8
-        201E3600000000FFFFFFFFFFFFFFFF02000000FFFFFFFF000000000645004F00
-        20003700330030000040181E360000211E3600000000FFFFFFFFFFFFFFFF0200
-        0000FFFFFFFF000000000641004B00200032003300300000B0181E360038211E
-        3600000000FFFFFFFFFFFFFFFF02000000FFFFFFFF00000000064D0052002000
-        3200300033000020191E360070211E3600000000FFFFFFFFFFFFFFFF02000000
-        FFFFFFFF00000000094D004B00330020004E0053005300460053000090191E36
-        00A8211E3600000000FFFFFFFFFFFFFFFF02000000FFFFFFFF00000000094D00
-        4B00340020004E00530053004600530000001A1E3600E0211E3600000000FFFF
-        FFFFFFFFFFFF02000000FFFFFFFF000000000353005000530000701A1E360018
-        221E3600000000FFFFFFFFFFFFFFFF02000000FFFFFFFF000000001153005500
-        540020002600200042004C00410043004B00200053004800410052004B0000E0
-        1A1E360050221E3600000000FFFFFFFFFFFFFFFF02000000FFFFFFFF00000000
-        07520042005500200044004900470000501B1E360088221E3600000000FFFFFF
-        FFFFFFFFFF02000000FFFFFFFF000000000752004200550020004D0041004E00
-        00C01B1E3600F8221E3600000000FFFFFFFFFFFFFFFF02000000FFFFFFFF0000
-        0000073300440020004E0053004600530000301C1E360030231E3600000000FF
-        FFFFFFFFFFFFFF02000000FFFFFFFF00000000073300440020004E0041004600
-        530000A01C1E360068231E3600000000FFFFFFFFFFFFFFFF02000000FFFFFFFF
-        00000000083300440020004E00530053004600530000101D1E3600A0231E36FF
+        05400600001D00000000000000FFFFFFFFFFFFFFFF02000000FFFFFFFF000000
+        000949004E005300540020004E005300460053000038FA2B350020152C350000
+        0000FFFFFFFFFFFFFFFF02000000FFFFFFFF00000000084D004B00330020004E
+        0053004600530000F8F42B350048122C3500000000FFFFFFFFFFFFFFFF020000
+        00FFFFFFFF00000000084D004B00340020004E0053004600530000A03B2C3500
+        58002C3500000000FFFFFFFFFFFFFFFF02000000FFFFFFFF0000000005430020
+        0038003000320000D00C2C350078DC2B3500000000FFFFFFFFFFFFFFFF020000
+        00FFFFFFFF000000000354004400530000E0D02B350018332C3500000000FFFF
+        FFFFFFFFFFFF02000000FFFFFFFF00000000054300200037003000350000B0EA
+        2B3500C8F92B3500000000FFFFFFFFFFFFFFFF02000000FFFFFFFF0000000007
+        590041004B0048004F004E0054000068F52B350008222C3500000000FFFFFFFF
+        FFFFFFFF02000000FFFFFFFF0000000009460043002000350037002000440049
+        00470000009E25350080CB253500000000FFFFFFFFFFFFFFFF02000000FFFFFF
+        FF00000000054D005200200033003500000089253500D0DA253500000000FFFF
+        FFFFFFFFFFFF02000000FFFFFFFF00000000094600430020003500370020004D
+        0041004E000070B325350060BE253500000000FFFFFFFFFFFFFFFF02000000FF
+        FFFFFF00000000073300440020004E00530046005300003099253500F0772535
+        00000000FFFFFFFFFFFFFFFF02000000FFFFFFFF000000000949004E00530054
+        0020004E004100460053000040B825350098D3253500000000FFFFFFFFFFFFFF
+        FF02000000FFFFFFFF00000000064D004D00200031003000330000F09A253500
+        4893253500000000FFFFFFFFFFFFFFFF02000000FFFFFFFF00000000084D004B
+        00330020004E004100460053000078C625350028B0253500000000FFFFFFFFFF
+        FFFFFF02000000FFFFFFFF00000000084D004B00340020004E00410046005300
+        003076253500D892253500000000FFFFFFFFFFFFFFFF02000000FFFFFFFF0000
+        0000084300490057005300200037003300300000E8CD25350038892535000000
+        00FFFFFFFFFFFFFFFF02000000FFFFFFFF000000000645004F00200037003300
+        30000078B1253500A08B253500000000FFFFFFFFFFFFFFFF02000000FFFFFFFF
+        000000000641004B00200032003300300000609425350018D7253500000000FF
+        FFFFFFFFFFFFFF02000000FFFFFFFF00000000064D0052002000320030003300
+        00808525350040E2253500000000FFFFFFFFFFFFFFFF02000000FFFFFFFF0000
+        0000073300440020004E0041004600530000189125350080A8253500000000FF
+        FFFFFFFFFFFFFF02000000FFFFFFFF000000000A49004E005300540020004E00
+        530053004600530000C08A2535008891253500000000FFFFFFFFFFFFFFFF0200
+        0000FFFFFFFF00000000094D004B00330020004E0053005300460053000000A5
+        25350070E4253500000000FFFFFFFFFFFFFFFF02000000FFFFFFFF0000000007
+        53005000530020004D004B0033000030A7253500A0D1253500000000FFFFFFFF
+        FFFFFFFF02000000FFFFFFFF00000000094D004B00340020004E005300530046
+        0053000048C4253500F0A8253500000000FFFFFFFFFFFFFFFF02000000FFFFFF
+        FF000000000753005000530020004D004B00340000F0E025350088E525350000
+        0000FFFFFFFFFFFFFFFF02000000FFFFFFFF0000000011530055005400200026
+        00200042004C00410043004B00200053004800410052004B0000708925350070
+        90253500000000FFFFFFFFFFFFFFFF02000000FFFFFFFF000000000752004200
+        550020004400490047000080E7253500F07E253500000000FFFFFFFFFFFFFFFF
+        02000000FFFFFFFF000000000752004200550020004D0041004E0000188A2535
+        0030DF253500000000FFFFFFFFFFFFFFFF02000000FFFFFFFF00000000083300
+        440020004E005300530046005300001077253500F8982535FFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+        FFFFFFFFFFFFFFFFFFFFFFFF}
       RowSelect = True
       ParentFont = False
       StateImages = ilClientStateColor
       TabOrder = 0
       ViewStyle = vsReport
+      OnMouseDown = lvSystemMouseDown
     end
   end
   object AdvSmoothPanel14: TAdvSmoothPanel
-    Left = 17
-    Top = 20
+    Left = 10
+    Top = 10
     Width = 275
-    Height = 333
+    Height = 293
     Cursor = crDefault
     Caption.Location = plTopCenter
     Caption.HatchStyle = HatchStyleDiagonalBrick
@@ -51063,10 +51107,10 @@ object MainForm: TMainForm
     TabOrder = 4
     TMSStyle = 0
     object AdvSmoothPanel13: TAdvSmoothPanel
-      Left = 17
+      Left = 30
       Top = 64
-      Width = 240
-      Height = 251
+      Width = 215
+      Height = 210
       Cursor = crDefault
       Caption.Location = plTopCenter
       Caption.HatchStyle = HatchStyleDiagonalBrick
@@ -51104,11 +51148,13 @@ object MainForm: TMainForm
       TMSStyle = 0
       object btnRunSessionVoip: TImage
         Tag = 19
-        Left = 27
-        Top = 191
+        Left = 15
+        Top = 153
         Width = 90
         Height = 35
         Cursor = crHandPoint
+        Hint = 'Run'
+        ParentShowHint = False
         Picture.Data = {
           0954506E67496D61676589504E470D0A1A0A0000000D494844520000005A0000
           002308020000009BE78A5C000000097048597300000EC400000EC401952B0E1B
@@ -51188,16 +51234,19 @@ object MainForm: TMainForm
           FED2E5CB5A9A1AD99929C08A9C71EFAE8DBC3C3C97AF5C3B76FC14385D8C94A4
           01038C8C4C8C26C686E6A6C6A0050DDB36AFE6E6E26263631BA1AB7F40090494
           02FEFCFDFBE3FB0F00383AA047EDC5D26D0000000049454E44AE426082}
+        ShowHint = True
         Stretch = True
         OnClick = btnRunClick
       end
       object btnStopSessionVoip: TImage
         Tag = 20
-        Left = 122
-        Top = 191
+        Left = 110
+        Top = 153
         Width = 90
         Height = 35
         Cursor = crHandPoint
+        Hint = 'Kill'
+        ParentShowHint = False
         Picture.Data = {
           0954506E67496D61676589504E470D0A1A0A0000000D494844520000005A0000
           002308020000009BE78A5C000000097048597300000EC400000EC401952B0E1B
@@ -51278,14 +51327,15 @@ object MainForm: TMainForm
           53233B33E5EBD76F8C7B776DE4E5E1B97CE5DAB1E3A7C0E962A4240D18606464
           62343136343735062D68D8B679353717171B1BDB085DFD034A20A014F0E7EFDF
           1FDF7F00006CE78B47DD1D868B0000000049454E44AE426082}
+        ShowHint = True
         Stretch = True
         OnClick = btnKillClick
       end
       object imgSessionVoip: TImage
-        Left = 50
-        Top = 44
-        Width = 140
-        Height = 140
+        Left = 39
+        Top = 39
+        Width = 137
+        Height = 109
         Picture.Data = {
           0954506E67496D61676589504E470D0A1A0A0000000D49484452000002000000
           02000806000000F478D4FA000000097048597300000EC400000EC401952B0E1B
@@ -51682,8 +51732,8 @@ object MainForm: TMainForm
         Stretch = True
       end
       object lblStatusSessionVoip: TLabel
-        Left = 58
-        Top = 83
+        Left = 46
+        Top = 67
         Width = 123
         Height = 35
         Alignment = taCenter
@@ -51700,7 +51750,7 @@ object MainForm: TMainForm
       object Label20: TLabel
         Left = 0
         Top = 0
-        Width = 240
+        Width = 215
         Height = 65
         Align = alTop
         Alignment = taCenter
@@ -51720,9 +51770,9 @@ object MainForm: TMainForm
       end
     end
     object AdvSmoothPanel18: TAdvSmoothPanel
-      Left = 17
+      Left = 30
       Top = 18
-      Width = 240
+      Width = 215
       Height = 40
       Cursor = crDefault
       Caption.Text = 'global'
@@ -51917,5 +51967,27 @@ object MainForm: TMainForm
     OnTimer = tmrCekAplicationTimer
     Left = 1015
     Top = 8
+  end
+  object pmClient: TPopupMenu
+    Left = 174
+    Top = 398
+    object mniRestart: TMenuItem
+      Tag = 1
+      Caption = 'Restart'
+      OnClick = btnSingleSystemClick
+    end
+    object mniShutdown: TMenuItem
+      Caption = 'Shutdown'
+      OnClick = btnSingleSystemClick
+    end
+    object mniRestartAll: TMenuItem
+      Tag = 1
+      Caption = 'Restart All'
+      OnClick = btnAllSystemClick
+    end
+    object mniShutdownAll: TMenuItem
+      Caption = 'Shutdown All'
+      OnClick = btnAllSystemClick
+    end
   end
 end

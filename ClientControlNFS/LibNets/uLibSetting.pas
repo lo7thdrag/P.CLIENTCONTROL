@@ -74,8 +74,9 @@ type
     display3d_nafs  :string;
     instruktur_nssfs:string;
     mk3_2h_nssfs    :string;
-    sps             :string;
+    sps_mk3         :string;
     mk4_nssfs       :string;
+    sps_mk4         :string;
     sut_black_shark :string;
     rbu_digital     :string;
     rbu_manual      :string;
@@ -168,8 +169,9 @@ begin
     display3d_nafs  := INIFReadString(inif, c_ipconsole, '3d nafs', '');
     instruktur_nssfs:= INIFReadString(inif, c_ipconsole, 'instruktur nssfs', '');
     mk3_2h_nssfs    := INIFReadString(inif, c_ipconsole, 'mk3 2h nssfs', '');
-    sps             := INIFReadString(inif, c_ipconsole, 'sps', '');
+    sps_mk3         := INIFReadString(inif, c_ipconsole, 'sps mk3', '');
     mk4_nssfs       := INIFReadString(inif, c_ipconsole, 'mk4 nssfs', '');
+    sps_mk4         := INIFReadString(inif, c_ipconsole, 'sps mk4', '');
     sut_black_shark := INIFReadString(inif, c_ipconsole, 'sut black shark', '');
     rbu_digital     := INIFReadString(inif, c_ipconsole, 'rbu digital', '');
     rbu_manual      := INIFReadString(inif, c_ipconsole, 'rbu manual', '');
