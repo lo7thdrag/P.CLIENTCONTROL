@@ -11,3 +11,9 @@
 *.dcu
 /ClientControlMonitoringTes/LibNets/__recovery
 /ClientControlMonitoringTes/Server/__history
+/ClientControlASTC/Client/__history
+/ClientControlASTC/Commons/__history
+/ClientControlASTC/LibNets/__history
+/ClientControlASTC/LibNets/NetComponent/__history
+/ClientControlASTC/Server/__history
+/ClientControlOTC/Server/__history

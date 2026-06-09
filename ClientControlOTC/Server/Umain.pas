@@ -35,6 +35,14 @@ type
     btnSystemShowLog: TButton;
     Label3: TLabel;
     cbbMenu: TComboBox;
+    lvSystem: TListView;
+    pnlLog: TPanel;
+    lblClearLog: TLabel;
+    LogMemo: TMemo;
+    PortEdit: TEdit;
+    PortLabel: TLabel;
+    StartButton: TButton;
+    Label1: TLabel;
     pnlVoip: TPanel;
     grpVoipServer: TGroupBox;
     btnVoipRefreshState: TButton;
@@ -53,15 +61,7 @@ type
     btnVoipShutdown: TButton;
     btnRunApk2: TButton;
     btnKillApk2: TButton;
-    lvSystem: TListView;
     lvVoip: TListView;
-    pnlLog: TPanel;
-    lblClearLog: TLabel;
-    LogMemo: TMemo;
-    PortEdit: TEdit;
-    PortLabel: TLabel;
-    StartButton: TButton;
-    Label1: TLabel;
 
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);

@@ -5,7 +5,7 @@ object MainForm: TMainForm
   BorderStyle = bsSingle
   Caption = 'Console Control'
   ClientHeight = 889
-  ClientWidth = 539
+  ClientWidth = 1009
   Color = clWindowText
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -20,15 +20,17 @@ object MainForm: TMainForm
   PixelsPerInch = 96
   TextHeight = 13
   object pnlLog: TPanel
-    Left = 535
+    Left = 353
     Top = 48
-    Width = 4
+    Width = 656
     Height = 841
     Align = alClient
     BevelOuter = bvNone
     Color = clWindowText
     ParentBackground = False
-    TabOrder = 3
+    TabOrder = 2
+    ExplicitLeft = 535
+    ExplicitWidth = 4
     object lblClearLog: TLabel
       Left = 194
       Top = 61
@@ -87,7 +89,7 @@ object MainForm: TMainForm
   object pnlHeader: TPanel
     Left = 0
     Top = 0
-    Width = 539
+    Width = 1009
     Height = 48
     Align = alTop
     BevelOuter = bvNone
@@ -97,11 +99,12 @@ object MainForm: TMainForm
     ShowCaption = False
     TabOrder = 0
     OnMouseDown = pnlHeaderMouseDown
+    ExplicitWidth = 539
     DesignSize = (
-      539
+      1009
       48)
     object Label3: TLabel
-      Left = 392
+      Left = 862
       Top = 16
       Width = 134
       Height = 16
@@ -133,9 +136,9 @@ object MainForm: TMainForm
     end
   end
   object pnlSystem: TPanel
-    Left = 535
+    Left = 0
     Top = 48
-    Width = 0
+    Width = 353
     Height = 841
     Align = alLeft
     BevelOuter = bvNone
@@ -487,7 +490,7 @@ object MainForm: TMainForm
       ViewStyle = vsReport
     end
     object grpSystemSingleClient: TGroupBox
-      Left = 359
+      Left = 0
       Top = 175
       Width = 173
       Height = 323
@@ -600,16 +603,17 @@ object MainForm: TMainForm
     end
   end
   object pnlVoip: TPanel
-    Left = 0
+    Left = 353
     Top = 48
-    Width = 535
+    Width = 0
     Height = 841
     Align = alLeft
     BevelOuter = bvNone
     Color = clWindowText
     ParentBackground = False
     ShowCaption = False
-    TabOrder = 2
+    TabOrder = 3
+    ExplicitLeft = 0
     object grpVoipServer: TGroupBox
       Left = 359
       Top = 27

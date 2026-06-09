@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899-12-30 00:00:00.000.992,=C:\Users\Testing 2d 3\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.611,=C:\Users\Testing 2d 3\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.732,=C:\Users\Testing 2d 3\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.130,=C:\Users\Testing 2d 3\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024-04-26 16:52:05.000.817,=C:\Users\Testing 2d 3\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024-04-26 16:59:30.000.058,=C:\Users\Testing 2d 3\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024-05-06 10:36:19.000.435,=C:\Users\Testing 2d 3\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024-05-06 10:36:58.000.878,D:\[ ANWAR ]\Learn Delphi\Client_Control\Server\Umain.pas=C:\Users\Testing 2d 3\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024-05-06 10:36:58.000.878,D:\[ ANWAR ]\Learn Delphi\Client_Control\Server\Umain.dfm=C:\Users\Testing 2d 3\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2024-05-06 10:37:06.000.809,D:\[ ANWAR ]\Learn Delphi\Client_Control\Server\server.dproj=C:\Users\Testing 2d 3\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2024-05-06 10:40:12.000.068,=D:\[ ANWAR ]\Learn Delphi\Client_Control\LibNets\NetComponent\uTCPDatatype.pas</Transaction>
+    <Transaction>2024-05-06 10:40:12.000.058,=D:\[ ANWAR ]\Learn Delphi\Client_Control\LibNets\NetComponent\uPacketRegister.pas</Transaction>
+    <Transaction>2024-05-06 10:40:12.000.040,=D:\[ ANWAR ]\Learn Delphi\Client_Control\LibNets\NetComponent\uNetBaseSocket.pas</Transaction>
+    <Transaction>2024-05-06 10:40:12.000.088,=D:\[ ANWAR ]\Learn Delphi\Client_Control\LibNets\NetComponent\uTCPServer.pas</Transaction>
+    <Transaction>2024-05-06 10:40:12.000.022,=D:\[ ANWAR ]\Learn Delphi\Client_Control\LibNets\NetComponent\uDataBuffer.pas</Transaction>
+    <Transaction>2024-05-06 10:44:58.000.767,=D:\[ ANWAR ]\Learn Delphi\Client_Control\Server\Unit1.pas</Transaction>
+    <Transaction>2024-05-06 10:45:18.000.587,D:\[ ANWAR ]\Learn Delphi\Client_Control\Server\UNetData.pas=D:\[ ANWAR ]\Learn Delphi\Client_Control\Server\Unit1.pas</Transaction>
+    <Transaction>2024-05-08 12:22:46.000.539,D:\[ ANWAR ]\Learn Delphi\Client_Control - Project\Server\UNetData.pas=</Transaction>
+    <Transaction>2024-05-08 12:22:56.000.572,=D:\[ ANWAR ]\Learn Delphi\Client_Control - Project\Commons\UNetData.pas</Transaction>
+    <Transaction>2024-05-10 14:17:13.000.755,=D:\Share\Client_Control - Project\LibNets\uIniFilesProcs.pas</Transaction>
+    <Transaction>2024-05-10 14:17:13.000.776,=D:\Share\Client_Control - Project\LibNets\uLibSetting.pas</Transaction>
+    <Transaction>2024-09-15 15:44:12.000.669,=E:\ClientControlPPKM\Commons\uExecuter.pas</Transaction>
+    <Transaction>2026-02-18 10:16:25.000.430,D:\P.CLIENTCONTROL\ClientControlNFS\Server\WorldController.dproj=D:\P.CLIENTCONTROL\ClientControlNFS\Server\server.dproj</Transaction>
+  </Transactions>
+</BorlandProject>
