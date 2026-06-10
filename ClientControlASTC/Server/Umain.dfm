@@ -41137,7 +41137,7 @@ object MainForm: TMainForm
     Width = 13
     Height = 67
     Cursor = crHandPoint
-    Hint = '192.168.84.138'
+    Hint = '192.168.1.30'
     BevelOuter = bvNone
     Caption = '3'
     Color = cl3DDkShadow
@@ -41160,7 +41160,7 @@ object MainForm: TMainForm
     Width = 13
     Height = 67
     Cursor = crHandPoint
-    Hint = '192.168.0.102'
+    Hint = '192.168.1.20'
     BevelOuter = bvNone
     Caption = '2'
     Color = cl3DDkShadow
@@ -41183,7 +41183,7 @@ object MainForm: TMainForm
     Width = 13
     Height = 67
     Cursor = crHandPoint
-    Hint = '192.168.1.30'
+    Hint = '192.168.1.10'
     BevelOuter = bvNone
     Caption = '1'
     Color = cl3DDkShadow
@@ -41252,7 +41252,7 @@ object MainForm: TMainForm
     Width = 20
     Height = 33
     Cursor = crHandPoint
-    Hint = '192.168.1.11'
+    Hint = '192.168.1.13'
     BevelOuter = bvNone
     Caption = '3'
     Color = cl3DDkShadow
