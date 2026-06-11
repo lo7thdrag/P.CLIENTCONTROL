@@ -13,6 +13,9 @@ const
   doKillGC        = 4;
   doKillSimClient = 5;
   doKillLauncher  = 6;
+  doRunUpdate     = 7;
+  doRunSyncMap    = 8;
+  doPing          = 10;
 
   CommandID: Word = 77;
   CommandApp: Word = 78;

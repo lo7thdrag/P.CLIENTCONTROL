@@ -5,7 +5,7 @@ object MainForm: TMainForm
   BorderStyle = bsSingle
   Caption = 'Console Control'
   ClientHeight = 641
-  ClientWidth = 1254
+  ClientWidth = 1265
   Color = clWhite
   TransparentColor = True
   TransparentColorValue = clFuchsia
@@ -38967,6 +38967,7 @@ object MainForm: TMainForm
       70381C8E19094F9A70381C0E87C3E170381C0E87C3E170381C0E87C3E170381C
       0E87C33123F1FF030672B6B66FDE9C000000000049454E44AE426082}
     Stretch = True
+    OnMouseDown = imgBackgroundMouseDown
     ExplicitLeft = 5
   end
   object btnShutdownAll: TImage
@@ -41300,6 +41301,7 @@ object MainForm: TMainForm
     Cursor = crHandPoint
     Hint = '192.168.1.15'
     BevelOuter = bvNone
+    Caption = '1'
     Color = cl3DDkShadow
     ParentBackground = False
     ParentShowHint = False
@@ -41316,6 +41318,7 @@ object MainForm: TMainForm
     Cursor = crHandPoint
     Hint = '192.168.1.16'
     BevelOuter = bvNone
+    Caption = 'MPE 1'
     Color = cl3DDkShadow
     ParentBackground = False
     ParentShowHint = False
@@ -41424,6 +41427,7 @@ object MainForm: TMainForm
     Cursor = crHandPoint
     Hint = '192.168.1.25'
     BevelOuter = bvNone
+    Caption = '2'
     Color = cl3DDkShadow
     ParentBackground = False
     ParentShowHint = False
@@ -41440,6 +41444,7 @@ object MainForm: TMainForm
     Cursor = crHandPoint
     Hint = '192.168.1.26'
     BevelOuter = bvNone
+    Caption = 'MPE 2'
     Color = cl3DDkShadow
     ParentBackground = False
     ParentShowHint = False
@@ -41548,6 +41553,7 @@ object MainForm: TMainForm
     Cursor = crHandPoint
     Hint = '192.168.1.35'
     BevelOuter = bvNone
+    Caption = '3'
     Color = cl3DDkShadow
     ParentBackground = False
     ParentShowHint = False
@@ -41564,6 +41570,7 @@ object MainForm: TMainForm
     Cursor = crHandPoint
     Hint = '192.168.1.36'
     BevelOuter = bvNone
+    Caption = 'MPE 3'
     Color = cl3DDkShadow
     ParentBackground = False
     ParentShowHint = False
@@ -41672,6 +41679,7 @@ object MainForm: TMainForm
     Cursor = crHandPoint
     Hint = '192.168.1.45'
     BevelOuter = bvNone
+    Caption = '4'
     Color = cl3DDkShadow
     ParentBackground = False
     ParentShowHint = False
@@ -41688,6 +41696,7 @@ object MainForm: TMainForm
     Cursor = crHandPoint
     Hint = '192.168.1.46'
     BevelOuter = bvNone
+    Caption = 'MPE 4'
     Color = cl3DDkShadow
     ParentBackground = False
     ParentShowHint = False
@@ -41796,6 +41805,7 @@ object MainForm: TMainForm
     Cursor = crHandPoint
     Hint = '192.168.1.55'
     BevelOuter = bvNone
+    Caption = '5'
     Color = cl3DDkShadow
     ParentBackground = False
     ParentShowHint = False
@@ -41812,6 +41822,7 @@ object MainForm: TMainForm
     Cursor = crHandPoint
     Hint = '192.168.1.56'
     BevelOuter = bvNone
+    Caption = 'MPE 5'
     Color = cl3DDkShadow
     ParentBackground = False
     ParentShowHint = False
@@ -41920,6 +41931,7 @@ object MainForm: TMainForm
     Cursor = crHandPoint
     Hint = '192.168.1.65'
     BevelOuter = bvNone
+    Caption = '6'
     Color = cl3DDkShadow
     ParentBackground = False
     ParentShowHint = False
@@ -41936,6 +41948,7 @@ object MainForm: TMainForm
     Cursor = crHandPoint
     Hint = '192.168.1.66'
     BevelOuter = bvNone
+    Caption = 'MPE 6'
     Color = cl3DDkShadow
     ParentBackground = False
     ParentShowHint = False
@@ -42044,6 +42057,7 @@ object MainForm: TMainForm
     Cursor = crHandPoint
     Hint = '192.168.1.75'
     BevelOuter = bvNone
+    Caption = '7'
     Color = cl3DDkShadow
     ParentBackground = False
     ParentShowHint = False
@@ -42060,6 +42074,7 @@ object MainForm: TMainForm
     Cursor = crHandPoint
     Hint = '192.168.1.76'
     BevelOuter = bvNone
+    Caption = 'MPE 7'
     Color = cl3DDkShadow
     ParentBackground = False
     ParentShowHint = False
@@ -42168,6 +42183,7 @@ object MainForm: TMainForm
     Cursor = crHandPoint
     Hint = '192.168.1.85'
     BevelOuter = bvNone
+    Caption = '8'
     Color = cl3DDkShadow
     ParentBackground = False
     ParentShowHint = False
@@ -42184,6 +42200,7 @@ object MainForm: TMainForm
     Cursor = crHandPoint
     Hint = '192.168.1.86'
     BevelOuter = bvNone
+    Caption = 'MPE 8'
     Color = cl3DDkShadow
     ParentBackground = False
     ParentShowHint = False
@@ -42292,6 +42309,7 @@ object MainForm: TMainForm
     Cursor = crHandPoint
     Hint = '192.168.1.95'
     BevelOuter = bvNone
+    Caption = '9'
     Color = cl3DDkShadow
     ParentBackground = False
     ParentShowHint = False
@@ -42308,6 +42326,7 @@ object MainForm: TMainForm
     Cursor = crHandPoint
     Hint = '192.168.1.96'
     BevelOuter = bvNone
+    Caption = 'MPE 9'
     Color = cl3DDkShadow
     ParentBackground = False
     ParentShowHint = False
@@ -42416,6 +42435,7 @@ object MainForm: TMainForm
     Cursor = crHandPoint
     Hint = '192.168.1.105'
     BevelOuter = bvNone
+    Caption = '10'
     Color = cl3DDkShadow
     ParentBackground = False
     ParentShowHint = False
@@ -42432,6 +42452,7 @@ object MainForm: TMainForm
     Cursor = crHandPoint
     Hint = '192.168.1.106'
     BevelOuter = bvNone
+    Caption = 'MPE 10'
     Color = cl3DDkShadow
     ParentBackground = False
     ParentShowHint = False
@@ -42523,6 +42544,43 @@ object MainForm: TMainForm
       object Shutdown1: TMenuItem
         Caption = 'Shutdown'
         OnClick = btnSingleSystemClick
+      end
+    end
+    object Maintenance1: TMenuItem
+      Caption = 'Maintenance'
+      Visible = False
+      object Update1: TMenuItem
+        Tag = 7
+        Caption = 'Update'
+        OnClick = btnSingleSystemClick
+      end
+      object UpdateAll1: TMenuItem
+        Tag = 7
+        Caption = 'Update All'
+        OnClick = btnMultipleSystemClick
+      end
+      object SyncMap1: TMenuItem
+        Tag = 8
+        Caption = 'Sync Map'
+        OnClick = btnMultipleSystemClick
+      end
+      object PingLauncher1: TMenuItem
+        Caption = 'Ping Launcher'
+        object Ping1: TMenuItem
+          Tag = 10
+          Caption = 'Ping'
+          OnClick = btnMultipleSystemClick
+        end
+        object Kill3: TMenuItem
+          Tag = 6
+          Caption = 'Kill'
+          OnClick = btnSingleSystemClick
+        end
+        object KillAll1: TMenuItem
+          Tag = 6
+          Caption = 'Kill All'
+          OnClick = btnMultipleSystemClick
+        end
       end
     end
   end

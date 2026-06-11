@@ -30,6 +30,8 @@ type
     AutoStart : Boolean;
 
     Clientapp : string;
+    ClientUpdate : string;
+    SyncMap : string;
     Sessionapp : string;
     sessionurl : string;
 
@@ -150,6 +152,8 @@ begin
     AutoStart       := INIFReadBool(inif, c_net, 'autostart', true);
 
     clientapp       := INIFReadString(inif, c_app, 'clientapp', c_APP_NAME);
+    ClientUpdate    := INIFReadString(inif, c_app, 'clientupdate', c_APP_NAME);
+    SyncMap         := INIFReadString(inif, c_app, 'syncmap', c_APP_NAME);
     sessionapp      := INIFReadString(inif, c_app, 'sessionapp', c_APP_NAME);
     sessionurl      := INIFReadString(inif, c_url, 'sessionurl', c_URL_APP);
 

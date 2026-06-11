@@ -104,6 +104,14 @@ type
     Run2: TMenuItem;
     Kill2: TMenuItem;
     lbl1: TLabel;
+    Maintenance1: TMenuItem;
+    Update1: TMenuItem;
+    UpdateAll1: TMenuItem;
+    SyncMap1: TMenuItem;
+    PingLauncher1: TMenuItem;
+    Ping1: TMenuItem;
+    Kill3: TMenuItem;
+    KillAll1: TMenuItem;
 
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -121,6 +129,9 @@ type
     
     procedure pnlMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
+    procedure Button2Click(Sender: TObject);
+    procedure imgBackgroundMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
 
   private
     FpnlIP : string;
@@ -134,6 +145,8 @@ type
 
     procedure Client_Connect(const S: string);
     procedure Client_Disconnect(const S: string);
+
+    procedure RefreshClient;
 
 //    procedure UpdateSystemClientState;
     procedure UpdateConsoleState;
@@ -240,12 +253,12 @@ begin
   server.SendDataToIPAddress(CommandID, @CommandData, FpnlIP);
 
   case TMenuItem(Sender).Tag of
-    0 : ShowMessage('Shutdown ' + FpnlIP);
-    1 : ShowMessage('Restart ' + FpnlIP);
-    2 : ShowMessage('Run GC ' + FpnlIP);
-  //      3 : ShowMessage('Run Simclient ' + FpnlIP);
-    4 : ShowMessage('Kill GC ' + FpnlIP);
-  //      5 : ShowMessage('Kill Simclient ' + FpnlIP);
+    doShutdown : ShowMessage('Shutdown ' + FpnlIP);
+    doRestart : ShowMessage('Restart ' + FpnlIP);
+    doRunGC : ShowMessage('Run GC ' + FpnlIP);
+    doKillGC : ShowMessage('Kill GC ' + FpnlIP);
+    doKillLauncher : ShowMessage('Kill Launcher ' + FpnlIP);
+    doRunUpdate : ShowMessage('Run Update ' + FpnlIP);
   end;
 end;
 
@@ -272,7 +285,11 @@ begin
       if TPanel(Components[i]).Tag = 100 then
       begin
         ipAddress := TPanel(Components[i]).Hint;
-        CommandData.command := TImage(Sender).Tag;
+
+        if Sender is TImage then
+          CommandData.command := TImage(Sender).Tag
+        else if Sender is TMenuItem then
+          CommandData.command := TMenuItem(Sender).Tag;
 
         server.SendDataToIPAddress(CommandID, @CommandData, ipAddress);
 
@@ -280,12 +297,38 @@ begin
     end;
   end;
 
-  case TImage(Sender).Tag of
-    0 : ShowMessage('Shutdown All PC');
-    1 : ShowMessage('Restart All PC');
-    2 : ShowMessage('Run All GC ');
-    4 : ShowMessage('Kill All GC ');
+  if Sender is TImage then
+  begin
+    case TImage(Sender).Tag of
+      doShutdown : ShowMessage('Shutdown All PC');
+      doRestart : ShowMessage('Restart All PC');
+      doRunGC : ShowMessage('Run All GC ');
+      doKillGC : ShowMessage('Kill All GC ');
+    end;
+  end
+  else if Sender is TMenuItem then
+  begin
+    case TMenuItem(Sender).Tag of
+      doShutdown : ShowMessage('Shutdown All PC');
+      doRestart : ShowMessage('Restart All PC');
+      doRunGC : ShowMessage('Run All GC ');
+      doKillGC : ShowMessage('Kill All GC ');
+      doRunUpdate : ShowMessage('Run Update All');
+      doPing : ShowMessage('Ping All');
+      doKillLauncher : ShowMessage('Kill Launcher All');
+      doRunSyncMap : ShowMessage('Sync Map All');
+    end;
   end;
+
+end;
+
+procedure TMainForm.Button2Click(Sender: TObject);
+var
+  CommandData: RecCommandData;
+
+begin
+  CommandData.command := doRunUpdate;
+  server.SendData(CommandID, @CommandData);
 end;
 
 procedure TMainForm.btnKillClick(Sender: TObject);
@@ -349,7 +392,7 @@ begin
   try
     server.GetConnectedList(ss);
     UpdateConsoleState;
-//    UpdateServerState;
+    RefreshClient;
   finally
     ss.Free;
   end;
@@ -363,7 +406,7 @@ begin
   try
     server.GetConnectedList(ss);
     UpdateConsoleState;
-//    UpdateServerState;
+    RefreshClient;
   finally
     ss.Free;
   end;
@@ -448,6 +491,15 @@ begin
   server.getPacket;
 end;
 
+procedure TMainForm.imgBackgroundMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  if ( Button = mbright )  and (ssShift in Shift) then
+  begin
+    Maintenance1.Visible := not Maintenance1.Visible
+  end;
+end;
+
 procedure TMainForm.NetRecv_AppData(apRec: PAnsiChar; aSize: word);
 var
   i : Integer;
@@ -488,8 +540,8 @@ procedure TMainForm.pnlMouseDown(Sender: TObject; Button: TMouseButton; Shift: T
 var
     p : TPoint;
 begin
-  if ( Button = mbright ) then
-  begin
+//  if ( Button = mbright ) then
+//  begin
     if Sender is TLabel then
     begin
       GC1.Visible := False;
@@ -517,7 +569,16 @@ begin
     GetCursorPos(p);
 
     pmPanel.Popup(p.X, p.Y);
-  end;
+//  end;
+end;
+
+procedure TMainForm.RefreshClient;
+var
+  CommandData: RecCommandData;
+
+begin
+  CommandData.command := 10;
+  server.SendData(CommandID, @CommandData);
 end;
 
 procedure TMainForm.Server_Log(const S: string);

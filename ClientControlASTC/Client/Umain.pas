@@ -47,6 +47,7 @@ type
     Client: TTCPClient;
     FAppGame : TAppExecute;
     AppState : Boolean;
+    isFlag : Boolean;
 
     function GetApp: Boolean;
 
@@ -59,6 +60,9 @@ type
     procedure RestartWindows();
     procedure RunClientApp();
     procedure KillClientApp();
+    procedure RunUpdateClient();
+    procedure RunSyncMap();
+    procedure PingClientApp();
 
     procedure O_nsShellIcon( var Msg : TMessage ); message WM_ShellIcon;
     procedure O_nsMinimize( var Msg : TWMSysCommand ); message WM_SYSCOMMAND;
@@ -130,8 +134,6 @@ begin
   begin
     Client.Connect(vNetSetting.ServerIP, vNetSetting.Port);
   end;
-
-  FAppGame.FExecFname := vNetSetting.Clientapp;
 end;
 
 procedure TMainForm.btnCloseClick(Sender: TObject);
@@ -172,6 +174,10 @@ begin
     begin
       RunClientApp;
     end;
+    doRunUpdate:
+    begin
+      RunUpdateClient;
+    end;
     doKillGC:
     begin
       KillClientApp
@@ -179,6 +185,14 @@ begin
     doKillLauncher:
     begin
       Close;
+    end;
+    doRunSyncMap :
+    begin
+
+    end;
+    doPing:
+    begin
+      PingClientApp;
     end;
   end;
 end;
@@ -219,6 +233,19 @@ begin
       PostMessage( Handle, WM_USER, 0, 0 );
     end;
   end;
+end;
+
+procedure TMainForm.PingClientApp;
+var
+  AppData: RecAppData;
+
+begin
+
+  AppState := GetApp;
+
+  AppData.state := AppState;
+  Client.SendData(CommandApp, @AppData);
+
 end;
 
 procedure TMainForm.KillClientApp;
@@ -264,6 +291,7 @@ procedure TMainForm.RunClientApp;
 begin
   if not GetApp then
   begin
+    FAppGame.FExecFname := vNetSetting.Clientapp;
     FAppGame.Executes;
     LogMemo.Lines.Add('Run ' + vNetSetting.Clientapp);
   end
@@ -272,16 +300,24 @@ begin
 
 end;
 
+procedure TMainForm.RunSyncMap;
+begin
+  FAppGame.FExecFname := vNetSetting.SyncMap;
+  FAppGame.Executes;
+  LogMemo.Lines.Add('Run ' + vNetSetting.SyncMap);
+end;
+
+procedure TMainForm.RunUpdateClient;
+begin
+  FAppGame.FExecFname := vNetSetting.ClientUpdate;
+  FAppGame.Executes;
+  LogMemo.Lines.Add('Run ' + vNetSetting.ClientUpdate);
+end;
+
 procedure TMainForm.RestartWindows;
 begin
   LogMemo.Lines.Add('Restart');
   ShellExecute(handle, 'open', PChar('cmd.exe'), PChar('/C shutdown /r /t 2'), nil, SW_HIDE);
-end;
-
-procedure TMainForm.Show1Click(Sender: TObject);
-begin
-  Show;
-  SetForegroundWindow( Handle );
 end;
 
 procedure TMainForm.ShutdownWindows;
@@ -325,6 +361,12 @@ begin
   Client.GetPacket;
 end;
 
+procedure TMainForm.Show1Click(Sender: TObject);
+begin
+  Show;
+  SetForegroundWindow( Handle );
+end;
+
 procedure TMainForm.Hide1Click(Sender: TObject);
 begin
   Hide;
@@ -340,6 +382,18 @@ begin
       begin
         Client.Connect(vNetSetting.ServerIP, vNetSetting.Port);
       end;
+
+      Show;
+      isFlag := False;
+    end
+    else
+    begin
+      if not isFlag then
+      begin
+        isFlag := True;
+        Hide
+      end;
+
     end;
   end;
 end;
