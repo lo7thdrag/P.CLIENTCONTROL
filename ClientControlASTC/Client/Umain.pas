@@ -188,7 +188,7 @@ begin
     end;
     doRunSyncMap :
     begin
-
+      RunSyncMap;
     end;
     doPing:
     begin
