@@ -17,15 +17,17 @@ type
 
     GetPacketTimer: TTimer;
     LogMemo: TMemo;
-    btnClose: TButton;
     Timer1: TTimer;
-    lblClearLog: TLabel;
 
     PopupMenu1: TPopupMenu;
     Show1: TMenuItem;
     Hide1: TMenuItem;
     tmrCekApplication: TTimer;
     pnlBody: TAdvSmoothPanel;
+    imgBackground: TImage;
+    lblHeader: TLabel;
+    btnClose: TImage;
+    lblClearLog: TImage;
 
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
