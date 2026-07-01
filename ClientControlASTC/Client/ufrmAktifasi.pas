@@ -87,7 +87,21 @@ begin
       end
       else
       begin
-        Appstop := start + 210;
+        Appstop := start + 360;
+        Networkstop := start + 180;
+        Fkeluar := False;
+      end;
+    end
+    else if password = 'kerjoojokk' then
+    begin
+      if start > filter + 30 then
+      begin
+        MessageDlg('Password wes expired sik digawe, kono izin sik', mtInformation,[mbOk], 0);
+        Fkeluar := True;
+      end
+      else
+      begin
+        Appstop := start + 360;
         Networkstop := start + 180;
         Fkeluar := False;
       end;
