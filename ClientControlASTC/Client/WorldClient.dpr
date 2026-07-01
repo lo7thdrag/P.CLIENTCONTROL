@@ -16,19 +16,48 @@ uses
   uLibSetting in '..\LibNets\uLibSetting.pas',
   uIniFilesProcs in '..\LibNets\uIniFilesProcs.pas',
   uExecuter in '..\Commons\uExecuter.pas',
-  WbemScripting_TLB in '..\Commons\WbemScripting_TLB.pas';
+  WbemScripting_TLB in '..\Commons\WbemScripting_TLB.pas',
+  ufrmAktifasi in 'ufrmAktifasi.pas' {frmAktifasi},
+  ufrmPassword in 'ufrmPassword.pas' {frmPassword};
 
 {$R *.res}
 
 var
   NotifyIconData : TNotifyIconData;
+  idError : Integer;
 begin
-  if not GetConsoleIdentification then
-    Exit;
 
   Application.Initialize;
   Application.ShowMainForm := False;
+
+  idError := 0;
+
+  if not GetConsoleIdentification(idError) then
+  begin
+    case idError of
+      0:
+      begin
+        Application.CreateForm(TfrmAktifasi, frmAktifasi);
+
+        frmAktifasi.ShowModal;
+
+        if frmAktifasi.Fkeluar then
+        begin
+          ShowMessage(' Wkwkwkwkwkwkwkwkw ');
+          Exit;
+        end;
+
+        frmAktifasi.Free;
+      end;
+      1:
+      begin
+        Exit;
+      end;
+    end;
+  end;
+
   Application.CreateForm(TMainForm, MainForm);
+
   NotifyIconData.cbSize := SizeOf( NotifyIconData );
   NotifyIconData.Wnd    := MainForm.Handle;
   NotifyIconData.uCallbackMessage := WM_ShellIcon;

@@ -7,7 +7,7 @@ uses
   System.Classes, Vcl.Graphics, uLibSetting,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, uExecuter,
   uTCPClient, ShellApi, Vcl.Imaging.jpeg, Winapi.TlHelp32, Vcl.Imaging.pngimage,
-  Vcl.Menus, AdvSmoothPanel;
+  Vcl.Menus, AdvSmoothPanel, ufrmAktifasi;
 
 const
   WM_ShellIcon = WM_USER + 1;

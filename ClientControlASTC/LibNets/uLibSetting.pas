@@ -121,7 +121,7 @@ var
 
   vNetSetting : TNetSetting;
 
-  function GetConsoleIdentification : Boolean;
+  function GetConsoleIdentification(var idError: Integer) : Boolean;
 
 implementation
 
@@ -237,7 +237,7 @@ begin
   result := true;
 end;
 
-function GetConsoleIdentification: Boolean;
+function GetConsoleIdentification(var idError: Integer): Boolean;
 var
   WMIServices : ISWbemServices;
   Root        : ISWbemObjectSet;
@@ -283,15 +283,25 @@ begin
   begin
     Result := snTemp = regTemp;
   end
+  else if dateTemp = '' then
+  begin
+    idError := 0;
+    Result := False;
+  end
   else
   begin
     Stop := StrToFloat(dateTemp);
     selisih := Stop - start;
 
     if selisih < 0 then
+    begin
+      idError := 1;
       Result := False
+    end
     else
+    begin
       Result := snTemp = regTemp;
+    end;
   end;
 end;
 

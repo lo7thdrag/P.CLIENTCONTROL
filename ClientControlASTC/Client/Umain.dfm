@@ -3,7 +3,7 @@ object MainForm: TMainForm
   Top = 0
   BorderStyle = bsNone
   Caption = 'Client'
-  ClientHeight = 370
+  ClientHeight = 371
   ClientWidth = 471
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -23,7 +23,7 @@ object MainForm: TMainForm
     Left = 0
     Top = 0
     Width = 471
-    Height = 370
+    Height = 371
     Cursor = crDefault
     Caption.Location = plTopCenter
     Caption.HatchStyle = HatchStyleDiagonalBrick
@@ -58,14 +58,13 @@ object MainForm: TMainForm
     Version = '1.6.0.1'
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 449
-    ExplicitHeight = 367
+    ExplicitHeight = 370
     TMSStyle = 0
     object imgBackground: TImage
       Left = 0
       Top = 0
       Width = 471
-      Height = 370
+      Height = 371
       Align = alClient
       Picture.Data = {
         0954506E67496D61676589504E470D0A1A0A0000000D49484452000004780000
@@ -13409,16 +13408,16 @@ object MainForm: TMainForm
     Enabled = False
     OnTimer = GetPacketTimerTimer
     Left = 1
-    Top = 353
+    Top = 209
   end
   object Timer1: TTimer
     OnTimer = Timer1Timer
-    Left = 42
-    Top = 369
+    Left = 2
+    Top = 113
   end
   object PopupMenu1: TPopupMenu
-    Left = 51
-    Top = 361
+    Left = 3
+    Top = 73
     object Show1: TMenuItem
       Caption = '&Show'
       OnClick = Show1Click
@@ -13430,7 +13429,7 @@ object MainForm: TMainForm
   end
   object tmrCekApplication: TTimer
     OnTimer = tmrCekApplicationTimer
-    Left = 26
-    Top = 362
+    Left = 2
+    Top = 162
   end
 end
