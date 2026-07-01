@@ -87,16 +87,6 @@ type
     Restart1: TMenuItem;
     Shutdown1: TMenuItem;
     imgBackground: TImage;
-    Label1: TLabel;
-    Label2: TLabel;
-    Label3: TLabel;
-    Label4: TLabel;
-    Label5: TLabel;
-    Label6: TLabel;
-    Label7: TLabel;
-    Label8: TLabel;
-    Label9: TLabel;
-    Label10: TLabel;
     pnlSessionServer: TPanel;
     img1: TImage;
     img2: TImage;
@@ -112,6 +102,8 @@ type
     Ping1: TMenuItem;
     Kill3: TMenuItem;
     KillAll1: TMenuItem;
+    pnlBackground: TPanel;
+    lblHeader: TLabel;
 
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -352,10 +344,12 @@ begin
         if server.getClientState(TPanel(Components[i]).Hint) then
         begin
           TPanel(Components[i]).Color := clYellow;
+          TPanel(Components[i]).Font.Color := clBlack
         end
         else
         begin
           TPanel(Components[i]).Color := clRed;
+          TPanel(Components[i]).Font.Color := clWhite
         end;
       end;
     end;
@@ -369,13 +363,15 @@ begin
     if pnlSessionServer.Color <> clLime then
     begin
       pnlSessionServer.Color := clLime;
+      pnlSessionServer.Font.Color := clBlack
     end;
   end
   else
   begin
     if pnlSessionServer.Color <> clYellow then
     begin
-      pnlSessionServer.Color := clYellow
+      pnlSessionServer.Color := clYellow;
+      pnlSessionServer.Font.Color := clBlack
     end;
   end;
 end;
@@ -520,10 +516,12 @@ begin
         if rec.state then
         begin
           TPanel(Components[i]).Color := clLime;
+          TPanel(Components[i]).Font.Color := clBlack
         end
         else
         begin
           TPanel(Components[i]).Color := clYellow;
+          TPanel(Components[i]).Font.Color := clBlack
         end;
 
       end;
