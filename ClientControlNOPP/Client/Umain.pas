@@ -42,6 +42,8 @@ type
     procedure Show1Click(Sender: TObject);
     procedure Hide1Click(Sender: TObject);
     procedure tmrCekApplicationTimer(Sender: TObject);
+    procedure imgBackgroundMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
 
   private
     vSettingFile: string;
@@ -372,6 +374,22 @@ end;
 procedure TMainForm.Hide1Click(Sender: TObject);
 begin
   Hide;
+end;
+
+procedure TMainForm.imgBackgroundMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+const
+  {F012 nilai kombinasi dari delphi untuk move}
+  {F012 dari SC_MOVE ($F010) + HTCAPTION ($0002)}
+  SC_DRAGMOVE = $F012;
+begin
+  if Button = mbLeft then
+  begin
+    {Kunci kursor}
+    ReleaseCapture;
+    {WM_SYSCOMMAND = disystem, 0 = koordinatnya}
+    Perform(WM_SYSCOMMAND, SC_DRAGMOVE, 0);
+  end;
 end;
 
 procedure TMainForm.Timer1Timer(Sender: TObject);

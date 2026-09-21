@@ -58,7 +58,6 @@ object MainForm: TMainForm
     Version = '1.6.0.1'
     Align = alClient
     TabOrder = 0
-    ExplicitHeight = 370
     TMSStyle = 0
     object imgBackground: TImage
       Left = 0
@@ -13348,6 +13347,7 @@ object MainForm: TMainForm
         D0A04183060D1A34E825A7FF0F0EFF95A230A27CDA0000000049454E44AE4260
         82}
       Stretch = True
+      OnMouseDown = imgBackgroundMouseDown
       ExplicitLeft = 137
       ExplicitTop = 45
       ExplicitWidth = 449

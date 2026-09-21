@@ -16,16 +16,12 @@ type
     tmrCekAplication: TTimer;
     pnlCub_10_05: TPanel;
     pmPanel: TPopupMenu;
-    btnShutdownAll: TImage;
-    btnRestartAll: TImage;
     GC1: TMenuItem;
     Console1: TMenuItem;
     Run1: TMenuItem;
     Kill1: TMenuItem;
     Restart1: TMenuItem;
     Shutdown1: TMenuItem;
-    img1: TImage;
-    img2: TImage;
     SessionServer1: TMenuItem;
     Run2: TMenuItem;
     Kill2: TMenuItem;
@@ -38,49 +34,95 @@ type
     Kill3: TMenuItem;
     KillAll1: TMenuItem;
     pnlBackground: TPanel;
-    lblHeader: TLabel;
     img3: TImage;
-    pnl16: TPanel;
-    img4: TImage;
+    Image7: TImage;
+    imgMiniMaze: TImage;
+    lbl: TLabel;
+    Label1: TLabel;
+    lblTime: TLabel;
+    lblDate: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Image8: TImage;
+    Timer1: TTimer;
+    pnlLantai1: TPanel;
+    Image21: TImage;
+    pnl69: TPanel;
+    Image9: TImage;
+    lblInsAtwo: TLabel;
+    Image10: TImage;
+    Label2: TLabel;
+    Image11: TImage;
+    Label5: TLabel;
+    Image12: TImage;
+    Label6: TLabel;
+    Image13: TImage;
+    Label7: TLabel;
+    Image14: TImage;
+    Label8: TLabel;
+    Image15: TImage;
+    Label9: TLabel;
+    Image16: TImage;
+    Label10: TLabel;
+    Image17: TImage;
+    Label11: TLabel;
+    Image18: TImage;
+    Label12: TLabel;
+    Image19: TImage;
+    Label13: TLabel;
+    Image20: TImage;
+    Label14: TLabel;
+    pnlINS3: TPanel;
+    pnlINS2: TPanel;
+    pnlINS1: TPanel;
+    pnl12: TPanel;
+    pnl13: TPanel;
+    pnlCub_08_05: TPanel;
+    pnlCub_09_06: TPanel;
+    pnlCub_09_05: TPanel;
+    pnlCub_10_06: TPanel;
+    pnlCub_08_06: TPanel;
+    pnl14: TPanel;
+    pnl15: TPanel;
+    img11: TImage;
+    pnlSatgasduk: TPanel;
+    pnlPasrat: TPanel;
+    pnlSessionServer: TPanel;
     pnlCub_03_05: TPanel;
-    pnlCub_05_04: TPanel;
-    pnlCub_07_04: TPanel;
-    pnlCub_07_03: TPanel;
-    pnlCub_07_01: TPanel;
-    pnlCub_07_02: TPanel;
     pnlCub_03_06: TPanel;
+    pnlCub_07_02: TPanel;
+    pnlCub_07_01: TPanel;
+    pnlCub_07_03: TPanel;
+    pnlCub_07_04: TPanel;
+    pnlCub_05_04: TPanel;
     pnlCub_06_04: TPanel;
     pnlCub_06_03: TPanel;
     pnlCub_06_01: TPanel;
     pnlCub_06_02: TPanel;
     pnl1: TPanel;
-    lbl2: TLabel;
-    pnl17: TPanel;
-    img6: TImage;
-    lbl3: TLabel;
-    pnlCub_01_05: TPanel;
-    pnlCub_01_06: TPanel;
-    pnlCub_09_03: TPanel;
-    pnlCub_09_04: TPanel;
-    pnlCub_10_02: TPanel;
-    pnlCub_10_03: TPanel;
-    pnlCub_10_04: TPanel;
-    pnlCub_01_03: TPanel;
-    pnlCub_01_04: TPanel;
-    pnlCub_01_02: TPanel;
-    pnlCub_01_01: TPanel;
-    pnlCub_10_01: TPanel;
-    pnlCub_09_01: TPanel;
-    pnlCub_09_02: TPanel;
-    pnlCub_08_04: TPanel;
-    pnlCub_08_03: TPanel;
-    pnlCub_08_02: TPanel;
-    pnl18: TPanel;
-    img7: TImage;
-    lbl4: TLabel;
-    pnl19: TPanel;
-    img8: TImage;
-    lbl5: TLabel;
+    Image24: TImage;
+    Label15: TLabel;
+    Image23: TImage;
+    Image36: TImage;
+    pnlLantai2: TPanel;
+    pnlALWO: TPanel;
+    pnlCub_04_05: TPanel;
+    pnl2: TPanel;
+    pnl7: TPanel;
+    pnl8: TPanel;
+    pnl9: TPanel;
+    pnl10: TPanel;
+    pnl11: TPanel;
+    pnlCub_04_06: TPanel;
+    pnl3: TPanel;
+    pnl4: TPanel;
+    pnl5: TPanel;
+    pnl6: TPanel;
+    pnl21: TPanel;
+    pnl22: TPanel;
+    pnl23: TPanel;
+    pnl24: TPanel;
+    pnlATWO: TPanel;
     pnlCub_02_05: TPanel;
     pnlCub_02_06: TPanel;
     pnlCub_02_02: TPanel;
@@ -99,47 +141,25 @@ type
     pnlCub_03_01: TPanel;
     pnlCub_04_03: TPanel;
     pnlCub_04_04: TPanel;
-    pnl20: TPanel;
-    img5: TImage;
-    lbl6: TLabel;
-    pnlCub_04_05: TPanel;
-    pnl2: TPanel;
-    pnl7: TPanel;
-    pnl8: TPanel;
-    pnl9: TPanel;
-    pnl10: TPanel;
-    pnl11: TPanel;
-    pnlCub_04_06: TPanel;
-    pnl3: TPanel;
-    pnl4: TPanel;
-    pnl5: TPanel;
-    pnl6: TPanel;
-    pnl21: TPanel;
-    pnl22: TPanel;
-    pnl23: TPanel;
-    pnl24: TPanel;
-    pnl25: TPanel;
-    img9: TImage;
-    lbl7: TLabel;
-    pnl26: TPanel;
-    img10: TImage;
-    lbl8: TLabel;
-    pnl27: TPanel;
-    pnl28: TPanel;
-    pnl29: TPanel;
-    pnl30: TPanel;
-    pnl31: TPanel;
-    pnl32: TPanel;
-    pnl33: TPanel;
-    pnl34: TPanel;
-    pnl35: TPanel;
-    pnl36: TPanel;
-    pnl37: TPanel;
-    pnl38: TPanel;
-    pnl39: TPanel;
-    pnl40: TPanel;
-    pnlCub_07_05: TPanel;
-    pnlCub_07_06: TPanel;
+    pnlNTWO: TPanel;
+    pnlCub_01_05: TPanel;
+    pnlCub_01_06: TPanel;
+    pnlCub_09_03: TPanel;
+    pnlCub_09_04: TPanel;
+    pnlCub_10_02: TPanel;
+    pnlCub_10_03: TPanel;
+    pnlCub_10_04: TPanel;
+    pnlCub_01_03: TPanel;
+    pnlCub_01_04: TPanel;
+    pnlCub_01_02: TPanel;
+    pnlCub_01_01: TPanel;
+    pnlCub_10_01: TPanel;
+    pnlCub_09_01: TPanel;
+    pnlCub_09_02: TPanel;
+    pnlCub_08_04: TPanel;
+    pnlCub_08_03: TPanel;
+    pnlCub_08_02: TPanel;
+    pnlCDWO: TPanel;
     pnl41: TPanel;
     pnl42: TPanel;
     pnl43: TPanel;
@@ -155,8 +175,116 @@ type
     pnl53: TPanel;
     pnlCub_05_06: TPanel;
     pnlCub_05_05: TPanel;
+    Image25: TImage;
+    Image4: TImage;
+    Image5: TImage;
+    Image6: TImage;
+    Image26: TImage;
+    Label19: TLabel;
+    Image28: TImage;
+    Image29: TImage;
+    Label20: TLabel;
+    Image27: TImage;
+    Label16: TLabel;
+    Image30: TImage;
+    Label21: TLabel;
+    Image31: TImage;
+    Label23: TLabel;
+    Image32: TImage;
+    Label24: TLabel;
+    imgLt1: TImage;
+    imgLt2: TImage;
+    Label22: TLabel;
+    Image33: TImage;
+    Label25: TLabel;
+    Image37: TImage;
+    Image38: TImage;
+    Label26: TLabel;
+    Label27: TLabel;
+    Image39: TImage;
+    Label28: TLabel;
+    Image40: TImage;
+    Image41: TImage;
+    Label29: TLabel;
+    Image42: TImage;
+    Label30: TLabel;
+    Image43: TImage;
+    Label31: TLabel;
+    Image44: TImage;
+    Label32: TLabel;
+    Label33: TLabel;
+    Image45: TImage;
+    Image46: TImage;
+    Label34: TLabel;
+    Image47: TImage;
+    Label35: TLabel;
+    Image48: TImage;
+    Label36: TLabel;
+    Image49: TImage;
+    Label37: TLabel;
+    Image50: TImage;
+    Label38: TLabel;
+    Image51: TImage;
+    Label39: TLabel;
+    Image52: TImage;
+    Label40: TLabel;
+    btnRestartAll: TImage;
+    btnShutdownAll: TImage;
+    imgClose: TImage;
+    img1: TImage;
+    img2: TImage;
+    Image1: TImage;
+    Label41: TLabel;
+    Image34: TImage;
+    Label17: TLabel;
+    Image35: TImage;
+    Label18: TLabel;
+    Label42: TLabel;
+    Image3: TImage;
+    Image2: TImage;
+    Label43: TLabel;
+    pnl27: TPanel;
+    pnl28: TPanel;
+    pnl29: TPanel;
+    pnl30: TPanel;
+    pnl31: TPanel;
+    pnl32: TPanel;
+    pnl33: TPanel;
+    pnl34: TPanel;
+    pnl35: TPanel;
+    pnl36: TPanel;
+    pnl37: TPanel;
+    pnl38: TPanel;
+    pnl39: TPanel;
+    pnl40: TPanel;
+    pnl65: TPanel;
+    pnl66: TPanel;
+    pnl67: TPanel;
+    pnl68: TPanel;
+    Image53: TImage;
+    Image54: TImage;
+    Image55: TImage;
+    Image56: TImage;
+    Label44: TLabel;
+    Image57: TImage;
+    Label45: TLabel;
+    pnlCub_07_05: TPanel;
+    pnlCub_07_06: TPanel;
+    Image22: TImage;
+    Image58: TImage;
+    Label46: TLabel;
+    Image59: TImage;
+    Label47: TLabel;
+    pnlCub_06_06: TPanel;
+    pnlCub_06_05: TPanel;
+    Image60: TImage;
+    Label48: TLabel;
+    pnl63: TPanel;
+    pnl64: TPanel;
     pnl54: TPanel;
     pnl55: TPanel;
+    Image61: TImage;
+    Label49: TLabel;
     pnl56: TPanel;
     pnl57: TPanel;
     pnl58: TPanel;
@@ -164,30 +292,8 @@ type
     pnl60: TPanel;
     pnl61: TPanel;
     pnl62: TPanel;
-    pnl63: TPanel;
-    pnl64: TPanel;
-    pnlCub_06_05: TPanel;
-    pnlCub_06_06: TPanel;
-    pnl65: TPanel;
-    pnl66: TPanel;
-    pnl67: TPanel;
-    pnl68: TPanel;
-    pnl69: TPanel;
-    img11: TImage;
-    pnlINS3: TPanel;
-    pnlINS2: TPanel;
-    pnlINS1: TPanel;
-    pnl12: TPanel;
-    pnl13: TPanel;
-    pnlCub_08_05: TPanel;
-    pnlCub_09_06: TPanel;
-    pnlCub_09_05: TPanel;
-    pnlCub_10_06: TPanel;
-    pnlCub_08_06: TPanel;
-    pnl14: TPanel;
-    pnl15: TPanel;
-    pnlSessionServer: TPanel;
-    lbl1: TLabel;
+    Image62: TImage;
+    Image63: TImage;
 
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -208,6 +314,13 @@ type
     procedure Button2Click(Sender: TObject);
     procedure imgBackgroundMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
+    procedure imgMiniMazeClick(Sender: TObject);
+    procedure imgCloseClick(Sender: TObject);
+    procedure img3MouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure Timer1Timer(Sender: TObject);
+    procedure imgLt1Click(Sender: TObject);
+    procedure imgLt2Click(Sender: TObject);
 //    procedure pnlCub_04_05Click(Sender: TObject);
 
   private
@@ -572,6 +685,50 @@ begin
   server.getPacket;
 end;
 
+procedure TMainForm.imgLt1Click(Sender: TObject);
+begin
+  if Sender = imgLt1 then
+  begin
+    imgLt1.Picture.LoadFromFile('Image\btn_lantai1a.bmp');
+  end;
+  try
+    imgLt2.Picture.LoadFromFile('Image\btn_lantai1.bmp');
+    pnlLantai1.BringToFront;
+  finally
+
+  end;
+end;
+
+procedure TMainForm.imgLt2Click(Sender: TObject);
+begin
+  if Sender = imgLt2 then
+  begin
+    imgLt2.Picture.LoadFromFile('Image\btn_lantai2a.bmp');
+  end;
+  try
+    imgLt1.Picture.LoadFromFile('Image\btn_lantai2.bmp');
+    pnlLantai2.BringToFront;
+  finally
+
+  end;
+end;
+
+procedure TMainForm.img3MouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+const
+  {F012 nilai kombinasi dari delphi untuk move}
+  {F012 dari SC_MOVE ($F010) + HTCAPTION ($0002)}
+  SC_DRAGMOVE = $F012;
+begin
+  if Button = mbLeft then
+  begin
+    {Kunci kursor}
+    ReleaseCapture;
+    {WM_SYSCOMMAND = disystem, 0 = koordinatnya}
+    Perform(WM_SYSCOMMAND, SC_DRAGMOVE, 0);
+  end;
+end;
+
 procedure TMainForm.imgBackgroundMouseDown(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
@@ -579,6 +736,16 @@ begin
   begin
     Maintenance1.Visible := not Maintenance1.Visible
   end;
+end;
+
+procedure TMainForm.imgCloseClick(Sender: TObject);
+begin
+  Close;
+end;
+
+procedure TMainForm.imgMiniMazeClick(Sender: TObject);
+begin
+  Application.Minimize;
 end;
 
 procedure TMainForm.NetRecv_AppData(apRec: PAnsiChar; aSize: word);
@@ -670,6 +837,12 @@ procedure TMainForm.Server_Log(const S: string);
 begin
 //  LogMemo.Lines.Add(S);
 end;
+procedure TMainForm.Timer1Timer(Sender: TObject);
+begin
+  lblTime.Caption := FormatDateTime('hh:nn:ss', now);
+  lblDate.Caption := FormatDateTime('dd-mm-yyyy', now);
+end;
+
 {$ENDREGION}
 
 end.
