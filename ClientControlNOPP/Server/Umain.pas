@@ -14,7 +14,6 @@ type
   TMainForm = class(TForm)
     GetPacketTimer: TTimer;
     tmrCekAplication: TTimer;
-    pnlCub_10_05: TPanel;
     pmPanel: TPopupMenu;
     GC1: TMenuItem;
     Console1: TMenuItem;
@@ -34,8 +33,8 @@ type
     Kill3: TMenuItem;
     KillAll1: TMenuItem;
     pnlBackground: TPanel;
-    img3: TImage;
-    Image7: TImage;
+    imgBackground: TImage;
+    imgIconWatch: TImage;
     imgMiniMaze: TImage;
     lbl: TLabel;
     Label1: TLabel;
@@ -45,32 +44,10 @@ type
     Label4: TLabel;
     Image8: TImage;
     Timer1: TTimer;
-    pnlLantai1: TPanel;
+    pnlLantai2: TPanel;
     Image21: TImage;
-    pnl69: TPanel;
-    Image9: TImage;
-    lblInsAtwo: TLabel;
-    Image10: TImage;
-    Label2: TLabel;
-    Image11: TImage;
-    Label5: TLabel;
-    Image12: TImage;
-    Label6: TLabel;
-    Image13: TImage;
+    pnlINWO: TPanel;
     Label7: TLabel;
-    Image14: TImage;
-    Label8: TLabel;
-    Image15: TImage;
-    Label9: TLabel;
-    Image16: TImage;
-    Label10: TLabel;
-    Image17: TImage;
-    Label11: TLabel;
-    Image18: TImage;
-    Label12: TLabel;
-    Image19: TImage;
-    Label13: TLabel;
-    Image20: TImage;
     Label14: TLabel;
     pnlINS3: TPanel;
     pnlINS2: TPanel;
@@ -85,8 +62,8 @@ type
     pnl14: TPanel;
     pnl15: TPanel;
     img11: TImage;
-    pnlSatgasduk: TPanel;
-    pnlPasrat: TPanel;
+    pnlSUWO: TPanel;
+    pnlLFWO: TPanel;
     pnlSessionServer: TPanel;
     pnlCub_03_05: TPanel;
     pnlCub_03_06: TPanel;
@@ -103,8 +80,7 @@ type
     Image24: TImage;
     Label15: TLabel;
     Image23: TImage;
-    Image36: TImage;
-    pnlLantai2: TPanel;
+    pnlLantai1: TPanel;
     pnlALWO: TPanel;
     pnlCub_04_05: TPanel;
     pnl2: TPanel;
@@ -186,12 +162,8 @@ type
     Label20: TLabel;
     Image27: TImage;
     Label16: TLabel;
-    Image30: TImage;
-    Label21: TLabel;
     Image31: TImage;
-    Label23: TLabel;
     Image32: TImage;
-    Label24: TLabel;
     imgLt1: TImage;
     imgLt2: TImage;
     Label22: TLabel;
@@ -200,9 +172,7 @@ type
     Image37: TImage;
     Image38: TImage;
     Label26: TLabel;
-    Label27: TLabel;
     Image39: TImage;
-    Label28: TLabel;
     Image40: TImage;
     Image41: TImage;
     Label29: TLabel;
@@ -214,8 +184,6 @@ type
     Label32: TLabel;
     Label33: TLabel;
     Image45: TImage;
-    Image46: TImage;
-    Label34: TLabel;
     Image47: TImage;
     Label35: TLabel;
     Image48: TImage;
@@ -225,9 +193,6 @@ type
     Image50: TImage;
     Label38: TLabel;
     Image51: TImage;
-    Label39: TLabel;
-    Image52: TImage;
-    Label40: TLabel;
     btnRestartAll: TImage;
     btnShutdownAll: TImage;
     imgClose: TImage;
@@ -240,9 +205,7 @@ type
     Image35: TImage;
     Label18: TLabel;
     Label42: TLabel;
-    Image3: TImage;
     Image2: TImage;
-    Label43: TLabel;
     pnl27: TPanel;
     pnl28: TPanel;
     pnl29: TPanel;
@@ -261,9 +224,6 @@ type
     pnl66: TPanel;
     pnl67: TPanel;
     pnl68: TPanel;
-    Image53: TImage;
-    Image54: TImage;
-    Image55: TImage;
     Image56: TImage;
     Label44: TLabel;
     Image57: TImage;
@@ -277,14 +237,12 @@ type
     Label47: TLabel;
     pnlCub_06_06: TPanel;
     pnlCub_06_05: TPanel;
-    Image60: TImage;
     Label48: TLabel;
     pnl63: TPanel;
     pnl64: TPanel;
     pnl54: TPanel;
     pnl55: TPanel;
     Image61: TImage;
-    Label49: TLabel;
     pnl56: TPanel;
     pnl57: TPanel;
     pnl58: TPanel;
@@ -292,8 +250,18 @@ type
     pnl60: TPanel;
     pnl61: TPanel;
     pnl62: TPanel;
-    Image62: TImage;
-    Image63: TImage;
+    lbl1: TLabel;
+    lbl2: TLabel;
+    lbl3: TLabel;
+    lbl4: TLabel;
+    lbl5: TLabel;
+    lbl6: TLabel;
+    img6: TImage;
+    lbl7: TLabel;
+    img4: TImage;
+    img5: TImage;
+    lbl8: TLabel;
+    img7: TImage;
 
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -689,10 +657,10 @@ procedure TMainForm.imgLt1Click(Sender: TObject);
 begin
   if Sender = imgLt1 then
   begin
-    imgLt1.Picture.LoadFromFile('Image\btn_lantai1a.bmp');
+    imgLt1.Picture.LoadFromFile('Image\imgLt1_Select.bmp');
   end;
   try
-    imgLt2.Picture.LoadFromFile('Image\btn_lantai1.bmp');
+    imgLt2.Picture.LoadFromFile('Image\imgLt2.bmp');
     pnlLantai1.BringToFront;
   finally
 
@@ -703,10 +671,10 @@ procedure TMainForm.imgLt2Click(Sender: TObject);
 begin
   if Sender = imgLt2 then
   begin
-    imgLt2.Picture.LoadFromFile('Image\btn_lantai2a.bmp');
+    imgLt2.Picture.LoadFromFile('Image\imgLt2_Select.bmp');
   end;
   try
-    imgLt1.Picture.LoadFromFile('Image\btn_lantai2.bmp');
+    imgLt1.Picture.LoadFromFile('Image\imgLt1.bmp');
     pnlLantai2.BringToFront;
   finally
 
