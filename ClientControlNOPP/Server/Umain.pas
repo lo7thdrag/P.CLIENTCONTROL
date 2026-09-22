@@ -695,6 +695,11 @@ begin
     {WM_SYSCOMMAND = disystem, 0 = koordinatnya}
     Perform(WM_SYSCOMMAND, SC_DRAGMOVE, 0);
   end;
+
+  if ( Button = mbright )  and (ssShift in Shift) then
+  begin
+    Maintenance1.Visible := not Maintenance1.Visible
+  end;
 end;
 
 procedure TMainForm.imgBackgroundMouseDown(Sender: TObject;
@@ -753,8 +758,6 @@ procedure TMainForm.NetRecv_CommandData(apRec: PAnsiChar; aSize: word);
 begin
   //
 end;
-
-
 
 procedure TMainForm.pnlMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 var
