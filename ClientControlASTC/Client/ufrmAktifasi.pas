@@ -69,7 +69,7 @@ begin
 
     DecodeDate(Now, Tahun, Bulan, Hari);
     start := EncodeDate(Tahun, Bulan, Hari);
-    filter := EncodeDate(Word(2026), Word(6), Word(28));
+    filter := EncodeDate(Word(2026), Word(8), Word(28));
     alamatTemp:='\Software\CmPack\CmLogin';
 
     if password = 'Nuruly@k1n' then

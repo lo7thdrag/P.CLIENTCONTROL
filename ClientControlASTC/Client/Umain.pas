@@ -28,6 +28,7 @@ type
     lblHeader: TLabel;
     btnClose: TImage;
     lblClearLog: TImage;
+    btnHide: TImage;
 
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -42,6 +43,7 @@ type
     procedure Show1Click(Sender: TObject);
     procedure Hide1Click(Sender: TObject);
     procedure tmrCekApplicationTimer(Sender: TObject);
+    procedure btnHideClick(Sender: TObject);
 
   private
     vSettingFile: string;
@@ -142,6 +144,11 @@ procedure TMainForm.btnCloseClick(Sender: TObject);
 begin
   Client.Disconnect;
   Close;
+end;
+
+procedure TMainForm.btnHideClick(Sender: TObject);
+begin
+  Hide;
 end;
 
 procedure TMainForm.lblClearLogClick(Sender: TObject);
