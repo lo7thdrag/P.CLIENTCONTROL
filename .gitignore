@@ -24,3 +24,8 @@
 /ClientControlNOPP/Server/__history
 /ClientControlNFS/Dcu
 /ClientControlNFS/Dcu
+/ClientControlIPMS/Server/__history
+/ClientControlIPMS/LibNets/NetComponent/__history
+/ClientControlIPMS/LibNets/__history
+/ClientControlIPMS/Client/__history
+/ClientControlIPMS/Commons/__history
