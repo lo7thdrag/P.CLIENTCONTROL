@@ -36143,6 +36143,29 @@ object MainForm: TMainForm
       Font.Style = []
       ParentFont = False
     end
+    object pnlCub_09_04: TPanel
+      Tag = 100
+      Left = 596
+      Top = 494
+      Width = 17
+      Height = 28
+      Cursor = crHandPoint
+      Hint = '192.168.1.94'
+      BevelOuter = bvNone
+      Caption = '4'
+      Color = cl3DDkShadow
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -16
+      Font.Name = 'Calibri'
+      Font.Style = [fsBold]
+      ParentBackground = False
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 51
+      OnMouseDown = pnlMouseDown
+    end
     object pnlCub_01_01: TPanel
       Tag = 100
       Left = 314
@@ -36244,7 +36267,7 @@ object MainForm: TMainForm
       Cursor = crHandPoint
       Hint = '192.168.1.15'
       BevelOuter = bvNone
-      Caption = '1'
+      Caption = '5'
       Color = cl3DDkShadow
       Font.Charset = ANSI_CHARSET
       Font.Color = clWhite
@@ -36382,7 +36405,7 @@ object MainForm: TMainForm
       Cursor = crHandPoint
       Hint = '192.168.1.25'
       BevelOuter = bvNone
-      Caption = '2'
+      Caption = '5'
       Color = cl3DDkShadow
       Font.Charset = ANSI_CHARSET
       Font.Color = clBlack
@@ -36520,7 +36543,7 @@ object MainForm: TMainForm
       Cursor = crHandPoint
       Hint = '192.168.1.35'
       BevelOuter = bvNone
-      Caption = '3'
+      Caption = '5'
       Color = cl3DDkShadow
       Font.Charset = ANSI_CHARSET
       Font.Color = clBlack
@@ -36658,7 +36681,7 @@ object MainForm: TMainForm
       Cursor = crHandPoint
       Hint = '192.168.1.45'
       BevelOuter = bvNone
-      Caption = '4'
+      Caption = '5'
       Color = cl3DDkShadow
       Font.Charset = ANSI_CHARSET
       Font.Color = clBlack
@@ -36835,7 +36858,7 @@ object MainForm: TMainForm
     end
     object pnlCub_06_01: TPanel
       Tag = 100
-      Left = 1187
+      Left = 1124
       Top = 494
       Width = 17
       Height = 28
@@ -36858,7 +36881,7 @@ object MainForm: TMainForm
     end
     object pnlCub_06_02: TPanel
       Tag = 100
-      Left = 1187
+      Left = 1124
       Top = 554
       Width = 17
       Height = 28
@@ -36881,7 +36904,7 @@ object MainForm: TMainForm
     end
     object pnlCub_06_03: TPanel
       Tag = 100
-      Left = 1124
+      Left = 1187
       Top = 554
       Width = 17
       Height = 28
@@ -36904,7 +36927,7 @@ object MainForm: TMainForm
     end
     object pnlCub_06_04: TPanel
       Tag = 100
-      Left = 1124
+      Left = 1187
       Top = 494
       Width = 17
       Height = 28
@@ -36934,7 +36957,7 @@ object MainForm: TMainForm
       Cursor = crHandPoint
       Hint = '192.168.1.65'
       BevelOuter = bvNone
-      Caption = '6'
+      Caption = '5'
       Color = cl3DDkShadow
       Font.Charset = ANSI_CHARSET
       Font.Color = clBlack
@@ -36973,7 +36996,7 @@ object MainForm: TMainForm
     end
     object pnlCub_07_01: TPanel
       Tag = 100
-      Left = 996
+      Left = 934
       Top = 494
       Width = 17
       Height = 28
@@ -36996,7 +37019,7 @@ object MainForm: TMainForm
     end
     object pnlCub_07_02: TPanel
       Tag = 100
-      Left = 996
+      Left = 934
       Top = 554
       Width = 17
       Height = 28
@@ -37019,7 +37042,7 @@ object MainForm: TMainForm
     end
     object pnlCub_07_03: TPanel
       Tag = 100
-      Left = 934
+      Left = 996
       Top = 554
       Width = 17
       Height = 28
@@ -37042,7 +37065,7 @@ object MainForm: TMainForm
     end
     object pnlCub_07_04: TPanel
       Tag = 100
-      Left = 934
+      Left = 996
       Top = 494
       Width = 17
       Height = 28
@@ -37072,7 +37095,7 @@ object MainForm: TMainForm
       Cursor = crHandPoint
       Hint = '192.168.1.75'
       BevelOuter = bvNone
-      Caption = '7'
+      Caption = '5'
       Color = cl3DDkShadow
       Font.Charset = ANSI_CHARSET
       Font.Color = clBlack
@@ -37111,7 +37134,7 @@ object MainForm: TMainForm
     end
     object pnlCub_08_01: TPanel
       Tag = 100
-      Left = 795
+      Left = 733
       Top = 494
       Width = 17
       Height = 28
@@ -37134,7 +37157,7 @@ object MainForm: TMainForm
     end
     object pnlCub_08_02: TPanel
       Tag = 100
-      Left = 795
+      Left = 733
       Top = 554
       Width = 17
       Height = 28
@@ -37157,7 +37180,7 @@ object MainForm: TMainForm
     end
     object pnlCub_08_03: TPanel
       Tag = 100
-      Left = 733
+      Left = 795
       Top = 554
       Width = 17
       Height = 28
@@ -37180,7 +37203,7 @@ object MainForm: TMainForm
     end
     object pnlCub_08_04: TPanel
       Tag = 100
-      Left = 733
+      Left = 795
       Top = 494
       Width = 17
       Height = 28
@@ -37210,7 +37233,7 @@ object MainForm: TMainForm
       Cursor = crHandPoint
       Hint = '192.168.1.85'
       BevelOuter = bvNone
-      Caption = '8'
+      Caption = '5'
       Color = cl3DDkShadow
       Font.Charset = ANSI_CHARSET
       Font.Color = clBlack
@@ -37249,7 +37272,7 @@ object MainForm: TMainForm
     end
     object pnlCub_09_01: TPanel
       Tag = 100
-      Left = 596
+      Left = 534
       Top = 494
       Width = 17
       Height = 28
@@ -37272,7 +37295,7 @@ object MainForm: TMainForm
     end
     object pnlCub_09_02: TPanel
       Tag = 100
-      Left = 596
+      Left = 534
       Top = 554
       Width = 17
       Height = 28
@@ -37295,7 +37318,7 @@ object MainForm: TMainForm
     end
     object pnlCub_09_03: TPanel
       Tag = 100
-      Left = 534
+      Left = 596
       Top = 554
       Width = 17
       Height = 28
@@ -37316,29 +37339,6 @@ object MainForm: TMainForm
       TabOrder = 50
       OnMouseDown = pnlMouseDown
     end
-    object pnlCub_09_04: TPanel
-      Tag = 100
-      Left = 534
-      Top = 494
-      Width = 17
-      Height = 28
-      Cursor = crHandPoint
-      Hint = '192.168.1.94'
-      BevelOuter = bvNone
-      Caption = '4'
-      Color = cl3DDkShadow
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clBlack
-      Font.Height = -16
-      Font.Name = 'Calibri'
-      Font.Style = [fsBold]
-      ParentBackground = False
-      ParentFont = False
-      ParentShowHint = False
-      ShowHint = True
-      TabOrder = 51
-      OnMouseDown = pnlMouseDown
-    end
     object pnlCub_09_05: TPanel
       Tag = 100
       Left = 557
@@ -37348,7 +37348,7 @@ object MainForm: TMainForm
       Cursor = crHandPoint
       Hint = '192.168.1.95'
       BevelOuter = bvNone
-      Caption = '9'
+      Caption = '5'
       Color = cl3DDkShadow
       Font.Charset = ANSI_CHARSET
       Font.Color = clBlack
@@ -37387,7 +37387,7 @@ object MainForm: TMainForm
     end
     object pnlCub_10_01: TPanel
       Tag = 100
-      Left = 396
+      Left = 333
       Top = 493
       Width = 17
       Height = 28
@@ -37410,7 +37410,7 @@ object MainForm: TMainForm
     end
     object pnlCub_10_02: TPanel
       Tag = 100
-      Left = 396
+      Left = 333
       Top = 554
       Width = 17
       Height = 28
@@ -37433,8 +37433,8 @@ object MainForm: TMainForm
     end
     object pnlCub_10_03: TPanel
       Tag = 100
-      Left = 333
-      Top = 555
+      Left = 396
+      Top = 554
       Width = 17
       Height = 28
       Cursor = crHandPoint
@@ -37456,8 +37456,8 @@ object MainForm: TMainForm
     end
     object pnlCub_10_04: TPanel
       Tag = 100
-      Left = 333
-      Top = 494
+      Left = 396
+      Top = 493
       Width = 17
       Height = 28
       Cursor = crHandPoint
@@ -37486,7 +37486,7 @@ object MainForm: TMainForm
       Cursor = crHandPoint
       Hint = '192.168.1.105'
       BevelOuter = bvNone
-      Caption = '10'
+      Caption = '5'
       Color = cl3DDkShadow
       Font.Charset = ANSI_CHARSET
       Font.Color = clBlack
