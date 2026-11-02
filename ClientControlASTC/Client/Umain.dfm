@@ -12,7 +12,6 @@ object MainForm: TMainForm
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  Position = poScreenCenter
   OnActivate = FormActivate
   OnCreate = FormCreate
   OnDestroy = FormDestroy
@@ -12871,6 +12870,7 @@ object MainForm: TMainForm
         770E123C044110044110044110044110770E123C044110044110044110044110
         778EFF05F8A951965DB7345F0000000049454E44AE426082}
       Stretch = True
+      OnMouseDown = imgBackgroundMouseDown
       ExplicitLeft = 137
       ExplicitTop = 45
       ExplicitWidth = 449

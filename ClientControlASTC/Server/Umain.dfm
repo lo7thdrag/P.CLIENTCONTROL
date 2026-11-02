@@ -35482,7 +35482,7 @@ object MainForm: TMainForm
     end
     object pnlCub_01_02: TPanel
       Tag = 100
-      Left = 315
+      Left = 314
       Top = 86
       Width = 17
       Height = 28
@@ -35505,7 +35505,7 @@ object MainForm: TMainForm
     end
     object pnlCub_01_03: TPanel
       Tag = 100
-      Left = 252
+      Left = 251
       Top = 86
       Width = 17
       Height = 28
@@ -35528,7 +35528,7 @@ object MainForm: TMainForm
     end
     object pnlCub_01_04: TPanel
       Tag = 100
-      Left = 252
+      Left = 251
       Top = 146
       Width = 17
       Height = 28
@@ -35551,8 +35551,8 @@ object MainForm: TMainForm
     end
     object pnlCub_01_05: TPanel
       Tag = 100
-      Left = 274
-      Top = 51
+      Left = 244
+      Top = 270
       Width = 32
       Height = 12
       Cursor = crHandPoint
@@ -35574,7 +35574,7 @@ object MainForm: TMainForm
     end
     object pnlCub_01_06: TPanel
       Tag = 100
-      Left = 324
+      Left = 296
       Top = 258
       Width = 36
       Height = 19
@@ -35597,8 +35597,8 @@ object MainForm: TMainForm
     end
     object pnlCub_02_01: TPanel
       Tag = 100
-      Left = 515
-      Top = 147
+      Left = 514
+      Top = 146
       Width = 17
       Height = 28
       Cursor = crHandPoint
@@ -35620,7 +35620,7 @@ object MainForm: TMainForm
     end
     object pnlCub_02_02: TPanel
       Tag = 100
-      Left = 515
+      Left = 514
       Top = 86
       Width = 17
       Height = 28
@@ -35643,7 +35643,7 @@ object MainForm: TMainForm
     end
     object pnlCub_02_03: TPanel
       Tag = 100
-      Left = 452
+      Left = 451
       Top = 86
       Width = 17
       Height = 28
@@ -35666,7 +35666,7 @@ object MainForm: TMainForm
     end
     object pnlCub_02_04: TPanel
       Tag = 100
-      Left = 452
+      Left = 451
       Top = 146
       Width = 17
       Height = 28
@@ -35689,8 +35689,8 @@ object MainForm: TMainForm
     end
     object pnlCub_02_05: TPanel
       Tag = 100
-      Left = 475
-      Top = 51
+      Left = 444
+      Top = 271
       Width = 32
       Height = 12
       Cursor = crHandPoint
@@ -35712,7 +35712,7 @@ object MainForm: TMainForm
     end
     object pnlCub_02_06: TPanel
       Tag = 100
-      Left = 525
+      Left = 494
       Top = 258
       Width = 36
       Height = 19
