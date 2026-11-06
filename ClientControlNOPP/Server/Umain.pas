@@ -786,6 +786,11 @@ begin
         GC1.Visible := False;
         Console1.Visible := False;
         SessionServer1.Visible := True;
+
+        if ( Button = mbright )  and (ssShift in Shift) then
+        begin
+          Maintenance1.Visible := not Maintenance1.Visible
+        end;
       end;
     end;
 

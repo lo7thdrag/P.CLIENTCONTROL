@@ -104,6 +104,7 @@ type
     KillAll1: TMenuItem;
     pnlBackground: TPanel;
     lblHeader: TLabel;
+    pnlINS4: TPanel;
 
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
